@@ -1,0 +1,8 @@
+{
+  "name": "car-wash",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "227eb8d6"
+}
