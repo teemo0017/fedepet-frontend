@@ -1,0 +1,42 @@
+<ion-content class="app-bg-background">
+  <div class="img">
+    <div>
+      <h1 class="pl-16 app-text-clay-green">Bienvenido a FedePet</h1>
+    </div>
+    <div class="pl-16 app-text-yellow">
+      <h2 class=" app-text-strong">Manolo Contreras</h2>
+    </div>
+  </div>
+
+
+  <!-- Pets -->
+  <div class="px-16">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="9">
+          <div>
+            <h2 class="app-text-blue app-text-title">Mis Mascotas</h2>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <round-slide [roundSlideInfo]="infoPets"></round-slide>
+  </div>
+  <div class="px-16">
+    <!-- Docts -->
+    <ion-grid>
+      <ion-row class="ion-align-items-center ">
+        <ion-col size="9">
+          <div>
+            <h2 class="app-text-green  app-text-title">Doctores disponibles</h2>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <ng-lottie width="120px" height="80px" [options]="options" (animationCreated)="animationCreated($event)" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <square-slide [squareSlideInfo]="infoDoctors"></square-slide>
+  </div>
+
+</ion-content>

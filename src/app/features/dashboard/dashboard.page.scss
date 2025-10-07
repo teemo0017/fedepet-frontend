@@ -1,0 +1,19 @@
+.img{
+background: linear-gradient(to right,rgba(0, 0, 0, 0.4),rgba(250, 241, 241, 0.1)),url(/assets/imgs/dashboard/dogBackground.avif);
+height: 35vh;
+border-radius: 0 0 40% 0;
+background-position: left;
+background-attachment: fixed;
+background-size: cover;
+display: flex;
+
+justify-content: center;
+flex-direction: column;
+h1{
+  font-size: var(--app-spacing-18);
+}
+
+h2{
+  font-size: var(--app-spacing-18);
+}
+}

@@ -1,0 +1,23 @@
+<swiper-container space-between="15" slides-per-view="1.4" autoplay="true">
+  <swiper-slide [ngClass]="even ? 'app-bg-blue app-text-yellow':'app-bg-green app-text-clay-green'"
+    *ngFor="let info of squareSlideInfo ; even as even">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="content-text">
+            <div class="app-text-subtitle">
+              {{info.title}}
+            </div>
+            <div class="description mt-4 app-text-clay-green app-text-normal">
+              {{info.description}}
+            </div>
+          </div>
+
+        </ion-col>
+        <ion-col size="5">
+          <img  [src]="'assets/imgs/dashboard/'+info.url+'.webp'" alt="">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </swiper-slide>
+</swiper-container>

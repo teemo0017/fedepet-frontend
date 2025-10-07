@@ -24,14 +24,100 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ion-title,
+ion-tab-button {
+  font-family: var(--font-title);
+}
+
+ion-grid,
+ion-col {
+  padding: 0;
+}
+
+.app {
+
+  //BACKGROUND
+  &-bg-orange {
+    background-color: var(--app-color-orange);
+    --background: var(--app-color-orange);
+  }
+
+  &-bg-yellow {
+    background-color: var(--app-color-yellow);
+    --background: var(--app-color-yellow);
+  }
+
+  &-bg-clay-green {
+    background-color: var(--app-color-clay-green);
+    --background: var(--app-color-clay-green);
+  }
+
+  &-bg-blue {
+    background-color: var(--app-color-blue);
+    --background: var(--app-color-blue);
+  }
+
+  &-bg-green {
+    background-color: var(--app-color-green);
+    --background: var(--app-color-green);
+  }
+
+  &-bg-background {
+    background-color: var(--app-color-background);
+    --background: var(--app-color-background);
+  }
+
+  //TEXT
+
+  &-text-orange {
+    color: var(--app-color-orange);
+  }
+
+  &-text-yellow {
+    color: var(--app-color-yellow);
+  }
+
+  &-text-clay-green {
+    color: var(--app-color-clay-green);
+  }
+
+  &-text-blue {
+    color: var(--app-color-blue);
+  }
+
+  &-text-green {
+    color: var(--app-color-green);
+  }
+
+  &-text-normal {
+    font-size: var(--app-spacing-14);
+    font-weight: 400;
+  }
+
+  &-text-title {
+    font-size: var(--app-spacing-22);
+    font-weight: 700;
+  }
+
+  &-text-normal {
+    font-size: var(--app-spacing-14);
+    font-weight: 400;
+  }
+
+  &-text-subtitle {
+    font-size: var(--app-spacing-18);
+    font-weight: 600;
+  }
+
+  &-text-center {
+    text-align: center;
+  }
+}

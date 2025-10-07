@@ -1,0 +1,31 @@
+<ion-content class="app-bg-background">
+  <div class="px-30">
+
+
+    <ion-grid class="mt-60">
+      <ion-row>
+        <ion-col size="12">
+          <h1 class="app-text-orange app-text-title"> Bienvenido a Fede Pet</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row class="mt-30">
+        <ion-col size="12">
+          <div class="app-bg-yellow img-content">
+            <img src="/assets/imgs/login/img.webp" alt="pet">
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="mt-30 ion-justify-content-center">
+        <ion-col size="12">
+          <h2 class="ion-text-center app-text-title app-text-blue">Inicio Sesión</h2>
+        </ion-col>
+        <ion-button class="mt-30" (click)="goToLogin()">
+          <div class="grid-button">
+            <p>Iniciar con google</p>
+            <ion-icon name="logo-google" class="pl-10"></ion-icon>
+          </div>
+        </ion-button>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

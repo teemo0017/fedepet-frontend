@@ -1,16 +1,47 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { TabVarComponent } from './shared/components/tab-var/tab-var.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/inbox',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
+
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'user',
+    component: TabVarComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./features/dashboard/dashboard.module').then((m) => m.DashboardPageModule),
+      },
+      {
+        path: 'dates',
+        loadChildren: () => import('./features/dates/dates.module').then((m) => m.DatesPageModule),
+      },
+      {
+        path: 'pets',
+        loadChildren: () => import('./features/pets/pets.module').then((m) => m.PetsPageModule),
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+    ]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./features/login/login.module').then(m => m.LoginPageModule)
   }
+
 ];
 
 @NgModule({
@@ -19,4 +50,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

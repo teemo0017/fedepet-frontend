@@ -1,15 +1,17 @@
 {
-  "name": "car-wash",
+  "name": "fedepet",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
+    "sync-android": "ng build && npx cap sync android",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "optimize:imgs": "node ./scripts/optimize-images.js"
   },
   "private": true,
   "dependencies": {
@@ -29,8 +31,12 @@
     "@capacitor/keyboard": "7.0.2",
     "@capacitor/status-bar": "7.0.2",
     "@ionic/angular": "^8.0.0",
+    "google-one-tap": "^1.0.6",
     "ionicons": "^7.0.0",
+    "lottie-web": "^5.13.0",
+    "ngx-lottie": "^20.0.0",
     "rxjs": "~7.8.0",
+    "swiper": "^11.2.10",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
@@ -60,6 +66,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "sharp": "^0.34.3",
     "typescript": "~5.8.0"
   },
   "description": "An Ionic project"
