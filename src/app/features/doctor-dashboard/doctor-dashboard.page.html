@@ -1,0 +1,50 @@
+<ion-content class="dashboard-page px-16 py-16 my-16">
+  <div class="header mb-16">
+    <h1 class="title">Bienvenido, Dr. {{ doctorName }}</h1>
+    <p class="subtitle">Resumen de tu día 🐾</p>
+  </div>
+
+  <!-- Próximas citas -->
+     <div class="mx-16">
+  <div class="section mb-24 ">
+    <h2 class="section-title">📅 Próximas Citas</h2>
+    <ion-card *ngFor="let cita of upcomingAppointments" class="appointment-card">
+      <ion-card-header>
+        <ion-card-title>{{ cita.mascota }}</ion-card-title>
+        <ion-card-subtitle>{{ cita.fecha | date: 'short' }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Cliente:</strong> {{ cita.cliente }}</p>
+        <p><strong>Motivo:</strong> {{ cita.motivo }}</p>
+        <ion-badge [color]="getStatusColor(cita.estado)">
+          {{ cita.estado }}
+        </ion-badge>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="section mb-24">
+    <h2 class="section-title">📊 Estadísticas</h2>
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of stats">
+        <p class="stat-value">{{ stat.value }}</p>
+        <p class="stat-label">{{ stat.label }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificaciones -->
+  <div class="section">
+    <h2 class="section-title">🔔 Notificaciones</h2>
+    <ion-list>
+      <ion-item *ngFor="let n of notifications">
+        <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+        <ion-label>{{ n.text }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+  </div>
+</ion-content>

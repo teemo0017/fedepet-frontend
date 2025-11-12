@@ -1,0 +1,50 @@
+<ion-content class="app-bg-background">
+  <div class="dashboard-container">
+
+    <h1 class="app-text-title app-text-blue mb-10">👋 Hola {{ userName || 'Administrador' }}</h1>
+    <p class="app-text-normal mb-20 app-text-green">
+      Bienvenido al panel de control. Desde aquí puedes gestionar los datos de la app.
+    </p>
+
+    <!-- Sección de métricas -->
+    <div class="metrics">
+      <div class="metric-card">
+        <ion-icon name="people-outline"></ion-icon>
+        <div>
+          <p class="metric-title">Doctores</p>
+          <h3>{{ totalDoctors }}</h3>
+        </div>
+      </div>
+      <div class="metric-card">
+        <ion-icon name="bag-outline"></ion-icon>
+        <div>
+          <p class="metric-title">Productos</p>
+          <h3>{{ totalProducts }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de accesos -->
+    <h2 class="app-text-subtitle app-text-blue mt-20 mb-10">Acciones Rápidas</h2>
+    <div class="actions-grid">
+      <ion-card class="action-card app-bg-green" (click)="goTo('add-doctor')">
+        <ion-icon name="person-add-outline" class="action-icon"></ion-icon>
+        <ion-card-content>Agregar Doctor</ion-card-content>
+      </ion-card>
+
+      <ion-card class="action-card app-bg-orange" (click)="goTo('add-product')">
+        <ion-icon name="add-circle-outline" class="action-icon"></ion-icon>
+        <ion-card-content>Agregar Producto</ion-card-content>
+      </ion-card>
+
+      <ion-card class="action-card app-bg-blue" (click)="goTo('reports')">
+        <ion-icon name="bar-chart-outline" class="action-icon"></ion-icon>
+        <ion-card-content>Ver Reportes</ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Animación Lottie decorativa -->
+    <!-- <ng-lottie [options]="lottieConfig" class="bg-lottie"></ng-lottie> -->
+
+  </div>
+</ion-content>

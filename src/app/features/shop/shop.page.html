@@ -1,0 +1,21 @@
+<ion-content class="shop-page px-16 py-16">
+  <!-- Header -->
+  <div class="shop-header mb-16">
+    <h1 class="title">Tienda</h1>
+    <ion-searchbar placeholder="Buscar productos..." class="shop-search"></ion-searchbar>
+  </div>
+
+  <!-- Productos -->
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of products">
+      <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
+      <div class="product-info">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-price">\${{ product.price }}</p>
+      </div>
+      <ion-button fill="solid" class="buy-btn" shape="round" (click)="addToCart(product)">
+        Agregar al carrito
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -8,7 +8,6 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 import { SharedModule } from 'src/app/shared/shared-module';
-import { LottieComponent } from 'ngx-lottie';
 
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { LottieComponent } from 'ngx-lottie';
     IonicModule,
     DashboardPageRoutingModule,
     SharedModule,
-    LottieComponent
   ],
   declarations: [DashboardPage], exports: [DashboardPage]
 })

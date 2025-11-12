@@ -1,0 +1,140 @@
+.register-page {
+  --background: var(--app-color-background);
+  font-family: var(--ion-font-family);
+  color: var(--app-color-blue);
+
+  .register-header {
+    text-align: center;
+    padding: var(--app-spacing-16);
+
+    .register-title {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--app-color-orange);
+    }
+
+    .register-subtitle {
+      font-size: 1rem;
+      color: var(--app-color-blue);
+    }
+  }
+
+  .register-form {
+
+    .input-field {
+      --background: transparent;
+      border: 1.5px solid var(--app-color-clay-green);
+      border-radius: 14px;
+      padding: var(--app-spacing-4) var(--app-spacing-8);
+      --color: var(--app-color-blue);
+
+      ion-label {
+        color: var(--app-color-blue);
+      }
+
+      ion-input {
+        color: var(--app-color-blue);
+      }
+    }
+
+    .register-btn {
+      --background: var(--app-color-orange);
+      --background-activated: color-mix(in srgb, var(--app-color-orange) 80%, black);
+      --border-radius: 22px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.3px;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        filter: brightness(1.05);
+        transform: scale(1.01);
+      }
+    }
+  }
+
+  .register-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--app-color-blue);
+
+    a {
+      color: var(--app-color-orange);
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
+}
+
+
+.fancy-vet-header {
+  position: relative;
+  background: linear-gradient(120deg, var(--app-color-orange), var(--app-color-yellow));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  z-index: 10;
+  overflow: hidden;
+
+  .safe-area {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 35px;
+    animation: slideDown 0.5s ease;
+
+    .back-btn {
+        background: linear-gradient(120deg, var(--app-color-orange), var(--app-color-yellow));
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.25s ease;
+      color: white;
+      ion-icon {
+        font-size: 1.5rem;
+      }
+
+      &:active {
+        transform: scale(0.92);
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      position: relative;
+      gap: var(--app-spacing-8);
+
+      .header-title {
+        font-family: var(--font-title);
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: white;
+        letter-spacing: 0.5px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.6s ease;
+      }
+
+      .paw-anim {
+        width: 22px;
+        height: 22px;
+        animation: pawWalk 1.2s ease-in-out infinite alternate;
+      }
+    }
+
+  }
+}
+

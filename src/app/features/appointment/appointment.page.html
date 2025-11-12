@@ -1,0 +1,39 @@
+<ion-content class="appointment-page">
+  <div class="header mt-12 mx-16">
+    <h1 class="title">Agenda tu cita</h1>
+    <p class="subtitle mt-4">Selecciona un doctor y la fecha disponible</p>
+  </div>
+  <div class="mx-16">
+    <form class="form mt-20">
+      <!-- Seleccionar doctor -->
+      <ion-item class="input-field mb-16" lines="none">
+        <ion-select label="Doctor" label-placement="floating" interface="popover" [(ngModel)]="selectedDoctor"
+          (ionChange)="updateAvailableDates()" name="doctor" placeholder="Selecciona un doctor">
+          <ion-select-option *ngFor="let doctor of doctors" [value]="doctor">
+            {{ doctor.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Calendario dinámico -->
+      <ion-item class="input-field mb-16" lines="none" *ngIf="availableDates.length > 0">
+        <ion-datetime label="Fecha" label-placement="floating" [min]="minDate" [max]="maxDate" presentation="date"
+          (ionChange)="updateAvailableTimes($event)" [disabledDates]="disabledDates"></ion-datetime>
+      </ion-item>
+
+      <!-- Horas disponibles -->
+      <ion-item class="input-field mb-20" lines="none" *ngIf="availableTimes.length > 0">
+        <ion-select label="Hora disponible" label-placement="floating" placeholder="Selecciona una hora"
+          [(ngModel)]="selectedTime" name="time">
+          <ion-select-option *ngFor="let time of availableTimes" [value]="time">
+            {{ time }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" class="confirm-btn py-8" shape="round" [disabled]="!selectedDoctor || !selectedTime">
+        Confirmar cita
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

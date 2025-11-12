@@ -1,0 +1,72 @@
+.form-container {
+  margin: var(--app-spacing-24);
+  background: #fff;
+  padding: var(--app-spacing-20);
+  border-radius: 22px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.upload-box {
+  text-align: center;
+}
+
+.upload-btn {
+  border: 2px solid var(--app-color-green);
+  color: var(--app-color-green);
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.preview-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: var(--app-spacing-10);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.input-item {
+  --highlight-color-focused: var(--app-color-blue);
+  margin-bottom: var(--app-spacing-12);
+}
+
+.submit-btn {
+  background: linear-gradient(45deg, var(--app-color-blue), var(--app-color-green));
+  color: #fff;
+  font-weight: 700;
+  border-radius: 12px;
+  height: 48px;
+  margin-top: var(--app-spacing-12);
+}
+
+.main-header {
+  background: var(--app-color-blue);
+  --background: var(--app-color-blue);
+
+  /* Respeta notch de iPhone */
+  padding-top: env(safe-area-inset-top);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar {
+  --background: var(--app-color-blue);
+  background: var(--app-color-blue);
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+
+.back-btn {
+  --color: white;
+  margin-left: 4px;
+}

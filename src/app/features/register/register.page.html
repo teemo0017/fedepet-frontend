@@ -1,0 +1,50 @@
+<ion-header class="fancy-vet-header">
+
+  <div class="header-container">
+    <!-- Botón atrás -->
+    <button class="back-btn ml-10" (click)="goToBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+
+    <!-- Título -->
+    <div class="title-wrapper">
+      <h1 class="header-title">Registro</h1>
+      <img src="assets/icon/paw.svg" alt="paw" class="paw-anim" />
+    </div>
+  </div>
+</ion-header>
+
+
+<ion-content class="register-page">
+  <div class="register-header mt-20">
+    <h1 class="register-title">Crea tu cuenta</h1>
+    <p class="register-subtitle mt-4">Comienza a disfrutar de la app</p>
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="register-form mt-24 px-32">
+    <ion-item class="input-field mb-12" lines="none">
+      <ion-input label="Nombre completo" label-placement="floating" type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-field mb-12" lines="none">
+      <ion-input label="Correo electrónico" label-placement="floating" type="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-field mb-12" lines="none">
+      <ion-input label="Teléfono" label-placement="floating" type="tel" formControlName="phone"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-field mb-20" lines="none">
+      <ion-input label="Contraseña" label-placement="floating" type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="register-btn py-8" shape="round" type="submit" [disabled]="userForm.invalid">
+                <span *ngIf="!loadingService"> Registrarme</span>
+                <ion-spinner *ngIf="loadingService" name="dots"></ion-spinner>
+    </ion-button>
+  </form>
+
+  <div class="register-footer mt-20" (click)="goToBack()">
+    <p>¿Ya tienes cuenta? <span class="app-text-orange app-text-strong"> Inicia sesión </span></p>
+  </div>
+</ion-content>

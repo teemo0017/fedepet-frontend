@@ -1,0 +1,83 @@
+.shop-page {
+  --background: var(--app-color-background);
+  font-family: var(--ion-font-family);
+  color: var(--app-color-blue);
+
+  .shop-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--app-spacing-12);
+    text-align: center;
+
+    .title {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--app-color-orange);
+    }
+
+    .shop-search {
+      --background: var(--app-color-clay-green);
+      --color: var(--app-color-blue);
+      border-radius: 16px;
+      --placeholder-color: var(--app-color-blue);
+      --icon-color: var(--app-color-orange);
+    }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--app-spacing-16);
+  }
+
+  .product-card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: var(--app-spacing-12);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: var(--app-spacing-8);
+    }
+
+    .product-info {
+      margin-bottom: var(--app-spacing-8);
+
+      .product-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--app-color-blue);
+      }
+
+      .product-price {
+        color: var(--app-color-green);
+        font-weight: 700;
+        margin-top: var(--app-spacing-4);
+      }
+    }
+
+    .buy-btn {
+      --background: var(--app-color-orange);
+      --background-activated: color-mix(in srgb, var(--app-color-orange) 80%, black);
+      color: white;
+      font-weight: 600;
+      --border-radius: 18px;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+  }
+}

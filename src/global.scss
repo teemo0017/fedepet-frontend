@@ -24,7 +24,6 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-@import "@ionic/angular/css/palettes/dark.system.css";
 
 h1,
 h2,
@@ -115,6 +114,10 @@ ion-col {
   &-text-subtitle {
     font-size: var(--app-spacing-18);
     font-weight: 600;
+  }
+
+    &-text-strong {
+    font-weight: 700;
   }
 
   &-text-center {

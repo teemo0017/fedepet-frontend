@@ -1,0 +1,70 @@
+.dashboard-page {
+  --background: var(--app-color-background);
+  font-family: var(--ion-font-family);
+  color: var(--app-color-blue);
+
+  .header {
+    text-align: center;
+    .title {
+      font-family: var(--font-title);
+      color: var(--app-color-orange);
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .subtitle {
+      color: var(--app-color-blue);
+    }
+  }
+
+  .section {
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--app-color-green);
+      margin-bottom: var(--app-spacing-8);
+    }
+
+    .appointment-card {
+      border-radius: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      margin-bottom: var(--app-spacing-12);
+      ion-badge {
+        float: right;
+        margin-top: var(--app-spacing-4);
+      }
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--app-spacing-8);
+
+      .stat-card {
+        background-color: white;
+        border-radius: 14px;
+        padding: var(--app-spacing-8);
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+        .stat-value {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--app-color-orange);
+        }
+        .stat-label {
+          font-size: 0.9rem;
+          color: var(--app-color-blue);
+        }
+      }
+    }
+
+    ion-list {
+      background: transparent;
+      ion-item {
+        --background: white;
+        margin-bottom: var(--app-spacing-8);
+        border-radius: 12px;
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+.dashboard-container {
+  padding: var(--app-spacing-20);
+  position: relative;
+  z-index: 2;
+}
+
+.metrics {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--app-spacing-12);
+  flex-wrap: wrap;
+}
+
+.metric-card {
+  flex: 1 1 calc(50% - var(--app-spacing-8));
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-10);
+  padding: var(--app-spacing-12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.metric-card ion-icon {
+  font-size: 28px;
+  color: var(--app-color-blue);
+}
+
+.metric-title {
+  font-size: var(--app-spacing-14);
+  color: #6b6b6b;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--app-spacing-14);
+}
+
+.action-card {
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+
+  ion-card-content {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .action-icon {
+    font-size: 32px;
+    margin-top: var(--app-spacing-10);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Animación Lottie decorativa de fondo */
+.bg-lottie {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 180px;
+  height: 180px;
+  opacity: 0.2;
+  pointer-events: none;
+}

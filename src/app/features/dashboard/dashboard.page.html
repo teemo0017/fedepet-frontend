@@ -1,42 +1,95 @@
 <ion-content class="app-bg-background">
-  <div class="img">
-    <div>
-      <h1 class="pl-16 app-text-clay-green">Bienvenido a FedePet</h1>
+  <div *ngIf="!loading">
+
+
+    <div class="img">
+      <ion-grid class="container-text-title">
+        <ion-row class="mb-60 pt-20 mr-14">
+          <ion-col size="12" class="container-icon-exit">
+            <div (click)="goExit()" class="ion-text-center">
+              <ion-icon name="exit-outline"></ion-icon>
+              <div class="app-text-subtitle">Salir</div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="text">
+              <h1 class="pl-16 app-text-clay-green app-text-title">Bienvenido a <span class="app-text-orange">FedePet
+                </span></h1>
+            </div>
+            <div class="text pl-16 app-text-yellow">
+              <h2 class=" app-text-strong">{{infoUser.name}}</h2>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </div>
-    <div class="pl-16 app-text-yellow">
-      <h2 class=" app-text-strong">Manolo Contreras</h2>
+
+
+    <!-- Pets -->
+
+    <div *ngIf="infoPets.length === 0 && !loading" class="empty px-16 py-20">
+      <div class="empty-card p-16">
+        <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
+        <h2 class="empty-title">No hay mascotas registradas</h2>
+        <p class="empty-text">Crea la primera para empezar a gestionar sus controles y vacunas.</p>
+        <ion-button class="mt-12" shape="round" (click)="goToCreate()">
+          Agregar mascota
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="px-16 mb-20" *ngIf="infoPets.length > 0 && !loading">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="9">
+            <div>
+              <h2 class="app-text-blue app-text-title">Mis Mascotas</h2>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <round-slide [roundSlideInfo]="infoPets"></round-slide>
+    </div>
+
+    <div class="px-20 mt-16" *ngIf="infoPets.length > 0 && !loading">
+      <div class="app-bg-green p-12  manage-pets-container">
+        <h2 class="app-text-title app-text-clay-green m-0 ">Gestionar Mascotas</h2>
+        <ion-grid>
+          <ion-row class="mt-16">
+            <ion-col size="6">
+              <ion-button (click)="goManagerPets()" expand="block" shape="round">
+                Ver todos
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button class="dates" expand="block" shape="round">
+                Agendar Cita
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+    </div>
+
+    <div class="px-16 pb-24">
+      <!-- Docts -->
+      <ion-grid>
+        <ion-row class="ion-align-items-center ">
+          <ion-col size="9">
+            <div>
+              <h2 class="app-text-green  app-text-title">Doctores disponibles</h2>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <square-slide [squareSlideInfo]="infoDoctors"></square-slide>
     </div>
   </div>
-
-
-  <!-- Pets -->
-  <div class="px-16">
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="9">
-          <div>
-            <h2 class="app-text-blue app-text-title">Mis Mascotas</h2>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <round-slide [roundSlideInfo]="infoPets"></round-slide>
+  <div *ngIf="loading">
+    <component-skeleton></component-skeleton>
   </div>
-  <div class="px-16">
-    <!-- Docts -->
-    <ion-grid>
-      <ion-row class="ion-align-items-center ">
-        <ion-col size="9">
-          <div>
-            <h2 class="app-text-green  app-text-title">Doctores disponibles</h2>
-          </div>
-        </ion-col>
-        <ion-col size="3">
-          <ng-lottie width="120px" height="80px" [options]="options" (animationCreated)="animationCreated($event)" />
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <square-slide [squareSlideInfo]="infoDoctors"></square-slide>
-  </div>
-
 </ion-content>

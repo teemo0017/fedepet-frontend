@@ -1,5 +1,5 @@
 <swiper-container space-between="15" slides-per-view="1.4" autoplay="true">
-  <swiper-slide [ngClass]="even ? 'app-bg-blue app-text-yellow':'app-bg-green app-text-clay-green'"
+  <swiper-slide [ngClass]="even ? 'app-bg-blue app-text-yellow':'app-bg-blue app-text-clay-green'"
     *ngFor="let info of squareSlideInfo ; even as even">
     <ion-grid>
       <ion-row>
@@ -15,7 +15,7 @@
 
         </ion-col>
         <ion-col size="5">
-          <img  [src]="'assets/imgs/dashboard/'+info.url+'.webp'" alt="">
+          <img  [src]="info.url" alt="">
         </ion-col>
       </ion-row>
     </ion-grid>

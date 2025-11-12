@@ -1,19 +1,84 @@
-.img{
-background: linear-gradient(to right,rgba(0, 0, 0, 0.4),rgba(250, 241, 241, 0.1)),url(/assets/imgs/dashboard/dogBackground.avif);
-height: 35vh;
-border-radius: 0 0 40% 0;
-background-position: left;
-background-attachment: fixed;
-background-size: cover;
-display: flex;
+.img {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(250, 241, 241, 0.1)), url(/assets/imgs/dashboard/dogBackground.avif);
+  height: 35vh;
+  border-radius: 0 0 40% 0;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 
-justify-content: center;
-flex-direction: column;
-h1{
-  font-size: var(--app-spacing-18);
+  h1 {
+    font-size: var(--app-spacing-18);
+  }
+
+  h2 {
+    font-size: var(--app-spacing-18);
+  }
 }
 
-h2{
-  font-size: var(--app-spacing-18);
+.icon-title {
+  width: var(--app-spacing-26);
+  height: var(--app-spacing-26);
 }
+
+.container-text-title {
+  height: 100%;
+}
+
+.manage-pets-container {
+  box-shadow: 1px 1px 18px -5px rgba(0, 0, 0, 0.75);
+  border-radius: var(--app-spacing-12);
+}
+
+ion-button {
+  --background: var(--app-color-orange);
+
+  &.dates {
+    --background: var(--app-color-yellow);
+  }
+
+}
+
+.container-icon-exit {
+  display: flex;
+  justify-content: end;
+
+  ion-icon {
+    width: var(--app-spacing-36);
+    height: var(--app-spacing-36);
+    color: var(--app-color-background);
+  }
+
+  div {
+    color: var(--app-color-background);
+  }
+}
+
+
+.empty {
+  display: grid;
+  place-items: center;
+}
+
+.empty-card {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: var(--app-color-blue);
+}
+
+.empty-title {
+  font-family: var(--font-title);
+  margin: var(--app-spacing-8) 0 var(--app-spacing-4);
+  color: #2a2a2a;
+}
+
+.empty-text {
+  color: #666;
 }

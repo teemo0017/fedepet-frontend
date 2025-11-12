@@ -1,0 +1,22 @@
+<div class="skeleton-container">
+  <div class="skeleton-card" *ngFor="let _ of [].constructor(count)">
+    <div class="skeleton-header">
+      <div class="skeleton-avatar shimmer"></div>
+      <div class="skeleton-title-group">
+        <div class="skeleton-line title shimmer"></div>
+        <div class="skeleton-line subtitle shimmer"></div>
+      </div>
+    </div>
+
+    <div class="skeleton-body">
+      <div class="skeleton-line shimmer"></div>
+      <div class="skeleton-line shimmer short"></div>
+      <div class="skeleton-line shimmer"></div>
+    </div>
+
+    <div class="skeleton-footer" *ngIf="showFooter">
+      <div class="skeleton-btn shimmer"></div>
+      <div class="skeleton-btn shimmer"></div>
+    </div>
+  </div>
+</div>
