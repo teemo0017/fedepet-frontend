@@ -1,7 +1,7 @@
 <ion-content class="pets-content" fullscreen>
 
   <!-- Encabezado con gradiente y CTA -->
-  <div class="hero px-16 py-20">
+  <div class="hero px-16 pb-20 py-40">
     <div class="hero-text">
       <h1 class="title">Mascotas</h1>
       <p class="subtitle">Administra, busca y agenda sus controles</p>
@@ -75,7 +75,7 @@
       <ion-card-content class="p-12">
         <div class="header-row">
           <h3 class="pet-name">{{ pet.name }}</h3>
-          <ion-badge class="age-badge">{{ pet.dateBirth }}</ion-badge>
+          <ion-badge class="age-badge">{{ pet.dateBirth | date:'dd/MM/yyyy':'America/Panama' }}</ion-badge>
         </div>
 
         <div class="meta mt-6">

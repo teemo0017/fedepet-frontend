@@ -24,18 +24,8 @@
   height: 100%;
 }
 
-.manage-pets-container {
-  box-shadow: 1px 1px 18px -5px rgba(0, 0, 0, 0.75);
-  border-radius: var(--app-spacing-12);
-}
-
 ion-button {
   --background: var(--app-color-orange);
-
-  &.dates {
-    --background: var(--app-color-yellow);
-  }
-
 }
 
 .container-icon-exit {
@@ -82,3 +72,71 @@ ion-button {
 .empty-text {
   color: #666;
 }
+
+
+
+/* CARD PRINCIPAL */
+.quick-actions-card {
+  background:  var(--app-color-clay-green);
+  border-radius: 22px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.10);
+  margin-top: var(--app-spacing-20);
+}
+
+/* TÍTULO */
+.quick-title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  margin-bottom: var(--app-spacing-14);
+  color: var(--app-color-blue);
+}
+
+/* GRID DE BOTONES */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--app-spacing-14);
+}
+
+/* BOTÓN */
+.quick-btn {
+  background: var(--app-color-background);
+  border-radius: 18px;
+  padding: var(--app-spacing-12);
+  text-align: center;
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Hover móvil */
+.quick-btn:active {
+  transform: scale(0.96);
+}
+
+/* ICONO REDONDO */
+.quick-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--app-spacing-8);
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.12);
+}
+
+.quick-icon ion-icon {
+  font-size: 2rem;
+  color: white;
+}
+
+/* TEXTO */
+.quick-btn span {
+  font-size: var(--app-spacing-14);
+  font-weight: 600;
+  color: #444;
+}
+

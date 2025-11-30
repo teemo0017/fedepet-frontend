@@ -42,7 +42,9 @@ export class RegisterPage implements OnInit {
       role: 'user'
     }
 
-    this.authService.register(user)
+    this.authService.register(user).pipe(finalize( () => {
+      this.loadingService = false;
+    }))
       .subscribe({
         next: async (resp) => {
           this.navCtrl.navigateRoot('/user/dashboard')

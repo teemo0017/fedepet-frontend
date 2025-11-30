@@ -1,21 +1,67 @@
-<ion-content class="shop-page px-16 py-16">
-  <!-- Header -->
-  <div class="shop-header mb-16">
-    <h1 class="title">Tienda</h1>
-    <ion-searchbar placeholder="Buscar productos..." class="shop-search"></ion-searchbar>
-  </div>
+<ion-header class="main-header">
+  <ion-toolbar class="toolbar">
 
-  <!-- Productos -->
-  <div class="product-grid">
-    <div class="product-card" *ngFor="let product of products">
-      <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
-      <div class="product-info">
-        <h2 class="product-name">{{ product.name }}</h2>
-        <p class="product-price">\${{ product.price }}</p>
-      </div>
-      <ion-button fill="solid" class="buy-btn" shape="round" (click)="addToCart(product)">
-        Agregar al carrito
+    <ion-buttons slot="start">
+      <ion-button fill="clear" class="back-btn" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
-    </div>
+    </ion-buttons>
+
+    <ion-title class="title">Tienda FedePet 🐾</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg-background">
+  <div class="store-wrapper p-20">
+
+    <!-- Banner superior -->
+    <section class="store-banner mb-20">
+      <div class="store-banner__text">
+        <h2 class="store-banner__title">Productos para tu mascota</h2>
+        <p class="store-banner__subtitle">
+          Alimentos, cuidados y accesorios seleccionados con cariño 🐾
+        </p>
+      </div>
+    </section>
+
+    <!-- Grid de productos -->
+    <ion-grid class="store-grid">
+      <ion-row>
+        <ion-col
+          size="6"
+          sizeMd="4"
+          *ngFor="let p of products"
+          class="store-col"
+        >
+          <article class="store-card">
+            <div class="store-card__image-wrapper">
+              <img [src]="p.image" alt="{{ p.name }}" />
+            </div>
+
+            <div class="store-card__body">
+              <h3 class="store-card__name app-text-strong">
+                {{ p.name }}
+              </h3>
+              <p class="store-card__description app-text-normal">
+                {{ p.description || 'Producto pensado para el bienestar diario de tu mascota.' }}
+              </p>
+            </div>
+
+            <div class="store-card__footer">
+              <span class="store-card__price">
+                $ {{ p.price | number : '1.2-2' }}
+              </span>
+
+              <button type="button" class="store-card__btn">
+                <ion-icon name="cart-outline"></ion-icon>
+                <span>Añadir</span>
+              </button>
+            </div>
+          </article>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </div>
 </ion-content>

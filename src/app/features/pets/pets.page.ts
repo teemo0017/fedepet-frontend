@@ -26,8 +26,6 @@ export class PetsPage implements OnInit {
 
   async ngOnInit() {
     this.infoUser = await this.authService.getUserInfo();
-    // Simula carga
-
   }
   constructor(private navCtrl: NavController, private userService: UserService, private authService: AuthService) { }
   onSearch(ev: CustomEvent) {
@@ -91,7 +89,7 @@ export class PetsPage implements OnInit {
   }
 
   public async callServicePet() {
-
+    this.loading = true;
     const request: requestId = {
       id: this.infoUser.id
     };

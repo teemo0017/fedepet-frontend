@@ -19,6 +19,8 @@ export interface Doctor {
   phone: string;
   available: boolean;
   photo: string;
+  description: string;
+  id: number;
 }
 
 export interface savePetRequest {
@@ -28,7 +30,7 @@ export interface savePetRequest {
   dateBirth: string;
   weight: number;
   owner: number;
-  photo:string
+  photo: string
 }
 
 export interface GenericResponseSave {
@@ -37,9 +39,32 @@ export interface GenericResponseSave {
 
 export interface saveDateRequest {
   motive: string;
-  state: string;
+  type: string;
   pet: number;
   doctor: number;
+  client: number;
   dateTime: string;
 }
 
+export interface DatesResponse {
+  id: number;
+  dateTime: string;
+  motive: string;
+  type: string;
+  state: string;
+  doctor?: string;
+  client?: string;
+  pet: string;
+  doctorImg: string;
+  petImg: string;
+}
+
+export interface updateDateState {
+  id: number,
+  state: string
+}
+
+export interface DateResponseDoctor {
+  datesIncoming: DatesResponse[],
+  datesDone: DatesResponse[]
+}

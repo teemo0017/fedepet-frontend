@@ -6,6 +6,8 @@ import { UserService } from '../services/user.service';
 import { NavController } from '@ionic/angular';
 import { savePetRequest } from '../services/models/users';
 import { DecodedUser } from 'src/app/core/models/auth';
+import { finalize } from 'rxjs';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-add-pet',
@@ -13,6 +15,7 @@ import { DecodedUser } from 'src/app/core/models/auth';
   styleUrls: ['./add-pet.page.scss'],
 })
 export class AddPetPage {
+  loading = false;
   petForm = this.fb.group({
     name: ['', Validators.required],
     species: ['', Validators.required],
@@ -35,9 +38,9 @@ export class AddPetPage {
   };
   filteredBreeds: string[] = [];
 
-  constructor(private navCtrl: NavController, private fb: FormBuilder, private userService: UserService, private authService: AuthService) { }
+  constructor(private toastService: ToastService, private navCtrl: NavController, private fb: FormBuilder, private userService: UserService, private authService: AuthService) { }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.infoUser = await this.authService.getUserInfo();
     this.petForm.get('species')?.valueChanges.subscribe(specie => {
       this.filteredBreeds = specie ? this.breedsBySpecies[specie] || [] : [];
@@ -45,7 +48,7 @@ export class AddPetPage {
     });
   }
 
-  async selectImage() {
+  async selectImage(): Promise<void> {
     const image = await Camera.getPhoto({
       quality: 80,
       resultType: CameraResultType.Base64,
@@ -57,10 +60,13 @@ export class AddPetPage {
     this.petForm.patchValue({ photo: image.base64String });
   }
 
-  get f() {
+  public get f() {
     return this.petForm.controls;
   }
-  onSubmit() {
+
+  public async onSubmit() {
+    if(this.loading) return;
+    this.loading = true;
     if (this.petForm.valid) {
       const request: savePetRequest = {
         name: this.f.name.value ?? '',
@@ -71,24 +77,38 @@ export class AddPetPage {
         owner: this.infoUser.id,
         photo: this.f.photo.value ?? ''
       }
-      this.userService.savePet(request).subscribe({
-        next: () => {
-          console.log("Mascota Guardada")
-          this.navCtrl.navigateForward('/user/dashboard', {
-          });
-        },
-        error: () => {
-          console.log("Error al llamar el servicio");
-        }
-      });
+      this.userService.savePet(request)
+        .pipe(finalize(
+          () => {
+            this.loading = false;
+          }
+        ))
+        .subscribe({
+          next: async () => {
+            await this.createToastSuccess();
+            this.navCtrl.navigateRoot('/user/dashboard', {
+            });
+          },
+          error: () => {
+            console.log("Error al llamar el servicio");
+          }
+        });
     }
   }
 
-  ionViewWillEnter() {
-  this.previewImage = null;
-  this.petForm.reset();
-}
-  goBack() {
+  public ionViewWillEnter(): void {
+    this.previewImage = null;
+    this.petForm.reset();
+  }
+  public goBack(): void {
     this.navCtrl.back();
+  }
+
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async createToastSuccess() {
+    await this.toastService.success('Mascota agregada con exito! , Refresca el dashboard para poder verlo ! ');
   }
 }

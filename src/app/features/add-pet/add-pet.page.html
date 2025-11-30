@@ -35,7 +35,7 @@
       <!-- Select especie -->
       <ion-item class="input-item">
         <ion-label position="floating">Especie</ion-label>
-        <ion-select  class="mt-10"  formControlName="species" interface="popover" placeholder="Seleccionar especie">
+        <ion-select class="mt-10" formControlName="species" interface="popover" placeholder="Seleccionar especie">
           <ion-select-option *ngFor="let specie of speciesList" [value]="specie">{{ specie }}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -59,7 +59,8 @@
       </ion-item>
 
       <ion-button expand="block" type="submit" class="submit-btn">
-        Guardar Mascota
+         <span *ngIf="!loading">Guardar Mascota</span>
+        <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
       </ion-button>
     </form>
   </div>

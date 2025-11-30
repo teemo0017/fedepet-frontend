@@ -1,0 +1,75 @@
+<ion-header class="main-header">
+  <ion-toolbar class="toolbar">
+
+    <ion-buttons slot="start">
+      <ion-button fill="clear" class="back-btn" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="title">Mis Citas</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="app-bg-background">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="!loading" class="p-20">
+
+    <div class="appointment-card" *ngFor="let date of dateList">
+
+      <div class="card-header">
+        <img [src]="date.doctorImg" class="doctor-photo" />
+        <div class="doctor-info">
+          <h2>{{ date.doctor | titlecase }}</h2>
+          <span>Especialidad</span>
+        </div>
+      </div>
+
+      <div class="pet-section">
+        <img [src]="date.petImg" class="pet-photo" />
+        <div class="pet-info">
+          <h3>{{ date.pet | titlecase }}</h3>
+          <p class="pet-motive">{{ date.type }}</p>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="detail-row">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ date.dateTime | date:'dd/MM/yyyy hh:mm':'America/Panama' }}</span>
+        </div>
+        <div class="detail-row">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span class="status-badge" [ngClass]="getStatusClass( date.state)">
+            {{ date.state | titlecase }}
+          </span>
+        </div>
+      </div>
+
+      <div class="mt-10">
+        <div class="mb-4 app-text-subtitle app-text-green">
+          Detalles:
+        </div>
+        {{ date.motive }}
+      </div>
+    </div>
+
+    <div *ngIf="dateList.length === 0" class="empty px-16 py-20">
+      <div class="empty-card p-16">
+        <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
+        <h2 class="empty-title">No hay citas registradas</h2>
+        <p class="empty-text">Crea la primera para agendar tu visita.</p>
+        <ion-button class="mt-12" shape="round" (click)="goToCreate()">
+          Agendar
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading">
+    <component-skeleton></component-skeleton>
+  </div>
+</ion-content>

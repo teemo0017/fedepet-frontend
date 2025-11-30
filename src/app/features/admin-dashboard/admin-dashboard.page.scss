@@ -1,72 +1,115 @@
-.dashboard-container {
-  padding: var(--app-spacing-20);
-  position: relative;
-  z-index: 2;
+ion-content {
+  --background: var(--app-color-background);
 }
 
-.metrics {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--app-spacing-12);
-  flex-wrap: wrap;
+.admin-header {
+  padding-top: env(safe-area-inset-top);
+  --background: var(--app-color-blue);
 }
 
-.metric-card {
-  flex: 1 1 calc(50% - var(--app-spacing-8));
+.admin-header__title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Tarjeta del doctor */
+
+.doctor-card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 20px;
+  padding: var(--app-spacing-16);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Parte superior: foto + info */
+
+.doctor-card__main {
   display: flex;
   align-items: center;
-  gap: var(--app-spacing-10);
-  padding: var(--app-spacing-12);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.metric-card ion-icon {
-  font-size: 28px;
-  color: var(--app-color-blue);
-}
-
-.metric-title {
-  font-size: var(--app-spacing-14);
-  color: #6b6b6b;
-}
-
-.actions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: var(--app-spacing-14);
 }
 
-.action-card {
-  border-radius: 20px;
-  text-align: center;
-  color: #fff;
-  transition: transform 0.2s ease;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+.doctor-card__photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 3px solid var(--app-color-green);
+}
 
-  ion-card-content {
-    font-weight: 600;
+.doctor-card__info {
+  flex: 1;
+}
+
+.doctor-card__name {
+  font-family: var(--font-title);
+  margin: 0;
+  font-size: var(--app-spacing-16);
+  color: #333;
+}
+
+.doctor-card__specialty {
+  margin: var(--app-spacing-4) 0 var(--app-spacing-8) 0;
+  font-size: var(--app-spacing-12);
+  color: var(--app-color-blue);
+}
+
+.doctor-card__contact {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: var(--app-spacing-12);
+  color: #555;
+
+  ion-icon {
     font-size: 1rem;
-  }
-
-  .action-icon {
-    font-size: 32px;
-    margin-top: var(--app-spacing-10);
-  }
-
-  &:hover {
-    transform: translateY(-4px);
+    color: var(--app-color-yellow);
   }
 }
 
-/* Animación Lottie decorativa de fondo */
-.bg-lottie {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 180px;
-  height: 180px;
-  opacity: 0.2;
-  pointer-events: none;
+/* Footer: estado + acciones */
+
+.doctor-card__footer {
+  margin-top: var(--app-spacing-14);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: var(--app-spacing-12);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-chip--active {
+  background: var(--app-color-green);
+  color: #fff;
+}
+
+.status-chip--inactive {
+  background: #e0e0e0;
+  color: #555;
+}
+
+.doctor-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-10);
+
+  ion-toggle {
+    --handle-background: #fff;
+    --background-checked: var(--app-color-green);
+    --handle-background-checked: #fff;
+  }
+
+  ion-button {
+    --border-color: var(--app-color-blue);
+    --color: var(--app-color-blue);
+  }
 }

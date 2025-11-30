@@ -1,0 +1,176 @@
+ion-content {
+  --background: var(--app-color-background);
+}
+
+.main-header {
+  background: var(--app-color-blue);
+  --background: var(--app-color-blue);
+
+  /* Respeta notch de iPhone */
+  padding-top: env(safe-area-inset-top);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.toolbar {
+  --background: var(--app-color-blue);
+  background: var(--app-color-blue);
+  padding-top: var(--app-spacing-40);
+  height: var(--app-spacing-80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+
+.back-btn {
+  --color: white;
+  margin-left: 4px;
+  ion-icon{
+    height: 35px;
+    width: 35px;
+  }
+
+}
+
+.dashboard-title {
+  font-family: var(--font-title);
+  color: white;
+  font-size: var(--app-spacing-20);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* CONTENEDOR */
+.doctor-dashboard-wrapper {
+  min-height: 100%;
+}
+
+/* CARD DE CITA */
+.appointment-card {
+  background: white;
+  border-radius: 20px;
+  padding: var(--app-spacing-16);
+  margin-bottom: var(--app-spacing-20);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* PET SECTION */
+.pet-info {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-14);
+}
+
+.pet-photo {
+  width: 90px;
+  height: 90px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 3px solid var(--app-color-green);
+}
+
+.pet-details h2 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-18);
+  color: var(--app-color-blue);
+}
+
+.client-name {
+  font-size: var(--app-spacing-12);
+  color: #666;
+}
+
+/* INFO SECTION */
+.info-section {
+  margin-top: var(--app-spacing-14);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--app-spacing-10);
+
+  ion-icon {
+    font-size: 1.3rem;
+    color: var(--app-color-orange);
+  }
+
+  .info-label {
+    font-size: var(--app-spacing-14);
+    font-weight: 600;
+    color: #333;
+  }
+
+  .info-type {
+    font-size: var(--app-spacing-12);
+    color: #555;
+  }
+}
+
+/* FECHA */
+.date-section {
+  margin-top: var(--app-spacing-12);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--app-color-yellow);
+
+  ion-icon {
+    font-size: 1.2rem;
+  }
+
+  span {
+    font-size: var(--app-spacing-14);
+  }
+}
+
+/* STATUS */
+.status-section {
+  margin-top: var(--app-spacing-16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-badge {
+  padding: 6px 14px;
+  font-size: var(--app-spacing-12);
+  font-weight: 700;
+  border-radius: 12px;
+  text-transform: capitalize;
+  color: white;
+}
+
+.status-btn {
+  font-size: var(--app-spacing-14);
+  color: var(--app-color-blue);
+}
+
+.status-pendiente {
+  background: var(--app-color-yellow);
+}
+
+.status-confirmada {
+  background: var(--app-color-green);
+}
+
+.status-en-curso {
+  background: var(--app-color-blue);
+}
+
+.status-cancelada {
+  background: var(--app-color-orange);
+}
+
+.status-finalizada {
+  background: gray;
+}

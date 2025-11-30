@@ -116,11 +116,15 @@ ion-col {
     font-weight: 600;
   }
 
-    &-text-strong {
+  &-text-strong {
     font-weight: 700;
   }
 
   &-text-center {
     text-align: center;
   }
+}
+
+ion-toolbar {
+  min-height: calc(56px + env(safe-area-inset-top));
 }

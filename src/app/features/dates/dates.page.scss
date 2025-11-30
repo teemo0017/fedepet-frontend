@@ -1,0 +1,202 @@
+.main-header {
+  background: var(--app-color-blue);
+  --background: var(--app-color-blue);
+
+  /* Respeta notch de iPhone */
+  padding-top: env(safe-area-inset-top);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.toolbar {
+  --background: var(--app-color-blue);
+  background: var(--app-color-blue);
+  padding-top: var(--app-spacing-40);
+  height: var(--app-spacing-80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+
+.back-btn {
+  --color: white;
+  margin-left: 4px;
+}
+
+
+.header-title {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  color: white;
+}
+
+/* TARJETA */
+.appointment-card {
+  background: rgba(255, 255, 255, 0.70);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  padding: var(--app-spacing-20);
+  margin-bottom: var(--app-spacing-20);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.10);
+}
+
+/* DOCTOR */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-14);
+  margin-bottom: var(--app-spacing-14);
+}
+
+.doctor-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 18px;
+  object-fit: fill;
+  border: 3px solid var(--app-color-blue);
+}
+
+.doctor-info h2 {
+  font-family: var(--font-title);
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--app-color-blue);
+}
+
+.doctor-info span {
+  font-size: .85rem;
+  color: #555;
+}
+
+/* PET */
+.pet-section {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-12);
+  margin-bottom: var(--app-spacing-14);
+}
+
+.pet-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 18px;
+  object-fit: fill;
+  border: 2px solid var(--app-color-green);
+}
+
+.pet-info h3 {
+  font-family: var(--font-title);
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--app-color-orange);
+}
+
+.pet-motive {
+  margin-top: 4px;
+  font-size: .9rem;
+  color: #666;
+}
+
+/* DETALLES */
+.details {
+  margin-top: var(--app-spacing-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-spacing-8);
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  ion-icon {
+    font-size: 1.2rem;
+    color: var(--app-color-yellow);
+  }
+
+  span {
+    font-size: .95rem;
+  }
+}
+
+/* ESTADOS */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: .85rem;
+}
+
+.status-pending {
+  background: var(--app-color-yellow);
+  color: #fff;
+}
+
+.status-confirmed {
+  background: var(--app-color-green);
+  color: white;
+}
+
+.status-completed {
+  background: var(--app-color-blue);
+  color: white;
+}
+
+.status-canceled {
+  background: var(--app-color-orange);
+  color: white;
+}
+
+.empty-card {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: var(--app-color-blue);
+}
+
+.empty-title {
+  font-family: var(--font-title);
+  margin: var(--app-spacing-8) 0 var(--app-spacing-4);
+  color: #2a2a2a;
+}
+
+.empty-text {
+  color: #666;
+}
+
+
+.status-pendiente {
+  background: var(--app-color-yellow);
+}
+
+.status-confirmada {
+  background: var(--app-color-green);
+}
+
+.status-en-curso {
+  background: var(--app-color-blue);
+}
+
+.status-cancelada {
+  background: var(--app-color-orange);
+}
+
+.status-finalizada {
+  background: gray;
+}

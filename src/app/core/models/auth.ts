@@ -19,6 +19,7 @@ export interface DecodedUser {
   name: string;
   role: string;
   phone: string;
+  doctorPhoto : string;
   exp: number;
   iat: number;
 }

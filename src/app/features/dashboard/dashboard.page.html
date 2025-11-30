@@ -1,4 +1,7 @@
 <ion-content class="app-bg-background">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div *ngIf="!loading">
 
 
@@ -6,7 +9,7 @@
       <ion-grid class="container-text-title">
         <ion-row class="mb-60 pt-20 mr-14">
           <ion-col size="12" class="container-icon-exit">
-            <div (click)="goExit()" class="ion-text-center">
+            <div (click)="goExit()" class="ion-text-center mt-20">
               <ion-icon name="exit-outline"></ion-icon>
               <div class="app-text-subtitle">Salir</div>
             </div>
@@ -46,7 +49,7 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="9">
             <div>
-              <h2 class="app-text-blue app-text-title">Mis Mascotas</h2>
+              <h2 class="app-text-blue app-text-title">Mis Mascotas 🐶</h2>
             </div>
           </ion-col>
         </ion-row>
@@ -54,25 +57,38 @@
       <round-slide [roundSlideInfo]="infoPets"></round-slide>
     </div>
 
-    <div class="px-20 mt-16" *ngIf="infoPets.length > 0 && !loading">
-      <div class="app-bg-green p-12  manage-pets-container">
-        <h2 class="app-text-title app-text-clay-green m-0 ">Gestionar Mascotas</h2>
-        <ion-grid>
-          <ion-row class="mt-16">
-            <ion-col size="6">
-              <ion-button (click)="goManagerPets()" expand="block" shape="round">
-                Ver todos
-              </ion-button>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button class="dates" expand="block" shape="round">
-                Agendar Cita
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
 
+    <div *ngIf="infoPets.length > 0 && !loading" class="quick-actions-card  p-20 mx-16">
+
+      <h2 class="quick-title">Accesos rápidos</h2>
+
+      <div class="quick-grid">
+
+        <!-- Citas -->
+        <div class="quick-btn" (click)="goDates()">
+          <div class="quick-icon app-bg-blue">
+            <ion-icon name="calendar-outline"></ion-icon>
+          </div>
+          <span>Citas</span>
+        </div>
+
+        <!-- Agendar cita -->
+        <div class="quick-btn" (click)="goCreateDate()">
+          <div class="quick-icon app-bg-green">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </div>
+          <span>Agendar</span>
+        </div>
+
+        <!-- Mascotas -->
+        <div class="quick-btn" (click)="goManagerPets()">
+          <div class="quick-icon app-bg-orange">
+            <ion-icon name="paw-outline"></ion-icon>
+          </div>
+          <span>Mascotas</span>
+        </div>
+
+      </div>
     </div>
 
     <div class="px-16 pb-24">
@@ -81,7 +97,7 @@
         <ion-row class="ion-align-items-center ">
           <ion-col size="9">
             <div>
-              <h2 class="app-text-green  app-text-title">Doctores disponibles</h2>
+              <h2 class="app-text-green  app-text-title">Doctores disponibles 🩺</h2>
             </div>
           </ion-col>
         </ion-row>

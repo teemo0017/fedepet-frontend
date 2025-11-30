@@ -6,7 +6,7 @@ import { UserService } from '../services/user.service';
 import { Doctor, petsResponseByUser, requestId } from '../services/models/users';
 import { AuthService } from '../../core/auth.service';
 import { DecodedUser } from '../../core/models/auth';
-import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class DashboardPage implements OnInit {
+  public firstCall = true;
   public infoUser: DecodedUser = {} as DecodedUser
   public loading = false;
   public infoDoctors: SquareSlideInfo[] = [
@@ -38,44 +39,63 @@ export class DashboardPage implements OnInit {
     this.navCtrl.navigateForward('/user/pets',)
 
   }
+  async goCreateDate() {
+    this.navCtrl.navigateForward('/user/appointment',)
 
+  }
+
+  async goDates() {
+    this.navCtrl.navigateForward('/user/dates',)
+
+  }
   async goToCreate() {
     this.navCtrl.navigateForward('/user/add-pet',)
   }
-  constructor(private router: Router, private navCtrl: NavController, private userService: UserService, private authService: AuthService, private platform: Platform) { }
+  constructor(private navCtrl: NavController, private userService: UserService, private authService: AuthService, private platform: Platform) { }
 
   async ngOnInit() {
     this.loading = true;
+    await this.delay(1000);
     this.infoUser = await this.authService.getUserInfo();
+    this.callServicePet();
     this.callServiceDocts();
   }
 
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
   public async callServicePet() {
 
     const request: requestId = {
       id: this.infoUser.id
     };
 
-    this.userService.getPets(request).subscribe({
-      next: async (resp: petsResponseByUser[]) => {
-        this.infoPets = resp.map(pet => {
-          return {
-            url: pet.photo,
-            title: pet.name,
-          }
+    this.userService.getPets(request)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
         })
+      )
+      .subscribe({
+        next: (resp: petsResponseByUser[]) => {
+          this.infoPets = resp.map(pet => {
+            return {
+              url: pet.photo,
+              title: pet.name,
+            }
+          })
 
-      },
-      error: (err) => {
-        console.log("Error al llamar el servicio");
-      },
-      complete: () => {
-        this.loading = false;
-      }
-    });
+        },
+        error: (err) => {
+          console.log("Error al llamar el servicio");
+        }
+      });
   }
   async ionViewDidEnter() {
-      await this.callServicePet();
+    if (this.firstCall) {
+      this.callServiceDocts();
+      this.firstCall = false;
+    }
   }
   public callServiceDocts() {
     this.userService.getDocts().subscribe({
@@ -84,17 +104,20 @@ export class DashboardPage implements OnInit {
           return {
             url: doc.photo,
             title: doc.name,
-            description: doc.specialty
+            description: doc.description
           }
         })
       },
       error: (err) => {
         console.log("Error al llamar el servicio");
       },
-      complete: () => {
-      }
     });
   }
 
-
+  async doRefresh(event: any) {
+    this.loading = true;
+    await this.delay(1000);
+    this.callServicePet();
+    event.target.complete(); // cierra el loader del refresher
+  }
 }

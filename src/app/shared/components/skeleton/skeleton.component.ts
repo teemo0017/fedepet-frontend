@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'component-skeleton',
@@ -11,6 +12,16 @@ export class SkeletonComponent implements OnInit {
   @Input() showFooter = false;
   @Input() type: 'grid' | 'list' = 'grid';
   constructor() { }
+
+    options: AnimationOptions = {
+      path: 'assets/animations/dog_walking.json', // ajusta la ruta
+      loop: true,
+      autoplay: true,
+    };
+
+    onAnimationCreated(anim: any) {
+      console.log('Lottie lista', anim);
+    }
 
   ngOnInit() { }
 

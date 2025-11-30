@@ -78,7 +78,7 @@
   .cover {
     height: 160px;
     width: 100%;
-    background-size: contain; /* que se vea completa aunque haya franjas */
+    background-size: cover; /* que se vea completa aunque haya franjas */
     background-position: center;
     background-repeat: no-repeat;
     position: relative;

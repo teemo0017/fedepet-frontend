@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // 🔹 Si usarás peticiones HTTP (recomendado)
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideLottieOptions } from 'ngx-lottie';
 
 
 @NgModule({
@@ -21,6 +22,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
   ],
 
   providers: [
+    provideLottieOptions({
+      // carga dinámica de lottie-web
+      player: () => import('lottie-web'),
+    }),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
 

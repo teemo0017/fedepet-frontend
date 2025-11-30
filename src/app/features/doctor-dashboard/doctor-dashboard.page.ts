@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
+import { ActionSheetController, NavController, Platform } from '@ionic/angular';
+import { UserService } from '../services/user.service';
+import { AuthService } from 'src/app/core/auth.service';
+import { DateResponseDoctor, DatesResponse, GenericResponseSave, requestId, updateDateState } from '../services/models/users';
+import { DecodedUser } from 'src/app/core/models/auth';
+import { finalize } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -7,32 +16,72 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class DoctorDashboardPage implements OnInit {
-  doctorName = 'Martínez';
+  doctorName = "Dr. Juan Martínez";
+  doctorPhoto = "https://i.pravatar.cc/150?img=12";
+  public infoUser: DecodedUser = {} as DecodedUser
+  datesIncoming: DatesResponse[] = [];
+  datesDone: DatesResponse[] = [];
+  loading = false;
+  constructor(private navCtrl: NavController, private userService: UserService, private authService: AuthService, private platform: Platform) { }
 
-  upcomingAppointments = [
-    { mascota: 'Luna', cliente: 'Carlos Gómez', fecha: '2025-10-14T09:00', motivo: 'Vacunación', estado: 'Confirmada' },
-    { mascota: 'Max', cliente: 'Ana Ruiz', fecha: '2025-10-14T10:30', motivo: 'Consulta general', estado: 'Pendiente' },
-  ];
+  async ngOnInit() {
+    this.loading = true;
+    this.infoUser = await this.authService.getUserInfo();
+    await this.delay(1000);
+    this.callService();
+  }
+  callService() {
+    this.loading = true;
+    this.delay(2000);
+    const request: requestId = {
+      id: this.infoUser.id
+    };
 
-  stats = [
-    { label: 'Citas Hoy', value: 5 },
-    { label: 'Mascotas Atendidas', value: 3 },
-    { label: 'Canceladas', value: 1 },
-  ];
+    this.userService.getDatesByDoctor(request)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe({
+        next: (resp: DateResponseDoctor) => {
+          this.datesIncoming = resp.datesIncoming;
+          this.datesDone = resp.datesDone
+        },
+        error: (err) => {
+          console.log("Error al llamar el servicio");
+        }
+      });
+  }
 
-  notifications = [
-    { text: 'Nueva cita con “Luna” para mañana a las 9:00 a.m.' },
-    { text: 'Cliente “Ana Ruiz” reprogramó su cita.' },
-  ];
+  viewAll() {
+    this.navCtrl.navigateForward('/doctor-dates', {
+      state: {
+        dates: this.datesIncoming
+      }
+    });
+  }
 
-  ngOnInit() {}
+  viewHistory() {
+    this.navCtrl.navigateForward('/doctor-dates', {
+      state: {
+        dates: this.datesDone
+      }
+    });
+  }
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async logout() {
+    await Preferences.clear();
+    await this.platform.ready();
+    await this.navCtrl.navigateRoot('/login')
+  }
 
-  getStatusColor(status: string): string {
-    switch (status.toLowerCase()) {
-      case 'confirmada': return 'success';
-      case 'pendiente': return 'warning';
-      case 'cancelada': return 'danger';
-      default: return 'medium';
-    }
+  async doRefresh(event: any) {
+    this.loading = true;
+    await this.delay(1000);
+    this.callService();
+    event.target.complete(); // cierra el loader del refresher
   }
 }

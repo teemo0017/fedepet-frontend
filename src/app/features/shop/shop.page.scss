@@ -1,83 +1,179 @@
-.shop-page {
+ion-content {
   --background: var(--app-color-background);
-  font-family: var(--ion-font-family);
-  color: var(--app-color-blue);
+}
 
-  .shop-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--app-spacing-12);
-    text-align: center;
+/* HEADER */
 
-    .title {
-      font-family: var(--font-title);
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--app-color-orange);
-    }
+.store-header {
+  --background: var(--app-color-blue);
+  color: #fff;
+}
 
-    .shop-search {
-      --background: var(--app-color-clay-green);
-      --color: var(--app-color-blue);
-      border-radius: 16px;
-      --placeholder-color: var(--app-color-blue);
-      --icon-color: var(--app-color-orange);
-    }
-  }
+.store-header__title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
 
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: var(--app-spacing-16);
-  }
+/* CONTENEDOR GENERAL */
 
-  .product-card {
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    padding: var(--app-spacing-12);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.store-wrapper {
+  min-height: 100%;
+}
 
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+/* BANNER SUPERIOR */
 
-    .product-image {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      margin-bottom: var(--app-spacing-8);
-    }
+.store-banner {
+  background: linear-gradient(
+    135deg,
+    var(--app-color-blue),
+    var(--app-color-green)
+  );
+  border-radius: 18px;
+  padding: var(--app-spacing-16);
+  color: #fff;
+}
 
-    .product-info {
-      margin-bottom: var(--app-spacing-8);
+.store-banner__title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  margin: 0 0 var(--app-spacing-6) 0;
+}
 
-      .product-name {
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--app-color-blue);
-      }
+.store-banner__subtitle {
+  margin: 0;
+  font-size: var(--app-spacing-14);
+  opacity: 0.95;
+}
 
-      .product-price {
-        color: var(--app-color-green);
-        font-weight: 700;
-        margin-top: var(--app-spacing-4);
-      }
-    }
+/* GRID */
 
-    .buy-btn {
-      --background: var(--app-color-orange);
-      --background-activated: color-mix(in srgb, var(--app-color-orange) 80%, black);
-      color: white;
-      font-weight: 600;
-      --border-radius: 18px;
-      font-size: 0.9rem;
-      margin-top: auto;
-    }
-  }
+.store-grid {
+  width: 100%;
+}
+
+.store-col {
+  padding-left: var(--app-spacing-8);
+  padding-right: var(--app-spacing-8);
+  margin-bottom: var(--app-spacing-16);
+}
+
+/* CARD PRODUCTO */
+
+.store-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Imagen con proporción fija (no se corta raro) */
+
+.store-card__image-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3; // mantiene proporción
+  overflow: hidden;
+}
+
+.store-card__image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* CUERPO DEL PRODUCTO */
+
+.store-card__body {
+  padding: var(--app-spacing-10) var(--app-spacing-12) 0
+    var(--app-spacing-12);
+  flex: 1;
+}
+
+.store-card__name {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-14);
+  margin: 0 0 var(--app-spacing-6) 0;
+  color: #333;
+}
+
+.store-card__description {
+  margin: 0;
+  font-size: var(--app-spacing-12);
+  color: #666;
+}
+
+/* FOOTER (precio + botón) */
+
+.store-card__footer {
+  padding: var(--app-spacing-10) var(--app-spacing-12)
+    var(--app-spacing-12) var(--app-spacing-12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-spacing-10);
+}
+
+.store-card__price {
+  font-weight: 700;
+  font-size: var(--app-spacing-14);
+  color: var(--app-color-orange);
+}
+
+/* Botón custom usando tu paleta */
+
+.store-card__btn {
+  border: none;
+  outline: none;
+  padding: var(--app-spacing-6) var(--app-spacing-10);
+  border-radius: 999px;
+  background: var(--app-color-green);
+  color: #fff;
+  font-size: var(--app-spacing-12);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--app-spacing-4);
+}
+
+.store-card__btn ion-icon {
+  font-size: 1.1rem;
+}
+
+.main-header {
+  background: var(--app-color-blue);
+  --background: var(--app-color-blue);
+
+  /* Respeta notch de iPhone */
+  padding-top: env(safe-area-inset-top);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar {
+  --background: var(--app-color-blue);
+  background: var(--app-color-blue);
+  padding-top: var(--app-spacing-40);
+  height: var(--app-spacing-80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-btn {
+  --color: white;
+  margin-left: 4px;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: var(--app-spacing-20);
+  font-weight: 700;
+  color: white;
+  text-align: center;
 }

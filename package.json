@@ -36,6 +36,8 @@
     "google-one-tap": "^1.0.6",
     "ionicons": "^7.1.2",
     "jwt-decode": "^4.0.0",
+    "lottie-web": "^5.13.0",
+    "ngx-lottie": "^11.0.2",
     "rxjs": "~7.8.1",
     "swiper": "^11.1.0",
     "tslib": "^2.6.2",

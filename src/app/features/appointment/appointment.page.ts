@@ -1,65 +1,157 @@
 import { Component } from '@angular/core';
+import { Doctor, petsResponseByUser, requestId, saveDateRequest } from '../services/models/users';
+import { UserService } from '../services/user.service';
+import { AuthService } from '../../core/auth.service';
+import { DecodedUser } from 'src/app/core/models/auth';
+import { NavController } from '@ionic/angular';
+import { ToastService } from '../services/toast.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.page.html',
   styleUrls: ['./appointment.page.scss'],
-  standalone:false
+  standalone: false
 })
 export class AppointmentPage {
-  doctors = [
-    {
-      id: 1,
-      name: 'Dr. Martínez',
-      availableDates: ['2025-10-14', '2025-10-15', '2025-10-18'],
-      availableTimes: {
-        '2025-10-14': ['09:00', '10:00', '15:00'],
-        '2025-10-15': ['11:00', '13:30'],
-        '2025-10-18': ['08:00', '09:30'],
-      },
-    },
-    {
-      id: 2,
-      name: 'Dra. López',
-      availableDates: ['2025-10-16', '2025-10-17', '2025-10-19'],
-      availableTimes: {
-        '2025-10-16': ['08:00', '09:00'],
-        '2025-10-17': ['10:00', '11:30'],
-        '2025-10-19': ['14:00', '15:30', '16:00'],
-      },
-    },
+  public fistCall = true;
+  isWeekday = (dateString: string) => {
+    const date = new Date(dateString);
+    const utcDay = date.getUTCDay();
+    return utcDay !== 0;
+  };
+  appointmentTypes: string[] = [
+    'Consulta General',
+    'Vacunación',
+    'Desparasitación',
+    'Control de Crecimiento',
+    'Consulta de Urgencia',
+    'Chequeo Preventivo',
+    'Cirugía Programada',
+    'Control Post-Operatorio',
+    'Corte de Uñas',
+    'Limpieza Dental',
+    'Baño Médico',
+    'Revisión de Piel',
+    'Consulta de Enfermedades Crónicas',
+    'Problemas Gastrointestinales',
+    'Problemas Respiratorios',
+    'Problemas Oculares',
+    'Problemas Dermatológicos',
+    'Consulta de Reproducción',
+    'Control de Embarazo',
+    'Ecografía',
+    'Rayos X',
+    'Vacunación Antirrábica',
+    'Consulta de Comportamiento',
+    'Nutrición y Dietética',
+    'Certificado de Salud',
+    'Control Geriátrico',
+    'Esterilización / Castración',
+    'Consulta de Animales Exóticos',
+    'Aplicación de Tratamientos',
+    'Revisión por Heridas o Traumas'
   ];
-
-  selectedDoctor: any = null;
-  availableDates: string[] = [];
-  availableTimes: string[] = [];
-  selectedTime: string | null = null;
-  minDate = new Date().toISOString();
+  public infoUser: DecodedUser = {} as DecodedUser
+  public doctorList: Doctor[] = [];
+  public petList: petsResponseByUser[] = []
+  reason: string = '';
+  selectedPet: number = 0;
+  selectAppointmentType = '';
+  selectedDoctor: number = 0;
   maxDate = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString();
-  disabledDates: string[] = [];
-
-  updateAvailableDates() {
-    if (this.selectedDoctor) {
-      this.availableDates = this.selectedDoctor.availableDates;
-      // Generar las fechas no disponibles
-      const today = new Date();
-      const next30 = Array.from({ length: 30 }, (_, i) => {
-        const d = new Date(today);
-        d.setDate(today.getDate() + i);
-        return d.toISOString().split('T')[0];
-      });
-      this.disabledDates = next30.filter((d) => !this.availableDates.includes(d));
-      this.availableTimes = [];
-      this.selectedTime = null;
+  minDate = new Date().toISOString();
+  selectedTime: string = new Date(new Date().setDate(new Date().getDay() + 1)).toISOString();;
+  initDate = this.selectedTime;
+  saveDateLoading = false;
+  initLoading = false;
+  constructor(private toastService: ToastService, private userService: UserService, private authService: AuthService, private navCtrl: NavController) { }
+  async ngOnInit() {
+    this.infoUser = await this.authService.getUserInfo();
+  }
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async ionViewDidEnter() {
+    this.resetValues();
+    this.initLoading = true;
+    await this.delay(2000);
+    if (this.fistCall) {
+      this.callServiceDocts();
+      this.fistCall = false;
     }
+    this.callServicePet();
   }
 
-  updateAvailableTimes(event: any) {
-    const selectedDate = event.detail.value.split('T')[0];
-    if (this.selectedDoctor?.availableTimes[selectedDate]) {
-      this.availableTimes = this.selectedDoctor.availableTimes[selectedDate];
-    } else {
-      this.availableTimes = [];
+  public callServicePet() {
+
+    const request: requestId = {
+      id: this.infoUser.id
+    };
+
+    this.userService.getPets(request).subscribe({
+      next: (resp: petsResponseByUser[]) => {
+        this.petList = resp
+
+      },
+      error: (err) => {
+        console.log("Error al llamar el servicio");
+      },
+      complete: () => {
+        this.initLoading = false;
+      }
+    });
+  }
+  public callServiceDocts() {
+    this.initLoading = true;
+    this.userService.getDocts().subscribe({
+      next: (resp: Doctor[]) => {
+        this.doctorList = resp;
+        console.log(this.doctorList);
+      },
+      error: (err) => {
+        console.log("Error al llamar el servicio", err);
+      },
+      complete: () => {
+        console.log("Completado")
+      }
+    });
+  }
+  submit() {
+    this.saveDateLoading = true;
+    const request: saveDateRequest = {
+      motive: this.reason,
+      type: this.selectAppointmentType,
+      pet: this.selectedPet,
+      client: this.infoUser.id,
+      doctor: this.selectedDoctor,
+      dateTime: new Date(this.selectedTime).toISOString()
     }
+
+    this.userService.saveDate(request)
+      .pipe(finalize(() => {
+        this.saveDateLoading = false;
+      }))
+      .subscribe({
+        next: async () => {
+          await this.createToastSuccess();
+          this.navCtrl.navigateForward('/user/dashboard');
+        },
+        error: (err) => {
+          console.log("error al llamar el servicio", err)
+        }
+
+      })
+  }
+  resetValues() {
+    this.selectedTime = this.initDate;
+    this.selectedDoctor = 0;
+    this.selectedPet = 0;
+    this.reason = ''
+  }
+  async createToastSuccess() {
+    await this.toastService.success('¡Cita Agendada con exito!');
   }
 }
+
+

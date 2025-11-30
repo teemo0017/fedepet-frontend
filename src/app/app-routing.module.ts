@@ -42,6 +42,10 @@ const routes: Routes = [
         loadChildren: () => import('./features/add-pet/add-pet.module').then(m => m.AddPetPageModule)
       },
       {
+        path: 'dates',
+        loadChildren: () => import('./features/dates/dates.module').then(m => m.DatesPageModule)
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
@@ -71,7 +75,10 @@ const routes: Routes = [
   {
     path: 'admin-dashboard',
     loadChildren: () => import('./features/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardPageModule)
-  }
+  },  {
+    path: 'doctor-dates',
+    loadChildren: () => import('./features/doctor-dates/doctor-dates.module').then( m => m.DoctorDatesPageModule)
+  },
 
 
 ];

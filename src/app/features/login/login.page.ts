@@ -65,13 +65,13 @@ export class LoginPage implements OnInit {
           if (user && user.role === 'DOCTOR') {
             this.navCtrl.navigateRoot('doctor-dashboard');
           }
+          if (user && user.role === 'CAPTURADOR') {
+            this.navCtrl.navigateRoot('doctor-dashboard');
+          }
         },
         error: (err) => {
           this.form.markAllAsTouched();
           this.form.setErrors({ invalidRequest: true });
-        },
-        complete: () => {
-          this.loadingService = false;
         }
       })
   }

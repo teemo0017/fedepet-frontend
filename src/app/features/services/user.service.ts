@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { from, Observable, switchMap, tap } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
-import { Doctor, GenericResponseSave, petsResponseByUser, requestId, saveDateRequest, savePetRequest } from './models/users';
+import { DateResponseDoctor, DatesResponse, Doctor, GenericResponseSave, petsResponseByUser, requestId, saveDateRequest, savePetRequest, updateDateState } from './models/users';
 import { AuthService } from 'src/app/core/auth.service';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -66,6 +66,48 @@ export class UserService {
         });
         return this.http.post<GenericResponseSave>(
           `${this.apiUrl}/api/dates/create`, request,
+          { headers }
+        );
+      })
+    );
+  }
+
+  getDatesByUser(request: requestId): Observable<DatesResponse[]> {
+    return from(this.authService.getToken()).pipe(
+      switchMap(token => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${token}` // 👈 lo envías así
+        });
+        return this.http.post<DatesResponse[]>(
+          `${this.apiUrl}/api/dates/findbyclient`, request,
+          { headers }
+        );
+      })
+    );
+  }
+
+  getDatesByDoctor(request: requestId): Observable<DateResponseDoctor> {
+    return from(this.authService.getToken()).pipe(
+      switchMap(token => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${token}` // 👈 lo envías así
+        });
+        return this.http.post<DateResponseDoctor>(
+          `${this.apiUrl}/api/dates/findbydoctor`, request,
+          { headers }
+        );
+      })
+    );
+  }
+
+  updateDate(request: updateDateState): Observable<GenericResponseSave> {
+    return from(this.authService.getToken()).pipe(
+      switchMap(token => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${token}` // 👈 lo envías así
+        });
+        return this.http.post<GenericResponseSave>(
+          `${this.apiUrl}/api/dates/update`, request,
           { headers }
         );
       })
