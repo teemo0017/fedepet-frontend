@@ -19,41 +19,36 @@
       Aquí puedes administrar los perfiles de todos los doctores de la veterinaria.
     </p>
 
-    <div *ngFor="let doc of doctors" class="doctor-card mb-16">
-
-      <div class="doctor-card__main">
-        <img [src]="doc.photo" class="doctor-card__photo" />
-
-        <div class="doctor-card__info">
-          <h3 class="doctor-card__name">{{ doc.name }}</h3>
-          <p class="doctor-card__specialty">{{ doc.specialty }}</p>
-
-          <p class="doctor-card__contact">
-            <ion-icon name="mail-outline"></ion-icon>
-            <span>{{ doc.email }}</span>
-          </p>
-          <p class="doctor-card__contact">
-            <ion-icon name="call-outline"></ion-icon>
-            <span>{{ doc.phone }}</span>
-          </p>
+    @for (doc of doctors; track doc) {
+      <div class="doctor-card mb-16">
+        <div class="doctor-card__main">
+          <img [src]="doc.photo" class="doctor-card__photo" />
+          <div class="doctor-card__info">
+            <h3 class="doctor-card__name">{{ doc.name }}</h3>
+            <p class="doctor-card__specialty">{{ doc.specialty }}</p>
+            <p class="doctor-card__contact">
+              <ion-icon name="mail-outline"></ion-icon>
+              <span>{{ doc.email }}</span>
+            </p>
+            <p class="doctor-card__contact">
+              <ion-icon name="call-outline"></ion-icon>
+              <span>{{ doc.phone }}</span>
+            </p>
+          </div>
+        </div>
+        <div class="doctor-card__footer">
+          <span class="status-chip" [ngClass]="doc.available ? 'status-chip--active' : 'status-chip--inactive'">
+            {{ doc.available ? 'Activo' : 'Inactivo' }}
+          </span>
+          <div class="doctor-card__actions">
+            <ion-toggle [checked]="doc.available" (ionChange)="toggleAvailability(doc)"></ion-toggle>
+            <ion-button size="small" fill="outline" (click)="goToEditDoctor(doc)">
+              Editar
+            </ion-button>
+          </div>
         </div>
       </div>
-
-      <div class="doctor-card__footer">
-        <span class="status-chip" [ngClass]="doc.available ? 'status-chip--active' : 'status-chip--inactive'">
-          {{ doc.available ? 'Activo' : 'Inactivo' }}
-        </span>
-
-        <div class="doctor-card__actions">
-          <ion-toggle [checked]="doc.available" (ionChange)="toggleAvailability(doc)"></ion-toggle>
-
-          <ion-button size="small" fill="outline" (click)="goToEditDoctor(doc)">
-            Editar
-          </ion-button>
-        </div>
-      </div>
-
-    </div>
+    }
 
   </div>
 </ion-content>

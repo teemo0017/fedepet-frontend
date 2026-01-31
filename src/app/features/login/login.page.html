@@ -23,44 +23,54 @@
 
         <ion-card class="auth-card p-16">
           <ion-card-content>
-            <div class="app-text-center" *ngIf="form.touched && form.errors?.['invalidRequest']">
-              <p class="app-text-strong app-text-orange">Verifica tu usuario o tu login</p>
-            </div>
+            @if (form.touched && form.errors?.['invalidRequest']) {
+              <div class="app-text-center">
+                <p class="app-text-strong app-text-orange">Verifica tu usuario o tu login</p>
+              </div>
+            }
             <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
               <!-- Usuario -->
               <ion-item lines="full" class="mb-12">
                 <ion-icon name="person-outline" slot="start"></ion-icon>
                 <ion-input label="Usuario" label-placement="floating" formControlName="username"
-                  placeholder="Tu nombre de usuario"></ion-input>
+                placeholder="Tu nombre de usuario"></ion-input>
               </ion-item>
-              <div class="error" *ngIf="f.username.touched && f.username.errors?.['required']">
-                <small>El usuario es obligatorio</small>
-              </div>
+              @if (f.username.touched && f.username.errors?.['required']) {
+                <div class="error">
+                  <small>El usuario es obligatorio</small>
+                </div>
+              }
               <!-- Contraseña -->
               <ion-item lines="full" class="mb-12">
                 <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
                 <ion-input label="Contraseña" label-placement="floating" [type]="hide ? 'password' : 'text'"
-                  formControlName="password" placeholder="••••••••"></ion-input>
+                formControlName="password" placeholder="••••••••"></ion-input>
                 <ion-button fill="clear" slot="end" size="small" type="button" (click)="togglePassword()">
                   <ion-icon [name]="hide ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
                 </ion-button>
               </ion-item>
 
 
-              <div class="error" *ngIf="f.password.touched && f.password.errors?.['required']">
-                <small>La contraseña es obligatoria</small>
-              </div>
+              @if (f.password.touched && f.password.errors?.['required']) {
+                <div class="error">
+                  <small>La contraseña es obligatoria</small>
+                </div>
+              }
               <!-- Botón -->
               <ion-button expand="block" class="btn-login mt-16" type="submit" [disabled]="form.invalid">
-                <span *ngIf="!loadingService">Ingresar</span>
-                <ion-spinner *ngIf="loadingService" name="dots"></ion-spinner>
+                @if (!loadingService) {
+                  <span>Ingresar</span>
+                }
+                @if (loadingService) {
+                  <ion-spinner name="dots"></ion-spinner>
+                }
               </ion-button>
             </form>
           </ion-card-content>
 
           <ion-col size="12" (click)="redirectToRegister()">
             <h2 class="ion-text-center app-text-normal app-text-orange">¿Aun no tienes cuenta? ¡Registrate dandome <span
-                class="app-text-blue app-text-strong">click</span>! </h2>
+            class="app-text-blue app-text-strong">click</span>! </h2>
           </ion-col>
         </ion-card>
       </ion-row>

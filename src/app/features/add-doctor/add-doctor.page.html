@@ -5,7 +5,9 @@
     </h1>
 
     <div class="upload-box mb-16">
-      <img *ngIf="previewImage" [src]="previewImage" class="preview-img" />
+      @if (previewImage) {
+        <img [src]="previewImage" class="preview-img" />
+      }
       <ion-button fill="outline" class="upload-btn app-text-blue" (click)="selectImage()">
         <ion-icon name="camera-outline" slot="start"></ion-icon>
         Subir o Capturar Foto
@@ -21,7 +23,9 @@
       <ion-item class="input-item">
         <ion-label position="floating">Especialidad</ion-label>
         <ion-select class="mt-10" formControlName="specialty" interface="popover" placeholder="Seleccionar especialidad">
-          <ion-select-option *ngFor="let s of specialties" [value]="s">{{ s }}</ion-select-option>
+          @for (s of specialties; track s) {
+            <ion-select-option [value]="s">{{ s }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
 

@@ -1,66 +1,69 @@
 <ion-content class="appointment-page">
-  <div *ngIf="!initLoading">
-    <div class="header mt-12 mx-16">
-      <h1 class="title">Agenda tu cita</h1>
-      <p class="subtitle mt-4">Selecciona un doctor y la fecha disponible</p>
+  @if (!initLoading) {
+    <div>
+      <div class="header mt-12 mx-16">
+        <h1 class="title">Agenda tu cita</h1>
+        <p class="subtitle mt-4">Selecciona un doctor y la fecha disponible</p>
+      </div>
+      <div class="mx-16">
+        <!-- Seleccionar doctor -->
+        <ion-item class="input-field mb-16" lines="none">
+          <ion-select label="Selecciona la mascota" label-placement="floating" interface="popover" [(ngModel)]="selectedPet"
+            placeholder="Selecciona tu mascota">
+            @for (pet of petList; track pet) {
+              <ion-select-option [value]="pet.id">
+                {{ pet.name }}
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        <ion-item class="input-field mb-16" lines="none">
+          <ion-select label="Selecciona el doctor" label-placement="floating" interface="popover" [(ngModel)]="selectedDoctor"
+            placeholder="Selecciona un doctor">
+            @for (doctor of doctorList; track doctor) {
+              <ion-select-option [value]="doctor.id">
+                {{ doctor.name }}
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        <!-- Calendario dinámico -->
+        <ion-item class="input-field mb-16" lines="none">
+          <ion-datetime [(ngModel)]="selectedTime" [isDateEnabled]="isWeekday" [min]="minDate" [max]="maxDate"
+            locale="es-ES" locale="es-PA" hourCycle="h12">
+            <span slot="time-label">Hora de la cita</span>
+          </ion-datetime>
+        </ion-item>
+        <ion-item class="input-field mb-16" lines="none">
+          <ion-select label="Tipo de cita" label-placement="floating" interface="popover" [(ngModel)]="selectAppointmentType"
+            placeholder="Selecciona tu mascota">
+            @for (type of appointmentTypes; track type) {
+              <ion-select-option [value]="type">
+                {{ type}}
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        <ion-item class="input-field mb-16" lines="none">
+          <ion-textarea label="Motivo de la cita" label-placement="floating" placeholder="Describe brevemente el motivo"
+            [(ngModel)]="reason">
+          </ion-textarea>
+        </ion-item>
+        <ion-button [disabled]="!selectedDoctor || !selectedPet || selectedTime === initDate || !reason || !selectAppointmentType"
+          (click)="submit()" expand="block" class="confirm-btn py-8" shape="round">
+          @if (!saveDateLoading) {
+            <span>Agendar Cita</span>
+          }
+          @if (saveDateLoading) {
+            <ion-spinner name="dots"></ion-spinner>
+          }
+        </ion-button>
+      </div>
     </div>
-    <div class="mx-16">
-
-      <!-- Seleccionar doctor -->
-
-      <ion-item class="input-field mb-16" lines="none">
-        <ion-select label="Selecciona la mascota" label-placement="floating" interface="popover" [(ngModel)]="selectedPet"
-          placeholder="Selecciona tu mascota">
-          <ion-select-option *ngFor="let pet of petList" [value]="pet.id">
-            {{ pet.name }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-
-
-      <ion-item class="input-field mb-16" lines="none">
-        <ion-select label="Selecciona el doctor" label-placement="floating" interface="popover" [(ngModel)]="selectedDoctor"
-          placeholder="Selecciona un doctor">
-          <ion-select-option *ngFor="let doctor of doctorList" [value]="doctor.id">
-            {{ doctor.name }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <!-- Calendario dinámico -->
-      <ion-item class="input-field mb-16" lines="none">
-        <ion-datetime [(ngModel)]="selectedTime" [isDateEnabled]="isWeekday" [min]="minDate" [max]="maxDate"
-          locale="es-ES" locale="es-PA" hourCycle="h12">
-          <span slot="time-label">Hora de la cita</span>
-        </ion-datetime>
-      </ion-item>
-
-      <ion-item class="input-field mb-16" lines="none">
-        <ion-select label="Tipo de cita" label-placement="floating" interface="popover" [(ngModel)]="selectAppointmentType"
-          placeholder="Selecciona tu mascota">
-          <ion-select-option *ngFor="let type of appointmentTypes" [value]="type">
-            {{ type}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-
-      <ion-item class="input-field mb-16" lines="none">
-        <ion-textarea label="Motivo de la cita" label-placement="floating" placeholder="Describe brevemente el motivo"
-          [(ngModel)]="reason">
-        </ion-textarea>
-      </ion-item>
-
-      <ion-button [disabled]="!selectedDoctor || !selectedPet || selectedTime === initDate || !reason || !selectAppointmentType"
-        (click)="submit()" expand="block" class="confirm-btn py-8" shape="round">
-        <span *ngIf="!saveDateLoading">Agendar Cita</span>
-        <ion-spinner *ngIf="saveDateLoading" name="dots"></ion-spinner>
-      </ion-button>
-
+  }
+  @if (initLoading) {
+    <div>
+      <component-skeleton [count]="5" [type]="'grid'"></component-skeleton>
     </div>
-  </div>
-  <div *ngIf="initLoading">
-    <component-skeleton [count]="5" [type]="'grid'"></component-skeleton>
-  </div>
+  }
 </ion-content>

@@ -15,56 +15,54 @@
 
 <ion-content class="app-bg-background">
 
-  <div *ngIf="!loading" class="doctor-dashboard-wrapper p-20">
-
-    <!-- TARJETA DE CITA -->
-    <div class="appointment-card" *ngFor="let item of dateList">
-
-      <!-- MASCOTA -->
-      <div class="pet-info">
-        <img [src]="item.petImg" class="pet-photo" />
-
-        <div class="pet-details">
-          <h2>{{ item.pet }}</h2>
-          <span class="client-name">Cliente: {{ item.client }}</span>
+  @if (!loading) {
+    <div class="doctor-dashboard-wrapper p-20">
+      <!-- TARJETA DE CITA -->
+      @for (item of dateList; track item) {
+        <div class="appointment-card">
+          <!-- MASCOTA -->
+          <div class="pet-info">
+            <img [src]="item.petImg" class="pet-photo" />
+            <div class="pet-details">
+              <h2>{{ item.pet }}</h2>
+              <span class="client-name">Cliente: {{ item.client }}</span>
+            </div>
+          </div>
+          <!-- MOTIVO Y TIPO -->
+          <div class="info-section">
+            <div class="info-row">
+              <ion-icon name="paw-outline"></ion-icon>
+              <span class="info-label">{{ item.motive }}</span>
+            </div>
+            <div class="info-row">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span class="info-type">{{ item.type }}</span>
+            </div>
+          </div>
+          <!-- FECHA -->
+          <div class="date-section">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ item.dateTime | date:'dd/MM/yyyy · HH:mm' }}</span>
+          </div>
+          <!-- ESTADO -->
+          <div class="status-section">
+            <span class="status-badge" [ngClass]="getStatusClass(item.state)">
+              {{ item.state }}
+            </span>
+            @if (!verifyStatusDate(item)) {
+              <ion-button fill="clear" class="status-btn" (click)="openStatusModal(item)">
+                Cambiar estado
+              </ion-button>
+            }
+          </div>
         </div>
-      </div>
-
-      <!-- MOTIVO Y TIPO -->
-      <div class="info-section">
-        <div class="info-row">
-          <ion-icon name="paw-outline"></ion-icon>
-          <span class="info-label">{{ item.motive }}</span>
-        </div>
-
-        <div class="info-row">
-          <ion-icon name="document-text-outline"></ion-icon>
-          <span class="info-type">{{ item.type }}</span>
-        </div>
-      </div>
-
-      <!-- FECHA -->
-      <div class="date-section">
-        <ion-icon name="calendar-outline"></ion-icon>
-        <span>{{ item.dateTime | date:'dd/MM/yyyy · HH:mm' }}</span>
-      </div>
-
-      <!-- ESTADO -->
-      <div class="status-section">
-        <span class="status-badge" [ngClass]="getStatusClass(item.state)">
-          {{ item.state }}
-        </span>
-
-        <ion-button *ngIf="!verifyStatusDate(item)" fill="clear" class="status-btn" (click)="openStatusModal(item)">
-          Cambiar estado
-        </ion-button>
-      </div>
-
+      }
     </div>
+  }
 
-  </div>
-
-  <div *ngIf="loading">
-    <component-skeleton></component-skeleton>
-  </div>
+  @if (loading) {
+    <div>
+      <component-skeleton></component-skeleton>
+    </div>
+  }
 </ion-content>

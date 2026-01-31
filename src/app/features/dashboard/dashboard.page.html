@@ -1,111 +1,105 @@
 <ion-content class="app-bg-background">
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div *ngIf="!loading">
-
-
-    <div class="img">
-      <ion-grid class="container-text-title">
-        <ion-row class="mb-60 pt-20 mr-14">
-          <ion-col size="12" class="container-icon-exit">
-            <div (click)="goExit()" class="ion-text-center mt-20">
-              <ion-icon name="exit-outline"></ion-icon>
-              <div class="app-text-subtitle">Salir</div>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="12">
-            <div class="text">
-              <h1 class="pl-16 app-text-clay-green app-text-title">Bienvenido a <span class="app-text-orange">FedePet
+  @if (!loading) {
+    <div>
+      <div class="img">
+        <ion-grid class="container-text-title">
+          <ion-row class="mb-60 pt-20 mr-14">
+            <ion-col size="12" class="container-icon-exit">
+              <div (click)="goExit()" class="ion-text-center mt-20">
+                <ion-icon name="exit-outline"></ion-icon>
+                <div class="app-text-subtitle">Salir</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="text">
+                <h1 class="pl-16 app-text-clay-green app-text-title">Bienvenido a <span class="app-text-orange">FedePet
                 </span></h1>
+              </div>
+              <div class="text pl-16 app-text-yellow">
+                <h2 class=" app-text-strong">{{infoUser.name}}</h2>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <!-- Pets -->
+      @if (infoPets.length === 0 && !loading) {
+        <div class="empty px-16 py-20">
+          <div class="empty-card p-16">
+            <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
+            <h2 class="empty-title">No hay mascotas registradas</h2>
+            <p class="empty-text">Crea la primera para empezar a gestionar sus controles y vacunas.</p>
+            <ion-button class="mt-12" shape="round" (click)="goToCreate()">
+              Agregar mascota
+            </ion-button>
+          </div>
+        </div>
+      }
+      @if (infoPets.length > 0 && !loading) {
+        <div class="px-16 mb-20">
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="9">
+                <div>
+                  <h2 class="app-text-blue app-text-title">Mis Mascotas 🐶</h2>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <round-slide [roundSlideInfo]="infoPets"></round-slide>
+        </div>
+      }
+      @if (infoPets.length > 0 && !loading) {
+        <div class="quick-actions-card  p-20 mx-16">
+          <h2 class="quick-title">Accesos rápidos</h2>
+          <div class="quick-grid">
+            <!-- Citas -->
+            <div class="quick-btn" (click)="goDates()">
+              <div class="quick-icon app-bg-blue">
+                <ion-icon name="calendar-outline"></ion-icon>
+              </div>
+              <span>Citas</span>
             </div>
-            <div class="text pl-16 app-text-yellow">
-              <h2 class=" app-text-strong">{{infoUser.name}}</h2>
+            <!-- Agendar cita -->
+            <div class="quick-btn" (click)="goCreateDate()">
+              <div class="quick-icon app-bg-green">
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </div>
+              <span>Agendar</span>
             </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-    </div>
-
-
-    <!-- Pets -->
-
-    <div *ngIf="infoPets.length === 0 && !loading" class="empty px-16 py-20">
-      <div class="empty-card p-16">
-        <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
-        <h2 class="empty-title">No hay mascotas registradas</h2>
-        <p class="empty-text">Crea la primera para empezar a gestionar sus controles y vacunas.</p>
-        <ion-button class="mt-12" shape="round" (click)="goToCreate()">
-          Agregar mascota
-        </ion-button>
+            <!-- Mascotas -->
+            <div class="quick-btn" (click)="goManagerPets()">
+              <div class="quick-icon app-bg-orange">
+                <ion-icon name="paw-outline"></ion-icon>
+              </div>
+              <span>Mascotas</span>
+            </div>
+          </div>
+        </div>
+      }
+      <div class="px-16 pb-24">
+        <!-- Docts -->
+        <ion-grid>
+          <ion-row class="ion-align-items-center ">
+            <ion-col size="9">
+              <div>
+                <h2 class="app-text-green  app-text-title">Doctores disponibles 🩺</h2>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <square-slide [squareSlideInfo]="infoDoctors"></square-slide>
       </div>
     </div>
-
-    <div class="px-16 mb-20" *ngIf="infoPets.length > 0 && !loading">
-      <ion-grid>
-        <ion-row class="ion-align-items-center">
-          <ion-col size="9">
-            <div>
-              <h2 class="app-text-blue app-text-title">Mis Mascotas 🐶</h2>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <round-slide [roundSlideInfo]="infoPets"></round-slide>
+  }
+  @if (loading) {
+    <div>
+      <component-skeleton></component-skeleton>
     </div>
-
-
-    <div *ngIf="infoPets.length > 0 && !loading" class="quick-actions-card  p-20 mx-16">
-
-      <h2 class="quick-title">Accesos rápidos</h2>
-
-      <div class="quick-grid">
-
-        <!-- Citas -->
-        <div class="quick-btn" (click)="goDates()">
-          <div class="quick-icon app-bg-blue">
-            <ion-icon name="calendar-outline"></ion-icon>
-          </div>
-          <span>Citas</span>
-        </div>
-
-        <!-- Agendar cita -->
-        <div class="quick-btn" (click)="goCreateDate()">
-          <div class="quick-icon app-bg-green">
-            <ion-icon name="add-circle-outline"></ion-icon>
-          </div>
-          <span>Agendar</span>
-        </div>
-
-        <!-- Mascotas -->
-        <div class="quick-btn" (click)="goManagerPets()">
-          <div class="quick-icon app-bg-orange">
-            <ion-icon name="paw-outline"></ion-icon>
-          </div>
-          <span>Mascotas</span>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="px-16 pb-24">
-      <!-- Docts -->
-      <ion-grid>
-        <ion-row class="ion-align-items-center ">
-          <ion-col size="9">
-            <div>
-              <h2 class="app-text-green  app-text-title">Doctores disponibles 🩺</h2>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <square-slide [squareSlideInfo]="infoDoctors"></square-slide>
-    </div>
-  </div>
-  <div *ngIf="loading">
-    <component-skeleton></component-skeleton>
-  </div>
+  }
 </ion-content>

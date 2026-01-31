@@ -22,60 +22,66 @@
   </div>
 
   <!-- Skeleton loader -->
-  <div *ngIf="loading" class="grid px-16 py-8">
-    <ion-card class="doctor-card skeleton" *ngFor="let s of [1,2,3,4,5,6]">
-      <div class="photo skeleton-box"></div>
-      <ion-card-content class="p-12">
-        <div class="title-line skeleton-box"></div>
-        <div class="meta-line skeleton-box mt-4"></div>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  @if (loading) {
+    <div class="grid px-16 py-8">
+      @for (s of [1,2,3,4,5,6]; track s) {
+        <ion-card class="doctor-card skeleton">
+          <div class="photo skeleton-box"></div>
+          <ion-card-content class="p-12">
+            <div class="title-line skeleton-box"></div>
+            <div class="meta-line skeleton-box mt-4"></div>
+          </ion-card-content>
+        </ion-card>
+      }
+    </div>
+  }
 
   <!-- Estado vacío -->
-  <div *ngIf="!loading && doctorsFiltered.length === 0" class="empty px-16 py-20">
-    <div class="empty-card p-16">
-      <ion-icon name="medical-outline" class="empty-icon"></ion-icon>
-      <h2 class="empty-title">No hay doctores registrados</h2>
-      <p class="empty-text">Agrega un doctor para comenzar a ofrecer atención personalizada.</p>
-      <ion-button class="mt-12" shape="round" (click)="openDoctorRegister()">
-        Agregar Doctor
-      </ion-button>
+  @if (!loading && doctorsFiltered.length === 0) {
+    <div class="empty px-16 py-20">
+      <div class="empty-card p-16">
+        <ion-icon name="medical-outline" class="empty-icon"></ion-icon>
+        <h2 class="empty-title">No hay doctores registrados</h2>
+        <p class="empty-text">Agrega un doctor para comenzar a ofrecer atención personalizada.</p>
+        <ion-button class="mt-12" shape="round" (click)="openDoctorRegister()">
+          Agregar Doctor
+        </ion-button>
+      </div>
     </div>
-  </div>
+  }
 
   <!-- Listado de doctores -->
-  <div *ngIf="!loading && doctorsFiltered.length > 0" class="grid px-16 py-12">
-    <ion-card class="doctor-card" *ngFor="let doctor of doctorsFiltered">
-      <div class="photo" [style.background-image]="'url(' + (doctor.photoUrl || defaultPhoto) + ')'"></div>
-
-      <ion-card-content class="p-12">
-        <h3 class="doctor-name">{{ doctor.name }}</h3>
-        <p class="specialty">{{ doctor.specialty }}</p>
-
-        <div class="contact mt-8">
-          <div class="row">
-            <ion-icon name="mail-outline"></ion-icon>
-            <span>{{ doctor.email }}</span>
-          </div>
-          <div class="row mt-4">
-            <ion-icon name="call-outline"></ion-icon>
-            <span>{{ doctor.phone }}</span>
-          </div>
-        </div>
-
-        <div class="actions mt-12">
-          <ion-button size="small" fill="outline" (click)="viewDoctor(doctor)">
-            <ion-icon slot="start" name="eye-outline"></ion-icon>
-            Ver perfil
-          </ion-button>
-
-          <ion-button size="small" color="danger" fill="outline" (click)="deleteDoctor(doctor)">
-            <ion-icon slot="start" name="trash-outline"></ion-icon>
-            Eliminar
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  @if (!loading && doctorsFiltered.length > 0) {
+    <div class="grid px-16 py-12">
+      @for (doctor of doctorsFiltered; track doctor) {
+        <ion-card class="doctor-card">
+          <div class="photo" [style.background-image]="'url(' + (doctor.photoUrl || defaultPhoto) + ')'"></div>
+          <ion-card-content class="p-12">
+            <h3 class="doctor-name">{{ doctor.name }}</h3>
+            <p class="specialty">{{ doctor.specialty }}</p>
+            <div class="contact mt-8">
+              <div class="row">
+                <ion-icon name="mail-outline"></ion-icon>
+                <span>{{ doctor.email }}</span>
+              </div>
+              <div class="row mt-4">
+                <ion-icon name="call-outline"></ion-icon>
+                <span>{{ doctor.phone }}</span>
+              </div>
+            </div>
+            <div class="actions mt-12">
+              <ion-button size="small" fill="outline" (click)="viewDoctor(doctor)">
+                <ion-icon slot="start" name="eye-outline"></ion-icon>
+                Ver perfil
+              </ion-button>
+              <ion-button size="small" color="danger" fill="outline" (click)="deleteDoctor(doctor)">
+                <ion-icon slot="start" name="trash-outline"></ion-icon>
+                Eliminar
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      }
+    </div>
+  }
 </ion-content>

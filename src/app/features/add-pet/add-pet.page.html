@@ -18,7 +18,9 @@
     <h1 class="app-text-title app-text-blue app-text-center mb-12">Registrar Mascota 🐾</h1>
 
     <div class="upload-box mb-16">
-      <img *ngIf="previewImage" [src]="previewImage" class="preview-img" />
+      @if (previewImage) {
+        <img [src]="previewImage" class="preview-img" />
+      }
       <ion-button fill="outline" class="upload-btn app-text-green" (click)="selectImage()">
         <ion-icon name="camera-outline" slot="start"></ion-icon>
         Subir o Capturar Foto
@@ -36,7 +38,9 @@
       <ion-item class="input-item">
         <ion-label position="floating">Especie</ion-label>
         <ion-select class="mt-10" formControlName="species" interface="popover" placeholder="Seleccionar especie">
-          <ion-select-option *ngFor="let specie of speciesList" [value]="specie">{{ specie }}</ion-select-option>
+          @for (specie of speciesList; track specie) {
+            <ion-select-option [value]="specie">{{ specie }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
 
@@ -44,7 +48,9 @@
       <ion-item class="input-item">
         <ion-label position="floating">Raza</ion-label>
         <ion-select class="mt-10" formControlName="breed" interface="popover" placeholder="Seleccionar raza">
-          <ion-select-option *ngFor="let breed of filteredBreeds" [value]="breed">{{ breed }}</ion-select-option>
+          @for (breed of filteredBreeds; track breed) {
+            <ion-select-option [value]="breed">{{ breed }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
 
@@ -59,8 +65,12 @@
       </ion-item>
 
       <ion-button expand="block" type="submit" class="submit-btn">
-         <span *ngIf="!loading">Guardar Mascota</span>
-        <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
+        @if (!loading) {
+          <span>Guardar Mascota</span>
+        }
+        @if (loading) {
+          <ion-spinner name="dots"></ion-spinner>
+        }
       </ion-button>
     </form>
   </div>

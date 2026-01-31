@@ -1,111 +1,102 @@
 <ion-header class="doctor-header app-bg-blue">
-  <ion-toolbar *ngIf="!loading">
-    <ion-buttons slot="end">
-      <ion-button fill="clear" class="back-btn" (click)="logout()">
-        <ion-icon name="exit-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <div class="header-row">
-      <div>
-        <h2 class="app-text-title">{{ infoUser.name }}</h2>
-        <p class="app-text-normal">Bienvenido doctor 👋</p>
+  @if (!loading) {
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" class="back-btn" (click)="logout()">
+          <ion-icon name="exit-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div class="header-row">
+        <div>
+          <h2 class="app-text-title">{{ infoUser.name }}</h2>
+          <p class="app-text-normal">Bienvenido doctor 👋</p>
+        </div>
+        <img [src]="infoUser.doctorPhoto" class="doctor-photo" />
       </div>
-      <img [src]="infoUser.doctorPhoto" class="doctor-photo" />
-    </div>
-  </ion-toolbar>
+    </ion-toolbar>
+  }
 </ion-header>
 
 <ion-content class="app-bg-background">
 
-  <div *ngIf="!loading" class="p-20">
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-    <!-- Próximas citas -->
-    <h3 class="section-title app-text-subtitle mt-12">Próximas citas</h3>
-
-    <div *ngFor="let cita of datesIncoming  | slice:0:3" class="appointment-card-upgraded mb-20">
-
-      <div class="card-left">
-        <img [src]="cita.petImg" class="card-pet-img" />
-      </div>
-
-      <div class="card-body">
-
-        <div class="card-header">
-          <h4 class="card-pet-name">{{ cita.pet }}</h4>
-          <span class="status-chip status-{{ cita.state | lowercase }}"
-            [ngClass]="cita.state === 'EN CURSO' ? 'status-en-curso' : ''">
-            {{ cita.state }}
-          </span>
+  @if (!loading) {
+    <div class="p-20">
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <!-- Próximas citas -->
+      <h3 class="section-title app-text-subtitle mt-12">Próximas citas</h3>
+      @for (cita of datesIncoming  | slice:0:3; track cita) {
+        <div class="appointment-card-upgraded mb-20">
+          <div class="card-left">
+            <img [src]="cita.petImg" class="card-pet-img" />
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="card-pet-name">{{ cita.pet }}</h4>
+              <span class="status-chip status-{{ cita.state | lowercase }}"
+                [ngClass]="cita.state === 'EN CURSO' ? 'status-en-curso' : ''">
+                {{ cita.state }}
+              </span>
+            </div>
+            <p class="card-client">
+              <ion-icon name="person-outline"></ion-icon>
+              {{ cita.client }}
+            </p>
+            <p class="card-motive">
+              <ion-icon name="medical-outline"></ion-icon>
+              {{ cita.motive }}
+            </p>
+            <p class="card-time">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ cita.dateTime | date:'shortTime' }}
+            </p>
+          </div>
         </div>
-
-        <p class="card-client">
-          <ion-icon name="person-outline"></ion-icon>
-          {{ cita.client }}
-        </p>
-
-        <p class="card-motive">
-          <ion-icon name="medical-outline"></ion-icon>
-          {{ cita.motive }}
-        </p>
-
-        <p class="card-time">
+      }
+      <!-- Acciones rápidas -->
+      <h3 class="section-title app-text-subtitle mt-32">Acciones rápidas</h3>
+      <div class="quick-actions">
+        <div class="quick-card app-bg-green" (click)="viewAll()">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Agenda Completa</span>
+        </div>
+        <div class="quick-card app-bg-yellow" (click)="viewHistory()">
           <ion-icon name="time-outline"></ion-icon>
-          {{ cita.dateTime | date:'shortTime' }}
-        </p>
-
+          <span>Historial</span>
+        </div>
+        <div class="quick-card app-bg-orange">
+          <ion-icon name="pulse-outline"></ion-icon>
+          <span>Disponibilidad</span>
+        </div>
+        <div class="quick-card app-bg-blue">
+          <ion-icon name="analytics-outline"></ion-icon>
+          <span>Reportes</span>
+        </div>
       </div>
-
+      <!-- Historial resumido -->
+      <h3 class="section-title app-text-subtitle mt-32">Historial reciente</h3>
+      @for (cita of datesDone  | slice:0:3; track cita) {
+        <div class="history-card mb-14">
+          <img [src]="cita.petImg" class="history-photo" />
+          <div class="history-body">
+            <h4>{{ cita.pet }} • {{ cita.type }}</h4>
+            <p class="client-name">{{ cita.client }}</p>
+            <span class="status-chip status-{{ cita.state | lowercase }}">
+              {{ cita.state }}
+            </span>
+          </div>
+          <p class="history-time">
+            {{ cita.dateTime | date:'shortDate' }}
+          </p>
+        </div>
+      }
     </div>
+  }
 
-    <!-- Acciones rápidas -->
-    <h3 class="section-title app-text-subtitle mt-32">Acciones rápidas</h3>
-
-    <div class="quick-actions">
-
-      <div class="quick-card app-bg-green" (click)="viewAll()">
-        <ion-icon name="calendar-outline"></ion-icon>
-        <span>Agenda Completa</span>
-      </div>
-
-      <div class="quick-card app-bg-yellow" (click)="viewHistory()">
-        <ion-icon name="time-outline"></ion-icon>
-        <span>Historial</span>
-      </div>
-
-      <div class="quick-card app-bg-orange">
-        <ion-icon name="pulse-outline"></ion-icon>
-        <span>Disponibilidad</span>
-      </div>
-
-      <div class="quick-card app-bg-blue">
-        <ion-icon name="analytics-outline"></ion-icon>
-        <span>Reportes</span>
-      </div>
+  @if (loading) {
+    <div>
+      <component-skeleton></component-skeleton>
     </div>
-
-    <!-- Historial resumido -->
-    <h3 class="section-title app-text-subtitle mt-32">Historial reciente</h3>
-
-    <div *ngFor="let cita of datesDone  | slice:0:3" class="history-card mb-14">
-      <img [src]="cita.petImg" class="history-photo" />
-
-      <div class="history-body">
-        <h4>{{ cita.pet }} • {{ cita.type }}</h4>
-        <p class="client-name">{{ cita.client }}</p>
-        <span class="status-chip status-{{ cita.state | lowercase }}">
-          {{ cita.state }}
-        </span>
-      </div>
-
-      <p class="history-time">
-        {{ cita.dateTime | date:'shortDate' }}
-      </p>
-    </div>
-  </div>
-
-  <div *ngIf="loading">
-    <component-skeleton></component-skeleton>
-  </div>
+  }
 </ion-content>

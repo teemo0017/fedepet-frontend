@@ -30,7 +30,7 @@ export class DoctorDatesPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const state = this.router.getCurrentNavigation()?.extras.state;
+    const state = this.router.currentNavigation()?.extras.state;
     console.log(state);
     this.dateList = state?.['dates'];
     console.log(this.dateList);
