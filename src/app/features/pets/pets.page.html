@@ -38,71 +38,77 @@
   </div>
 
   <!-- Skeleton de carga -->
-  <div *ngIf="loading" class="grid px-16 py-8">
-    <ion-card class="pet-card skeleton" *ngFor="let s of [1,2,3,4,5,6]">
-      <div class="cover skeleton-box"></div>
-      <ion-card-content class="p-12">
-        <div class="title-line skeleton-box"></div>
-        <div class="meta-line skeleton-box mt-4"></div>
-        <div class="meta-line short skeleton-box mt-4"></div>
-        <div class="actions mt-12">
-          <ion-button size="small" fill="outline" disabled>Editar</ion-button>
-          <ion-button size="small" color="danger" fill="outline" disabled>Eliminar</ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  @if (loading) {
+    <div class="grid px-16 py-8">
+      @for (s of [1,2,3,4,5,6]; track s) {
+        <ion-card class="pet-card skeleton">
+          <div class="cover skeleton-box"></div>
+          <ion-card-content class="p-12">
+            <div class="title-line skeleton-box"></div>
+            <div class="meta-line skeleton-box mt-4"></div>
+            <div class="meta-line short skeleton-box mt-4"></div>
+            <div class="actions mt-12">
+              <ion-button size="small" fill="outline" disabled>Editar</ion-button>
+              <ion-button size="small" color="danger" fill="outline" disabled>Eliminar</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      }
+    </div>
+  }
 
   <!-- Estado vacío -->
-  <div *ngIf="!loading && petsFiltered.length === 0" class="empty px-16 py-20">
-    <div class="empty-card p-16">
-      <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
-      <h2 class="empty-title">No hay mascotas registradas</h2>
-      <p class="empty-text">Crea la primera para empezar a gestionar sus controles y vacunas.</p>
-      <ion-button class="mt-12" shape="round" (click)="openCreate()">
-        Agregar mascota
-      </ion-button>
+  @if (!loading && petsFiltered.length === 0) {
+    <div class="empty px-16 py-20">
+      <div class="empty-card p-16">
+        <ion-icon name="paw-outline" class="empty-icon"></ion-icon>
+        <h2 class="empty-title">No hay mascotas registradas</h2>
+        <p class="empty-text">Crea la primera para empezar a gestionar sus controles y vacunas.</p>
+        <ion-button class="mt-12" shape="round" (click)="openCreate()">
+          Agregar mascota
+        </ion-button>
+      </div>
     </div>
-  </div>
+  }
 
   <!-- Grid de tarjetas -->
-  <div *ngIf="!loading && petsFiltered.length > 0" class="grid px-16 py-12">
-    <ion-card class="pet-card" *ngFor="let pet of petsFiltered" (click)="openDetails(pet)">
-      <div class="cover" [style.background-image]="'url('+pet.photo+')'">
-        <div class="badge">{{ pet.species }}</div>
-      </div>
-
-      <ion-card-content class="p-12">
-        <div class="header-row">
-          <h3 class="pet-name">{{ pet.name }}</h3>
-          <ion-badge class="age-badge">{{ pet.dateBirth | date:'dd/MM/yyyy':'America/Panama' }}</ion-badge>
-        </div>
-
-        <div class="meta mt-6">
-          <div class="row">
-            <ion-icon name="document-text-outline"></ion-icon>
-            <span class="text">{{ pet.breed || '—' }}</span>
+  @if (!loading && petsFiltered.length > 0) {
+    <div class="grid px-16 py-12">
+      @for (pet of petsFiltered; track pet) {
+        <ion-card class="pet-card" (click)="openDetails(pet)">
+          <div class="cover" [style.background-image]="'url('+pet.photo+')'">
+            <div class="badge">{{ pet.species }}</div>
           </div>
-          <div class="row">
-            <ion-icon name="fitness-outline"></ion-icon>
-            <span class="text">{{ pet.weight ? (pet.weight + ' kg') : '—' }}</span>
-          </div>
-        </div>
-
-        <div class="actions mt-12">
-          <ion-button size="small" fill="outline" (click)="$event.stopPropagation(); editPet(pet)">
-            <ion-icon slot="start" name="create-outline"></ion-icon>
-            Editar
-          </ion-button>
-
-          <ion-button size="small" color="danger" fill="outline" (click)="$event.stopPropagation(); deletePet(pet)">
-            <ion-icon slot="start" name="trash-outline"></ion-icon>
-            Eliminar
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
+          <ion-card-content class="p-12">
+            <div class="header-row">
+              <h3 class="pet-name">{{ pet.name }}</h3>
+              <ion-badge class="age-badge">{{ pet.dateBirth | date:'dd/MM/yyyy':'America/Panama' }}</ion-badge>
+            </div>
+            <div class="meta mt-6">
+              <div class="row">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span class="text">{{ pet.breed || '—' }}</span>
+              </div>
+              <div class="row">
+                <ion-icon name="fitness-outline"></ion-icon>
+                <span class="text">{{ pet.weight ? (pet.weight + ' kg') : '—' }}</span>
+              </div>
+            </div>
+            <div class="actions mt-12">
+              <ion-button size="small" fill="outline" (click)="$event.stopPropagation(); editPet(pet)">
+                <ion-icon slot="start" name="create-outline"></ion-icon>
+                Editar
+              </ion-button>
+              <ion-button size="small" color="danger" fill="outline" (click)="$event.stopPropagation(); deletePet(pet)">
+                <ion-icon slot="start" name="trash-outline"></ion-icon>
+                Eliminar
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      }
+    </div>
+  }
 
   <!-- FAB para acción rápida -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

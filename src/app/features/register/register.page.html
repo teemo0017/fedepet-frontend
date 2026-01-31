@@ -39,8 +39,12 @@
     </ion-item>
 
     <ion-button expand="block" class="register-btn py-8" shape="round" type="submit" [disabled]="userForm.invalid">
-                <span *ngIf="!loadingService"> Registrarme</span>
-                <ion-spinner *ngIf="loadingService" name="dots"></ion-spinner>
+      @if (!loadingService) {
+        <span> Registrarme</span>
+      }
+      @if (loadingService) {
+        <ion-spinner name="dots"></ion-spinner>
+      }
     </ion-button>
   </form>
 

@@ -1,21 +1,20 @@
 <swiper-container space-between="15" slides-per-view="2" autoplay="true">
-  <swiper-slide class="app-bg-white" *ngFor="let info of roundSlideInfo ; even as even">
-    <ion-grid>
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="9">
-          <img [src]="info.url" alt="">
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="9">
-          <div class="app-text-center app-text-title app-text-yellow">
-            {{info.title}}
-          </div>
-
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
-  </swiper-slide>
+  @for (info of roundSlideInfo ; track info; let even = $even) {
+    <swiper-slide class="app-bg-white">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="9">
+            <img [src]="info.url" alt="">
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="9">
+            <div class="app-text-center app-text-title app-text-yellow">
+              {{info.title}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </swiper-slide>
+  }
 </swiper-container>

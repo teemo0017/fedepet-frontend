@@ -28,38 +28,36 @@
     <!-- Grid de productos -->
     <ion-grid class="store-grid">
       <ion-row>
-        <ion-col
-          size="6"
-          sizeMd="4"
-          *ngFor="let p of products"
-          class="store-col"
-        >
-          <article class="store-card">
-            <div class="store-card__image-wrapper">
-              <img [src]="p.image" alt="{{ p.name }}" />
-            </div>
-
-            <div class="store-card__body">
-              <h3 class="store-card__name app-text-strong">
-                {{ p.name }}
-              </h3>
-              <p class="store-card__description app-text-normal">
-                {{ p.description || 'Producto pensado para el bienestar diario de tu mascota.' }}
-              </p>
-            </div>
-
-            <div class="store-card__footer">
-              <span class="store-card__price">
-                $ {{ p.price | number : '1.2-2' }}
-              </span>
-
-              <button type="button" class="store-card__btn">
-                <ion-icon name="cart-outline"></ion-icon>
-                <span>Añadir</span>
-              </button>
-            </div>
-          </article>
-        </ion-col>
+        @for (p of products; track p) {
+          <ion-col
+            size="6"
+            sizeMd="4"
+            class="store-col"
+            >
+            <article class="store-card">
+              <div class="store-card__image-wrapper">
+                <img [src]="p.image" alt="{{ p.name }}" />
+              </div>
+              <div class="store-card__body">
+                <h3 class="store-card__name app-text-strong">
+                  {{ p.name }}
+                </h3>
+                <p class="store-card__description app-text-normal">
+                  {{ p.description || 'Producto pensado para el bienestar diario de tu mascota.' }}
+                </p>
+              </div>
+              <div class="store-card__footer">
+                <span class="store-card__price">
+                  $ {{ p.price | number : '1.2-2' }}
+                </span>
+                <button type="button" class="store-card__btn">
+                  <ion-icon name="cart-outline"></ion-icon>
+                  <span>Añadir</span>
+                </button>
+              </div>
+            </article>
+          </ion-col>
+        }
       </ion-row>
     </ion-grid>
 
