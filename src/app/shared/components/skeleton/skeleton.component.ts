@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
-  selector: 'component-skeleton',
-  templateUrl: './skeleton.component.html',
-  styleUrls: ['./skeleton.component.scss'],
+    selector: 'component-skeleton',
+    templateUrl: './skeleton.component.html',
+    styleUrls: ['./skeleton.component.scss'],
+    standalone: false
 })
 export class SkeletonComponent implements OnInit {
 

@@ -6,9 +6,10 @@ import { UserService } from '../services/user.service';
 import { DecodedUser } from 'src/app/core/models/auth';
 
 @Component({
-  selector: 'app-pets',
-  templateUrl: './pets.page.html',
-  styleUrls: ['./pets.page.scss']
+    selector: 'app-pets',
+    templateUrl: './pets.page.html',
+    styleUrls: ['./pets.page.scss'],
+    standalone: false
 })
 export class PetsPage implements OnInit {
 

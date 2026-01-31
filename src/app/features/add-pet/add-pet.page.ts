@@ -10,9 +10,10 @@ import { finalize } from 'rxjs';
 import { ToastService } from '../services/toast.service';
 
 @Component({
-  selector: 'app-add-pet',
-  templateUrl: './add-pet.page.html',
-  styleUrls: ['./add-pet.page.scss'],
+    selector: 'app-add-pet',
+    templateUrl: './add-pet.page.html',
+    styleUrls: ['./add-pet.page.scss'],
+    standalone: false
 })
 export class AddPetPage {
   loading = false;

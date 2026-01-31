@@ -8,9 +8,10 @@ import { DatesResponse, requestId } from '../services/models/users';
 import { ToastService } from '../services/toast.service';
 
 @Component({
-  selector: 'app-dates',
-  templateUrl: './dates.page.html',
-  styleUrls: ['./dates.page.scss'],
+    selector: 'app-dates',
+    templateUrl: './dates.page.html',
+    styleUrls: ['./dates.page.scss'],
+    standalone: false
 })
 export class DatesPage implements OnInit {
   public isFirst = true;

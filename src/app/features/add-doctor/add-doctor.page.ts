@@ -3,9 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
-  selector: 'app-add-doctor',
-  templateUrl: './add-doctor.page.html',
-  styleUrls: ['./add-doctor.page.scss'],
+    selector: 'app-add-doctor',
+    templateUrl: './add-doctor.page.html',
+    styleUrls: ['./add-doctor.page.scss'],
+    standalone: false
 })
 export class AddDoctorPage {
   doctorForm = this.fb.group({

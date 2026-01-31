@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 
 @Component({
-  selector: 'app-doctor-dates',
-  templateUrl: './doctor-dates.page.html',
-  styleUrls: ['./doctor-dates.page.scss'],
+    selector: 'app-doctor-dates',
+    templateUrl: './doctor-dates.page.html',
+    styleUrls: ['./doctor-dates.page.scss'],
+    standalone: false
 })
 export class DoctorDatesPage implements OnInit {
   public loading = false;
