@@ -6,7 +6,7 @@
 
   @for $i from 1 through 94 {
     $px-value: 2 * $i;
-    $rem-value: $px-value / $base-font-size;
+    $rem-value: calc($px-value / $base-font-size);
     --app-spacing-#{$px-value}: #{$rem-value}rem;
   }
 
