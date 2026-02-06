@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { TabVarComponent } from './shared/components/tab-var/tab-var.component';
+
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    component: TabVarComponent,
+    loadComponent: () => import('./shared/components/tab-var/tab-var.component').then(m => m.TabVarComponent),
     children: [
       {
         path: '',
@@ -19,31 +19,31 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.module').then((m) => m.DashboardPageModule),
+        loadComponent: () => import('./features/dashboard/dashboard.page').then((m) => m.DashboardPage),
       },
       {
         path: 'doctors',
-        loadChildren: () => import('./features/doctors/doctors.module').then((m) => m.DoctorsPageModule),
+        loadComponent: () => import('./features/doctors/doctors.page').then((m) => m.DoctorsPage),
       },
       {
         path: 'pets',
-        loadChildren: () => import('./features/pets/pets.module').then((m) => m.PetsPageModule),
+        loadComponent: () => import('./features/pets/pets.page').then((m) => m.PetsPage),
       },
       {
         path: 'shop',
-        loadChildren: () => import('./features/shop/shop.module').then(m => m.ShopPageModule)
+        loadComponent: () => import('./features/shop/shop.page').then(m => m.ShopPage)
       },
       {
         path: 'appointment',
-        loadChildren: () => import('./features/appointment/appointment.module').then(m => m.AppointmentPageModule)
+        loadComponent: () => import('./features/appointment/appointment.page').then(m => m.AppointmentPage)
       },
       {
         path: 'add-pet',
-        loadChildren: () => import('./features/add-pet/add-pet.module').then(m => m.AddPetPageModule)
+        loadComponent: () => import('./features/add-pet/add-pet.page').then(m => m.AddPetPage)
       },
       {
         path: 'dates',
-        loadChildren: () => import('./features/dates/dates.module').then(m => m.DatesPageModule)
+        loadComponent: () => import('./features/dates/dates.page').then(m => m.DatesPage)
       },
       {
         path: '',
@@ -54,30 +54,31 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./features/login/login.module').then(m => m.LoginPageModule)
+    loadComponent: () => import('./features/login/login.page').then(m => m.LoginPage)
   },
   {
     path: 'register',
-    loadChildren: () => import('./features/register/register.module').then(m => m.RegisterPageModule)
+    loadComponent: () => import('./features/register/register.page').then(m => m.RegisterPage)
   },
   {
     path: 'doctor-dashboard',
-    loadChildren: () => import('./features/doctor-dashboard/doctor-dashboard.module').then(m => m.DoctorDashboardPageModule)
+    loadComponent: () => import('./features/doctor-dashboard/doctor-dashboard.page').then(m => m.DoctorDashboardPage)
   },
   {
     path: 'add-doctor',
-    loadChildren: () => import('./features/add-doctor/add-doctor.module').then(m => m.AddDoctorPageModule)
+    loadComponent: () => import('./features/add-doctor/add-doctor.page').then(m => m.AddDoctorPage)
   },
   {
     path: 'add-product',
-    loadChildren: () => import('./features/add-product/add-product.module').then(m => m.AddProductPageModule)
+    loadComponent: () => import('./features/add-product/add-product.page').then(m => m.AddProductPage)
   },
   {
     path: 'admin-dashboard',
-    loadChildren: () => import('./features/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardPageModule)
-  },  {
+    loadComponent: () => import('./features/admin-dashboard/admin-dashboard.page').then(m => m.AdminDashboardPage)
+  },
+  {
     path: 'doctor-dates',
-    loadChildren: () => import('./features/doctor-dates/doctor-dates.module').then( m => m.DoctorDatesPageModule)
+    loadComponent: () => import('./features/doctor-dates/doctor-dates.page').then( m => m.DoctorDatesPage)
   },
 
 

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminDashboardPage } from './admin-dashboard.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminDashboardPage
+    loadComponent: () => import('./admin-dashboard.page').then(m => m.AdminDashboardPage)
   }
 ];
 

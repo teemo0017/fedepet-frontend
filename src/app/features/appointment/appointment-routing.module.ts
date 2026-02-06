@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AppointmentPage } from './appointment.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: AppointmentPage
+    loadComponent: () => import('./appointment.page').then(m => m.AppointmentPage)
   }
 ];
 

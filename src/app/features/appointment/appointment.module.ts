@@ -7,17 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { AppointmentPageRoutingModule } from './appointment-routing.module';
 
 import { AppointmentPage } from './appointment.page';
-import { SharedModule } from '../../shared/shared-module';
+
 
 @NgModule({
     imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        SharedModule,
-        AppointmentPageRoutingModule,
-        AppointmentPage
-    ],
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    AppointmentPageRoutingModule,
+    AppointmentPage
+],
     schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppointmentPageModule {}
