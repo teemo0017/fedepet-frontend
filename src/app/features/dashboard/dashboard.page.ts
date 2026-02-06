@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { SquareSlideInfo } from '../../shared/interfaces/interfaces';
 import { Preferences } from '@capacitor/preferences';
-import { NavController, Platform } from '@ionic/angular';
+import { NavController, Platform, IonicModule } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 import { Doctor, petsResponseByUser, requestId } from '../services/models/users';
 import { AuthService } from '../../core/auth.service';
 import { DecodedUser } from '../../core/models/auth';
 import { finalize } from 'rxjs';
+import { RoundSlideComponent } from '../../shared/components/round-slide/round-slide.component';
+import { SquareSlideComponent } from '../../shared/components/square-slide/square-slide.component';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
-  standalone: false
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.page.html',
+    styleUrls: ['./dashboard.page.scss'],
+    imports: [IonicModule, RoundSlideComponent, SquareSlideComponent, SkeletonComponent]
 })
 export class DashboardPage implements OnInit {
   public firstCall = true;

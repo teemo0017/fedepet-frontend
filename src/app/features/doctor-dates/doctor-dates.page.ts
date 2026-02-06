@@ -3,17 +3,19 @@ import { Preferences } from '@capacitor/preferences';
 import { DatesResponse, GenericResponseSave, requestId, updateDateState } from '../services/models/users';
 import { finalize } from 'rxjs';
 import { DecodedUser } from 'src/app/core/models/auth';
-import { ActionSheetController, NavController, Platform } from '@ionic/angular';
+import { ActionSheetController, NavController, Platform, IonicModule } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 import { AuthService } from 'src/app/core/auth.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
+import { NgClass, DatePipe } from '@angular/common';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 
 @Component({
     selector: 'app-doctor-dates',
     templateUrl: './doctor-dates.page.html',
     styleUrls: ['./doctor-dates.page.scss'],
-    standalone: false
+    imports: [IonicModule, NgClass, SkeletonComponent, DatePipe]
 })
 export class DoctorDatesPage implements OnInit {
   public loading = false;

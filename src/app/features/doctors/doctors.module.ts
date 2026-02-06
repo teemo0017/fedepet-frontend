@@ -9,12 +9,12 @@ import { DoctorsPageRoutingModule } from './doctors-routing.module';
 import { DoctorsPage } from './doctors.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DoctorsPageRoutingModule
-  ],
-  declarations: [DoctorsPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        DoctorsPageRoutingModule,
+        DoctorsPage
+    ]
 })
 export class DoctorsPageModule { }

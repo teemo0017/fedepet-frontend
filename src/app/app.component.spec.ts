@@ -11,10 +11,10 @@ describe('AppComponent', () => {
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [RouterModule.forRoot([])],
-    }).compileComponents();
+    declarations: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [RouterModule.forRoot([])],
+}).compileComponents();
   });
 
   it('should create the app', () => {

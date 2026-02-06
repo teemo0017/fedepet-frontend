@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AuthService } from 'src/app/core/auth.service';
 import { UserService } from '../services/user.service';
-import { NavController } from '@ionic/angular';
+import { NavController, IonicModule } from '@ionic/angular';
 import { savePetRequest } from '../services/models/users';
 import { DecodedUser } from 'src/app/core/models/auth';
 import { finalize } from 'rxjs';
@@ -13,7 +13,7 @@ import { ToastService } from '../services/toast.service';
     selector: 'app-add-pet',
     templateUrl: './add-pet.page.html',
     styleUrls: ['./add-pet.page.scss'],
-    standalone: false
+    imports: [IonicModule, FormsModule, ReactiveFormsModule]
 })
 export class AddPetPage {
   loading = false;

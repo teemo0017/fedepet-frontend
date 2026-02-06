@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, IonicModule } from '@ionic/angular';
 import { AnimationOptions } from 'ngx-lottie';
+import { NgClass } from '@angular/common';
 
 interface AdminDoctor {
   id: number;
@@ -18,7 +19,7 @@ interface AdminDoctor {
     selector: 'app-admin-dashboard',
     templateUrl: './admin-dashboard.page.html',
     styleUrls: ['./admin-dashboard.page.scss'],
-    standalone: false
+    imports: [IonicModule, NgClass]
 })
 export class AdminDashboardPage {
   doctors: AdminDoctor[] = [];

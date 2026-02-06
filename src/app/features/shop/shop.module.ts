@@ -9,12 +9,12 @@ import { ShopPageRoutingModule } from './shop-routing.module';
 import { ShopPage } from './shop.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ShopPageRoutingModule
-  ],
-  declarations: [ShopPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ShopPageRoutingModule,
+        ShopPage
+    ]
 })
 export class ShopPageModule {}

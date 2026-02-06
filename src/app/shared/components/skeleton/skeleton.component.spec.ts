@@ -9,9 +9,8 @@ describe('SkeletonComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkeletonComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    imports: [IonicModule.forRoot(), SkeletonComponent]
+}).compileComponents();
 
     fixture = TestBed.createComponent(SkeletonComponent);
     component = fixture.componentInstance;

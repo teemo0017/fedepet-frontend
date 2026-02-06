@@ -3,15 +3,17 @@ import { Doctor, petsResponseByUser, requestId, saveDateRequest } from '../servi
 import { UserService } from '../services/user.service';
 import { AuthService } from '../../core/auth.service';
 import { DecodedUser } from 'src/app/core/models/auth';
-import { NavController } from '@ionic/angular';
+import { NavController, IonicModule } from '@ionic/angular';
 import { ToastService } from '../services/toast.service';
 import { finalize } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 
 @Component({
-  selector: 'app-appointment',
-  templateUrl: './appointment.page.html',
-  styleUrls: ['./appointment.page.scss'],
-  standalone: false
+    selector: 'app-appointment',
+    templateUrl: './appointment.page.html',
+    styleUrls: ['./appointment.page.scss'],
+    imports: [IonicModule, FormsModule, SkeletonComponent]
 })
 export class AppointmentPage {
   public fistCall = true;

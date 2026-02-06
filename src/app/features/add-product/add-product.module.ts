@@ -9,13 +9,13 @@ import { AddProductPageRoutingModule } from './add-product-routing.module';
 import { AddProductPage } from './add-product.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AddProductPageRoutingModule,
-    ReactiveFormsModule
-  ],
-  declarations: [AddProductPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AddProductPageRoutingModule,
+        ReactiveFormsModule,
+        AddProductPage
+    ]
 })
 export class AddProductPageModule {}

@@ -9,13 +9,13 @@ import { AddPetPageRoutingModule } from './add-pet-routing.module';
 import { AddPetPage } from './add-pet.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AddPetPageRoutingModule,
-    ReactiveFormsModule
-  ],
-  declarations: [AddPetPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AddPetPageRoutingModule,
+        ReactiveFormsModule,
+        AddPetPage
+    ]
 })
 export class AddPetPageModule {}

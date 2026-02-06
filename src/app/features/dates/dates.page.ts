@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs';
 import { UserService } from '../services/user.service';
-import { NavController } from '@ionic/angular';
+import { NavController, IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/core/auth.service';
 import { DecodedUser } from 'src/app/core/models/auth';
 import { DatesResponse, requestId } from '../services/models/users';
 import { ToastService } from '../services/toast.service';
+import { NgClass, TitleCasePipe, DatePipe } from '@angular/common';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 
 @Component({
     selector: 'app-dates',
     templateUrl: './dates.page.html',
     styleUrls: ['./dates.page.scss'],
-    standalone: false
+    imports: [IonicModule, NgClass, SkeletonComponent, TitleCasePipe, DatePipe]
 })
 export class DatesPage implements OnInit {
   public isFirst = true;

@@ -10,13 +10,13 @@ import { DoctorDatesPage } from './doctor-dates.page';
 import { SharedModule } from 'src/app/shared/shared-module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DoctorDatesPageRoutingModule,
-    SharedModule
-  ],
-  declarations: [DoctorDatesPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        DoctorDatesPageRoutingModule,
+        SharedModule,
+        DoctorDatesPage
+    ]
 })
 export class DoctorDatesPageModule { }

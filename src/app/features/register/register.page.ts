@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { FormGroup, NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavController, IonicModule } from '@ionic/angular';
 import { finalize } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 import { Register } from 'src/app/core/models/auth';
@@ -9,8 +9,9 @@ import { Register } from 'src/app/core/models/auth';
     selector: 'app-register',
     templateUrl: './register.page.html',
     styleUrls: ['./register.page.scss'],
-    standalone: false
+    imports: [IonicModule, FormsModule, ReactiveFormsModule]
 })
+
 export class RegisterPage implements OnInit {
   userForm!: FormGroup;
   constructor(private fb: NonNullableFormBuilder, private navCtrl: NavController, private authService: AuthService) { }

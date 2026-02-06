@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 type DoctorVM = {
   id: number;
@@ -13,7 +14,7 @@ type DoctorVM = {
     selector: 'app-doctors',
     templateUrl: './doctors.page.html',
     styleUrls: ['./doctors.page.scss'],
-    standalone: false
+    imports: [IonicModule]
 })
 export class DoctorsPage implements OnInit {
   loading = true;

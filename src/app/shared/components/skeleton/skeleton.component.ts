@@ -1,11 +1,12 @@
 import { Component, OnInit, input } from '@angular/core';
-import { AnimationOptions } from 'ngx-lottie';
+import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
     selector: 'component-skeleton',
     templateUrl: './skeleton.component.html',
     styleUrls: ['./skeleton.component.scss'],
-    standalone: false
+    imports: [IonicModule, LottieComponent]
 })
 export class SkeletonComponent implements OnInit {
 

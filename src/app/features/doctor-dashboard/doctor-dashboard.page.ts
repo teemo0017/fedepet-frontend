@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { ActionSheetController, NavController, Platform } from '@ionic/angular';
+import { ActionSheetController, NavController, Platform, IonicModule } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 import { AuthService } from 'src/app/core/auth.service';
 import { DateResponseDoctor, DatesResponse, GenericResponseSave, requestId, updateDateState } from '../services/models/users';
 import { DecodedUser } from 'src/app/core/models/auth';
 import { finalize } from 'rxjs';
+import { NgClass, LowerCasePipe, SlicePipe, DatePipe } from '@angular/common';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 
 
 
 @Component({
-  selector: 'app-doctor-dashboard',
-  templateUrl: './doctor-dashboard.page.html',
-  styleUrls: ['./doctor-dashboard.page.scss'],
-  standalone: false
+    selector: 'app-doctor-dashboard',
+    templateUrl: './doctor-dashboard.page.html',
+    styleUrls: ['./doctor-dashboard.page.scss'],
+    imports: [IonicModule, NgClass, SkeletonComponent, LowerCasePipe, SlicePipe, DatePipe]
 })
 export class DoctorDashboardPage implements OnInit {
   doctorName = "Dr. Juan Martínez";

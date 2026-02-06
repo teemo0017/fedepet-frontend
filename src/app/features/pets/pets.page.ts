@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { petsResponseByUser, requestId } from '../services/models/users';
-import { NavController } from '@ionic/angular';
+import { NavController, IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/core/auth.service';
 import { UserService } from '../services/user.service';
 import { DecodedUser } from 'src/app/core/models/auth';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-pets',
     templateUrl: './pets.page.html',
     styleUrls: ['./pets.page.scss'],
-    standalone: false
+    imports: [IonicModule, DatePipe]
 })
 export class PetsPage implements OnInit {
 

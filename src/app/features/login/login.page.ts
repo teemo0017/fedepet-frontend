@@ -1,20 +1,20 @@
 import { DecodedUser } from './../../core/models/auth';
 
 import { Component, OnInit } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { NavController, Platform, IonicModule } from '@ionic/angular';
 
 import { Login } from 'src/app/core/models/auth';
 import { AuthService } from '../../core/auth.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
 
 declare const google: any;
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
-  standalone: false
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: ['./login.page.scss'],
+    imports: [IonicModule, FormsModule, ReactiveFormsModule]
 })
 export class LoginPage implements OnInit {
   hide = true;

@@ -10,13 +10,13 @@ import { DatesPage } from './dates.page';
 import { SharedModule } from 'src/app/shared/shared-module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DatesPageRoutingModule,
-    SharedModule
-  ],
-  declarations: [DatesPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        DatesPageRoutingModule,
+        SharedModule,
+        DatesPage
+    ]
 })
 export class DatesPageModule {}

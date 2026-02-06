@@ -9,12 +9,12 @@ import { AdminDashboardPageRoutingModule } from './admin-dashboard-routing.modul
 import { AdminDashboardPage } from './admin-dashboard.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AdminDashboardPageRoutingModule
-  ],
-  declarations: [AdminDashboardPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AdminDashboardPageRoutingModule,
+        AdminDashboardPage
+    ]
 })
 export class AdminDashboardPageModule {}

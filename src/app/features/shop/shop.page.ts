@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, IonicModule } from '@ionic/angular';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-shop',
-  templateUrl: './shop.page.html',
-  styleUrls: ['./shop.page.scss'],
-  standalone: false
+    selector: 'app-shop',
+    templateUrl: './shop.page.html',
+    styleUrls: ['./shop.page.scss'],
+    imports: [IonicModule, DecimalPipe]
 })
 export class ShopPage {
 products: any[] = [];

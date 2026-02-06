@@ -9,9 +9,8 @@ describe('TabVarComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabVarComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    imports: [IonicModule.forRoot(), TabVarComponent]
+}).compileComponents();
 
     fixture = TestBed.createComponent(TabVarComponent);
     component = fixture.componentInstance;

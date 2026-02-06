@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
     selector: 'app-add-product',
     templateUrl: './add-product.page.html',
     styleUrls: ['./add-product.page.scss'],
-    standalone: false
+    imports: [IonicModule, FormsModule, ReactiveFormsModule]
 })
 export class AddProductPage {
   productForm = this.fb.group({

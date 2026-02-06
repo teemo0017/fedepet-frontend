@@ -9,13 +9,13 @@ import { AddDoctorPageRoutingModule } from './add-doctor-routing.module';
 import { AddDoctorPage } from './add-doctor.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AddDoctorPageRoutingModule,
-    ReactiveFormsModule
-  ],
-  declarations: [AddDoctorPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AddDoctorPageRoutingModule,
+        ReactiveFormsModule,
+        AddDoctorPage
+    ]
 })
 export class AddDoctorPageModule {}

@@ -10,13 +10,14 @@ import { DashboardPage } from './dashboard.page';
 import { SharedModule } from 'src/app/shared/shared-module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DashboardPageRoutingModule,
-    SharedModule,
-  ],
-  declarations: [DashboardPage], exports: [DashboardPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        DashboardPageRoutingModule,
+        SharedModule,
+        DashboardPage,
+    ],
+    exports: [DashboardPage]
 })
 export class DashboardPageModule { }
