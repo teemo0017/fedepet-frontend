@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { SquareSlideInfo } from '../../interfaces/interfaces';
 register();
@@ -10,8 +10,7 @@ register();
 })
 export class RoundSlideComponent implements OnInit {
 
-  @Input()
-  public roundSlideInfo: SquareSlideInfo[] = []
+  public readonly roundSlideInfo = input<SquareSlideInfo[]>([]);
 
   constructor() { }
 

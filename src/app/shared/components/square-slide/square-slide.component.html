@@ -1,5 +1,5 @@
 <swiper-container space-between="15" slides-per-view="1.4" autoplay="true">
-  @for (info of squareSlideInfo ; track info; let even = $even) {
+  @for (info of squareSlideInfo() ; track info; let even = $even) {
     <swiper-slide [ngClass]="even ? 'app-bg-blue app-text-yellow':'app-bg-blue app-text-clay-green'"
       >
       <ion-grid>

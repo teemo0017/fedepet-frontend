@@ -1,5 +1,5 @@
 <swiper-container space-between="15" slides-per-view="2" autoplay="true">
-  @for (info of roundSlideInfo ; track info; let even = $even) {
+  @for (info of roundSlideInfo() ; track info; let even = $even) {
     <swiper-slide class="app-bg-white">
       <ion-grid>
         <ion-row class="ion-justify-content-center">

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
@@ -9,9 +9,9 @@ import { AnimationOptions } from 'ngx-lottie';
 })
 export class SkeletonComponent implements OnInit {
 
-  @Input() count = 3;
-  @Input() showFooter = false;
-  @Input() type: 'grid' | 'list' = 'grid';
+  readonly count = input(3);
+  readonly showFooter = input(false);
+  readonly type = input<'grid' | 'list'>('grid');
   constructor() { }
 
     options: AnimationOptions = {
