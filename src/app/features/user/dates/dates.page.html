@@ -1,0 +1,62 @@
+<ion-header class="sub-header">
+  <div class="sub-header__inner">
+    <button class="sub-back" (click)="goBack()" aria-label="Volver">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <span class="sub-title">Mis citas</span>
+    <span class="sub-spacer"></span>
+  </div>
+</ion-header>
+
+<ion-content fullscreen class="dates-content">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @if (loading()) {
+    <div class="dt-skeleton">
+      <component-skeleton></component-skeleton>
+    </div>
+  } @else if (dateList.length === 0) {
+    <div class="dt-empty">
+      <div class="dt-empty-icon">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <h2>Aún no tienes citas</h2>
+      <p>Cuando agendes una cita aparecerá aquí con todos sus detalles.</p>
+      <ion-button class="dt-cta" (click)="goToCreate()">Agendar cita</ion-button>
+    </div>
+  } @else {
+    <div class="dt-list">
+      @for (date of dateList; track date) {
+        <article class="date-card">
+          <div class="dc-top">
+            <img [src]="date.doctorImg" class="dc-doctor-img" alt="" />
+            <div class="dc-doctor">
+              <h2>{{ date.doctor | titlecase }}</h2>
+              <span>{{ date.type }}</span>
+            </div>
+            <span class="dc-status" [ngClass]="getStatusClass(date.state)">{{ date.state | titlecase }}</span>
+          </div>
+
+          <div class="dc-pet">
+            <img [src]="date.petImg" class="dc-pet-img" alt="" />
+            <div>
+              <strong>{{ date.pet | titlecase }}</strong>
+              <small>Mascota</small>
+            </div>
+          </div>
+
+          <div class="dc-when">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ date.dateTime | date:'dd MMM yyyy, hh:mm a':'America/Panama' }}</span>
+          </div>
+
+          @if (date.motive) {
+            <p class="dc-motive">{{ date.motive }}</p>
+          }
+        </article>
+      }
+    </div>
+  }
+</ion-content>

@@ -1,21 +1,22 @@
 swiper-slide {
-  height: 125px;
-  border-radius: var(--app-spacing-14);
+  height: 135px;
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
 }
 
 img {
-
   width: 100%;
-  height: 125px;
+  height: 135px;
+  object-fit: cover;
   border-top-left-radius: 45%;
 }
 
-
 .content-text {
-  padding: var(--app-spacing-10);
+  padding: var(--app-spacing-12);
 }
 
 .description {
   hyphens: auto;
+  opacity: 0.95;
 }

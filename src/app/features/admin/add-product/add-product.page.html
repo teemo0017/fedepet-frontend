@@ -1,0 +1,78 @@
+<ion-header class="pf-header">
+  <ion-toolbar class="pf-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/dashboard" text="" icon="chevron-back-outline" class="pf-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="pf-title">Agregar producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="pf-content">
+  <div class="pf-body">
+    <p class="pf-intro">Registra un artículo para la tienda de tu clínica.</p>
+
+    <!-- Foto -->
+    <div class="pf-photo">
+      <div class="pf-photo-preview">
+        @if (previewImage) {
+          <img [src]="previewImage" alt="" />
+        } @else {
+          <ion-icon name="cube-outline"></ion-icon>
+        }
+      </div>
+      <button type="button" class="pf-photo-btn" (click)="selectImage()">
+        <ion-icon name="camera-outline"></ion-icon>
+        {{ previewImage ? 'Cambiar foto' : 'Subir foto' }}
+      </button>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="pf-form">
+      <div class="pf-field">
+        <label class="pf-label">Nombre del producto</label>
+        <ion-item class="pf-item" lines="none">
+          <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+          <ion-input formControlName="name" placeholder="Ej. Alimento premium 2kg"></ion-input>
+        </ion-item>
+        @if (productForm.get('name')?.touched && productForm.get('name')?.invalid) {
+          <small class="pf-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa el nombre.</small>
+        }
+      </div>
+
+      <div class="pf-field">
+        <label class="pf-label">Descripción</label>
+        <ion-item class="pf-item pf-item--area" lines="none">
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          <ion-textarea formControlName="description" autoGrow="true" rows="3"
+            placeholder="Detalles del producto"></ion-textarea>
+        </ion-item>
+        @if (productForm.get('description')?.touched && productForm.get('description')?.invalid) {
+          <small class="pf-error"><ion-icon name="alert-circle-outline"></ion-icon> Agrega una descripción.</small>
+        }
+      </div>
+
+      <div class="pf-row">
+        <div class="pf-field">
+          <label class="pf-label">Precio ($)</label>
+          <ion-item class="pf-item" lines="none">
+            <ion-input type="number" formControlName="price" placeholder="0.00"></ion-input>
+          </ion-item>
+          @if (productForm.get('price')?.touched && productForm.get('price')?.invalid) {
+            <small class="pf-error"><ion-icon name="alert-circle-outline"></ion-icon> Precio inválido.</small>
+          }
+        </div>
+
+        <div class="pf-field">
+          <label class="pf-label">Stock</label>
+          <ion-item class="pf-item" lines="none">
+            <ion-input type="number" formControlName="stock" placeholder="0"></ion-input>
+          </ion-item>
+          @if (productForm.get('stock')?.touched && productForm.get('stock')?.invalid) {
+            <small class="pf-error"><ion-icon name="alert-circle-outline"></ion-icon> Stock inválido.</small>
+          }
+        </div>
+      </div>
+
+      <button type="submit" class="pf-submit">Guardar producto</button>
+    </form>
+  </div>
+</ion-content>

@@ -1,65 +1,37 @@
-<ion-header class="main-header">
-  <ion-toolbar class="toolbar">
-
-    <ion-buttons slot="start">
-      <ion-button fill="clear" class="back-btn" (click)="goBack()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-title class="title">Tienda FedePet 🐾</ion-title>
-
-  </ion-toolbar>
+<ion-header class="sub-header">
+  <div class="sub-header__inner">
+    <button class="sub-back" (click)="goBack()" aria-label="Volver">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <span class="sub-title">Tienda</span>
+    <span class="sub-spacer"></span>
+  </div>
 </ion-header>
 
-<ion-content class="app-bg-background">
-  <div class="store-wrapper p-20">
+<ion-content class="shop-content">
+  <div class="sh-shell">
+    <header class="sh-head">
+      <h1 class="sh-title">Productos para tu mascota</h1>
+      <p class="sh-subtitle">Alimento, cuidado y accesorios de la clínica.</p>
+    </header>
 
-    <!-- Banner superior -->
-    <section class="store-banner mb-20">
-      <div class="store-banner__text">
-        <h2 class="store-banner__title">Productos para tu mascota</h2>
-        <p class="store-banner__subtitle">
-          Alimentos, cuidados y accesorios seleccionados con cariño 🐾
-        </p>
-      </div>
-    </section>
-
-    <!-- Grid de productos -->
-    <ion-grid class="store-grid">
-      <ion-row>
-        @for (p of products; track p) {
-          <ion-col
-            size="6"
-            sizeMd="4"
-            class="store-col"
-            >
-            <article class="store-card">
-              <div class="store-card__image-wrapper">
-                <img [src]="p.image" alt="{{ p.name }}" />
-              </div>
-              <div class="store-card__body">
-                <h3 class="store-card__name app-text-strong">
-                  {{ p.name }}
-                </h3>
-                <p class="store-card__description app-text-normal">
-                  {{ p.description || 'Producto pensado para el bienestar diario de tu mascota.' }}
-                </p>
-              </div>
-              <div class="store-card__footer">
-                <span class="store-card__price">
-                  $ {{ p.price | number : '1.2-2' }}
-                </span>
-                <button type="button" class="store-card__btn">
-                  <ion-icon name="cart-outline"></ion-icon>
-                  <span>Añadir</span>
-                </button>
-              </div>
-            </article>
-          </ion-col>
-        }
-      </ion-row>
-    </ion-grid>
-
+    <div class="sh-grid">
+      @for (p of products; track p) {
+        <article class="sh-card">
+          <div class="sh-card__media">
+            <img [src]="p.image" [alt]="p.name" />
+          </div>
+          <div class="sh-card__body">
+            <h3 class="sh-card__name">{{ p.name }}</h3>
+            <div class="sh-card__foot">
+              <span class="sh-card__price">${{ p.price | number : '1.2-2' }}</span>
+              <button type="button" class="sh-card__btn" aria-label="Añadir al carrito">
+                <ion-icon name="cart-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
   </div>
 </ion-content>

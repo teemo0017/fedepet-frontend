@@ -1,0 +1,110 @@
+<ion-header class=" af-header">
+  <ion-toolbar class="af-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/dashboard" text="" icon="chevron-back-outline" class="af-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="af-title">Registrar doctor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="af-content">
+  <div class="af-body">
+    <p class="af-intro">Completa los datos del profesional. Recibirá acceso con el correo y la contraseña que definas.</p>
+
+    <!-- Foto -->
+    <div class="af-photo">
+      <div class="af-photo-preview">
+        @if (previewImage) {
+          <img [src]="previewImage" alt="" />
+        } @else {
+          <ion-icon name="person-circle-outline"></ion-icon>
+        }
+      </div>
+      <button type="button" class="af-photo-btn" (click)="selectImage()">
+        <ion-icon name="camera-outline"></ion-icon>
+        {{ previewImage ? 'Cambiar foto' : 'Subir foto' }}
+      </button>
+    </div>
+
+    <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()" class="af-form">
+      <div class="af-field">
+        <label class="af-label">Nombre completo</label>
+        <ion-item class="af-item" lines="none">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input formControlName="name" placeholder="Ej. Dra. Ana Torres"></ion-input>
+        </ion-item>
+        @if (doctorForm.get('name')?.touched && doctorForm.get('name')?.invalid) {
+          <small class="af-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa el nombre.</small>
+        }
+      </div>
+
+      <div class="af-field">
+        <label class="af-label">Especialidad</label>
+        <ion-item class="af-item" lines="none">
+          <ion-icon name="medkit-outline" slot="start"></ion-icon>
+          <ion-select formControlName="specialty" interface="popover" placeholder="Seleccionar">
+            @for (s of specialties; track s) {
+              <ion-select-option [value]="s">{{ s }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        @if (doctorForm.get('specialty')?.touched && doctorForm.get('specialty')?.invalid) {
+          <small class="af-error"><ion-icon name="alert-circle-outline"></ion-icon> Selecciona una especialidad.</small>
+        }
+      </div>
+
+      <div class="af-field">
+        <label class="af-label">Correo</label>
+        <ion-item class="af-item" lines="none">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" formControlName="email" placeholder="doctor@clinica.com"></ion-input>
+        </ion-item>
+        @if (doctorForm.get('email')?.touched && doctorForm.get('email')?.invalid) {
+          <small class="af-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa un correo válido.</small>
+        }
+      </div>
+
+      <div class="af-field">
+        <label class="af-label">Teléfono</label>
+        <ion-item class="af-item" lines="none">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-input type="tel" formControlName="phone" placeholder="Número de contacto"></ion-input>
+        </ion-item>
+        @if (doctorForm.get('phone')?.touched && doctorForm.get('phone')?.invalid) {
+          <small class="af-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa el teléfono.</small>
+        }
+      </div>
+
+      <div class="af-field">
+        <label class="af-label">Contraseña de acceso</label>
+        <ion-item class="af-item" lines="none">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input type="password" formControlName="password" placeholder="Mínimo 6 caracteres"></ion-input>
+        </ion-item>
+        @if (doctorForm.get('password')?.touched && doctorForm.get('password')?.invalid) {
+          <small class="af-error"><ion-icon name="alert-circle-outline"></ion-icon> Debe tener al menos 6 caracteres.</small>
+        }
+      </div>
+
+      <div class="af-field">
+        <label class="af-label">Descripción</label>
+        <ion-item class="af-item af-item--area" lines="none">
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          <ion-textarea formControlName="description" autoGrow="true" rows="3"
+            placeholder="Experiencia, enfoque o notas del profesional"></ion-textarea>
+        </ion-item>
+        @if (doctorForm.get('description')?.touched && doctorForm.get('description')?.invalid) {
+          <small class="af-error"><ion-icon name="alert-circle-outline"></ion-icon> Agrega una descripción.</small>
+        }
+      </div>
+
+      <button type="submit" class="af-submit" [disabled]="loadingService">
+        @if (!loadingService) {
+          <span>Guardar doctor</span>
+        } @else {
+          <ion-spinner name="dots"></ion-spinner>
+        }
+      </button>
+    </form>
+  </div>
+</ion-content>

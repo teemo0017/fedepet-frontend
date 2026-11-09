@@ -1,0 +1,70 @@
+<ion-header class="sub-header">
+  <div class="sub-header__inner">
+    <button class="sub-back" (click)="goBack()" aria-label="Volver">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <span class="sub-title">Agregar mascota</span>
+    <span class="sub-spacer"></span>
+  </div>
+</ion-header>
+
+<ion-content class="add-pet-content">
+  <div class="ap-shell">
+    <p class="ap-lead">Cuéntanos sobre tu mascota para llevar su historial de salud.</p>
+
+    <button type="button" class="ap-photo" [class.ap-photo--set]="previewImage" (click)="selectImage()">
+      @if (previewImage) {
+        <img [src]="previewImage" class="ap-photo__img" alt="Foto de la mascota" />
+        <span class="ap-photo__edit"><ion-icon name="camera-outline"></ion-icon></span>
+      } @else {
+        <ion-icon name="camera-outline" class="ap-photo__icon"></ion-icon>
+        <span class="ap-photo__hint">Añadir foto</span>
+      }
+    </button>
+
+    <form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="ap-form">
+      <label class="ap-field">
+        <span class="ap-label">Nombre</span>
+        <ion-input class="ap-input" formControlName="name" placeholder="Ej. Luna" mode="md"></ion-input>
+      </label>
+
+      <label class="ap-field">
+        <span class="ap-label">Especie</span>
+        <ion-select class="ap-input" formControlName="species" interface="popover" placeholder="Seleccionar" mode="md">
+          @for (specie of speciesList; track specie) {
+            <ion-select-option [value]="specie">{{ specie }}</ion-select-option>
+          }
+        </ion-select>
+      </label>
+
+      <label class="ap-field">
+        <span class="ap-label">Raza</span>
+        <ion-select class="ap-input" formControlName="breed" interface="popover" placeholder="Seleccionar" mode="md">
+          @for (breed of filteredBreeds; track breed) {
+            <ion-select-option [value]="breed">{{ breed }}</ion-select-option>
+          }
+        </ion-select>
+      </label>
+
+      <label class="ap-field">
+        <span class="ap-label">Peso (kg)</span>
+        <ion-input class="ap-input" type="number" inputmode="decimal" formControlName="weight" placeholder="0.0" mode="md"></ion-input>
+      </label>
+
+      <div class="ap-field">
+        <span class="ap-label">Fecha de nacimiento</span>
+        <div class="ap-date">
+          <ion-datetime formControlName="dateBirth" presentation="date" [preferWheel]="true" locale="es-PA"></ion-datetime>
+        </div>
+      </div>
+
+      <ion-button expand="block" type="submit" class="ap-submit" [disabled]="petForm.invalid || loading">
+        @if (!loading) {
+          <span>Guardar mascota</span>
+        } @else {
+          <ion-spinner name="dots"></ion-spinner>
+        }
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

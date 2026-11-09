@@ -1,19 +1,10 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { NavController, IonicModule } from '@ionic/angular';
-import { AnimationOptions } from 'ngx-lottie';
 import { NgClass } from '@angular/common';
-
-interface AdminDoctor {
-  id: number;
-  name: string;
-  specialty: string;
-  email: string;
-  phone: string;
-  available: boolean;
-  photo: string;
-}
-
+import { firstValueFrom } from 'rxjs';
+import { UserService } from '../services/user.service';
+import { ToastService } from '../services/toast.service';
+import { Doctor } from '../services/models/users';
 
 @Component({
     selector: 'app-admin-dashboard',
@@ -21,60 +12,46 @@ interface AdminDoctor {
     styleUrls: ['./admin-dashboard.page.scss'],
     imports: [IonicModule, NgClass]
 })
-export class AdminDashboardPage {
-  doctors: AdminDoctor[] = [];
+export class AdminDashboardPage implements OnInit {
+  doctors: Doctor[] = [];
+  loading = false;
 
-  constructor(private navCtrl: NavController) { }
+  constructor(
+    private navCtrl: NavController,
+    private userService: UserService,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit() {
-    this.loadMockDoctors();
+    this.loadDoctors();
   }
 
-  loadMockDoctors() {
-    this.doctors = [
-      {
-        id: 1,
-        name: 'Dr. Juan Martínez',
-        specialty: 'Medicina General',
-        email: 'juan.martinez@vetclinic.com',
-        phone: '+507 6000-0001',
-        available: true,
-        photo: 'https://i.pravatar.cc/150?img=12'
-      },
-      {
-        id: 2,
-        name: 'Dra. Ana Gómez',
-        specialty: 'Dermatología Veterinaria',
-        email: 'ana.gomez@vetclinic.com',
-        phone: '+507 6000-0002',
-        available: false,
-        photo: 'https://i.pravatar.cc/150?img=32'
-      },
-      {
-        id: 3,
-        name: 'Dr. Carlos Pérez',
-        specialty: 'Cirugía',
-        email: 'carlos.perez@vetclinic.com',
-        phone: '+507 6000-0003',
-        available: true,
-        photo: 'https://i.pravatar.cc/150?img=45'
-      }
-    ];
+  async loadDoctors() {
+    this.loading = true;
+    try {
+      this.doctors = await firstValueFrom(this.userService.getDocts());
+    } catch (err) {
+      console.error('Error al obtener los doctores:', err);
+      this.doctors = [];
+    } finally {
+      this.loading = false;
+    }
   }
 
-  toggleAvailability(doctor: AdminDoctor) {
+  trackByDoctor(_index: number, doctor: Doctor) {
+    return doctor.id;
+  }
+
+  toggleAvailability(doctor: Doctor) {
     doctor.available = !doctor.available;
-    // Aquí luego llamas a tu backend para actualizar:
-    // this.adminService.updateDoctorAvailability(doctor.id, doctor.available).subscribe(...)
+    // El backend todavía no expone un endpoint para actualizar disponibilidad.
   }
 
   goToCreateDoctor() {
-    this.navCtrl.navigateForward('/admin/doctors/create');
+    this.navCtrl.navigateForward('/admin/add-doctor');
   }
 
-  goToEditDoctor(doctor: AdminDoctor) {
-    this.navCtrl.navigateForward(`/admin/doctors/edit/${doctor.id}`, {
-      state: { doctor }
-    });
+  async goToEditDoctor(doctor: Doctor) {
+    await this.toastService.info('La edición de doctores estará disponible pronto');
   }
 }

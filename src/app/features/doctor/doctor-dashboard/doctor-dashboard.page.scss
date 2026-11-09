@@ -1,0 +1,443 @@
+.doctor-dash {
+  --background: var(--app-color-background);
+}
+
+/* ---------- Encabezado ---------- */
+.dd-hero {
+  background: linear-gradient(160deg,
+      var(--app-color-primary),
+      color-mix(in srgb, var(--app-color-primary) 80%, black));
+  padding: calc(var(--app-spacing-16) + env(safe-area-inset-top)) var(--app-spacing-20) var(--app-spacing-32);
+  border-radius: 0 0 28px 28px;
+  color: #fff;
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--app-color-primary) 24%, transparent);
+}
+
+.dd-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dd-user {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-12);
+  min-width: 0;
+}
+
+.dd-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.dd-greeting {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.dd-hello {
+  font-size: 0.8rem;
+  opacity: 0.88;
+}
+
+.dd-name {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dd-logout {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, background 0.2s ease;
+
+  ion-icon {
+    font-size: 1.3rem;
+  }
+
+  &:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.dd-summary {
+  margin-top: var(--app-spacing-20);
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-16);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: var(--app-spacing-14) var(--app-spacing-18);
+}
+
+.dd-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dd-summary-num {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.dd-summary-lbl {
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+.dd-summary-sep {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ---------- Cuerpo ---------- */
+.dd-body {
+  padding: var(--app-spacing-22) var(--app-spacing-16) var(--app-spacing-32);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.dd-section {
+  margin-bottom: var(--app-spacing-26);
+}
+
+.dd-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--app-spacing-14);
+}
+
+.dd-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-8);
+  font-family: var(--font-title);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #2b3b36;
+  margin: 0;
+
+  ion-icon {
+    color: var(--app-color-primary);
+    font-size: 1.25rem;
+  }
+
+  &--sub {
+    margin-bottom: var(--app-spacing-14);
+  }
+}
+
+.dd-link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  color: var(--app-color-primary);
+  font-weight: 700;
+  font-size: 0.84rem;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 1rem;
+  }
+}
+
+/* ---------- Fila de cita ---------- */
+.dd-appt {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-14);
+  background: #fff;
+  border: 1px solid #e9efec;
+  border-radius: 18px;
+  padding: var(--app-spacing-14);
+  margin-bottom: var(--app-spacing-12);
+  transition: transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.dd-appt-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.dd-appt-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dd-appt-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-spacing-8);
+}
+
+.dd-appt-pet {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2b3b36;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dd-appt-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 0.82rem;
+  color: #6b7b76;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  ion-icon {
+    font-size: 0.95rem;
+    color: #9aa8a3;
+    flex-shrink: 0;
+  }
+}
+
+.dd-appt-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  color: #4a5852;
+  font-weight: 700;
+  font-size: 0.82rem;
+
+  ion-icon {
+    font-size: 1.1rem;
+    color: var(--app-color-primary);
+  }
+}
+
+/* ---------- Chips de estado ---------- */
+.dd-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 8px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &.is-pendiente {
+    background: color-mix(in srgb, var(--app-color-yellow) 20%, #fff);
+    color: color-mix(in srgb, var(--app-color-yellow) 62%, black);
+  }
+
+  &.is-confirmada {
+    background: color-mix(in srgb, var(--app-color-green) 24%, #fff);
+    color: color-mix(in srgb, var(--app-color-green) 60%, black);
+  }
+
+  &.is-en-curso {
+    background: color-mix(in srgb, var(--app-color-blue) 22%, #fff);
+    color: color-mix(in srgb, var(--app-color-blue) 62%, black);
+  }
+
+  &.is-finalizada {
+    background: #eef2f0;
+    color: #5a6b64;
+  }
+
+  &.is-cancelada {
+    background: color-mix(in srgb, #e5484d 16%, #fff);
+    color: #c02a2f;
+  }
+
+  &.is-default {
+    background: #eef2f0;
+    color: #5a6b64;
+  }
+}
+
+/* ---------- Acciones rápidas ---------- */
+.dd-quick {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--app-spacing-10);
+}
+
+.dd-quick-btn {
+  background: #fff;
+  border: 1px solid #e9efec;
+  border-radius: 16px;
+  padding: var(--app-spacing-14) var(--app-spacing-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--app-spacing-8);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &[disabled] {
+    opacity: 0.55;
+    cursor: default;
+  }
+}
+
+.dd-quick-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+
+  ion-icon {
+    font-size: 1.4rem;
+    color: #fff;
+  }
+
+  &--primary { background: var(--app-color-primary); }
+  &--blue { background: var(--app-color-blue); }
+  &--muted {
+    background: #eef2f0;
+    ion-icon { color: #8a9a93; }
+  }
+}
+
+.dd-quick-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #4a5852;
+  text-align: center;
+}
+
+/* ---------- Historial ---------- */
+.dd-hist {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-12);
+  background: #fff;
+  border: 1px solid #e9efec;
+  border-radius: 16px;
+  padding: var(--app-spacing-10) var(--app-spacing-12);
+  margin-bottom: var(--app-spacing-10);
+}
+
+.dd-hist-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.dd-hist-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.dd-hist-title {
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #2b3b36;
+  margin: 0 0 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dd-hist-meta {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #7a8983;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dd-hist-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.dd-hist-date {
+  font-size: 0.74rem;
+  color: #9aa8a3;
+  font-weight: 600;
+}
+
+/* ---------- Estado vacío ---------- */
+.dd-empty {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-10);
+  background: #fff;
+  border: 1px solid #e9efec;
+  border-radius: 16px;
+  padding: var(--app-spacing-16);
+  color: #7a8983;
+  font-size: 0.88rem;
+
+  ion-icon {
+    font-size: 1.4rem;
+    color: #9aa8a3;
+    flex-shrink: 0;
+  }
+}

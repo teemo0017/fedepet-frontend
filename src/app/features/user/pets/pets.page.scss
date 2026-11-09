@@ -1,0 +1,229 @@
+.pets-content {
+  --background: var(--app-color-background);
+}
+
+/* ---------- Head ---------- */
+.pg-head {
+  padding: calc(var(--app-spacing-24) + env(safe-area-inset-top)) var(--app-spacing-20) var(--app-spacing-8);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.pg-title {
+  font-family: var(--font-title);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #23322c;
+  margin: 0;
+}
+
+.pg-subtitle {
+  margin: var(--app-spacing-4) 0 0;
+  color: #6f7f79;
+  font-size: 0.95rem;
+}
+
+/* ---------- Tools ---------- */
+.pg-tools {
+  padding: var(--app-spacing-8) var(--app-spacing-16) var(--app-spacing-4);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.pg-search {
+  --background: #ffffff;
+  --border-radius: 14px;
+  --box-shadow: none;
+  --placeholder-color: #9aa8a3;
+  --icon-color: #9aa8a3;
+  padding: 0;
+  border: 1px solid #e7ede9;
+  border-radius: 14px;
+}
+
+.pg-filters {
+  display: flex;
+  gap: var(--app-spacing-8);
+  margin-top: var(--app-spacing-12);
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.pg-chip {
+  flex: 0 0 auto;
+  border: 1px solid #dbe5e0;
+  background: #ffffff;
+  color: #5f6f68;
+  font-family: var(--ion-font-family);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: var(--app-spacing-8) var(--app-spacing-14);
+  border-radius: 999px;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+
+  &--on {
+    background: var(--app-color-primary);
+    border-color: var(--app-color-primary);
+    color: #fff;
+  }
+}
+
+/* ---------- Grid ---------- */
+.pg-grid {
+  display: grid;
+  gap: var(--app-spacing-14);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: var(--app-spacing-16);
+  max-width: 640px;
+  margin: 0 auto;
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.pg-skeleton {
+  padding: var(--app-spacing-16);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ---------- Card ---------- */
+.pet-card {
+  background: #ffffff;
+  border: 1px solid #eaf0ec;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--app-color-clay-green);
+    display: grid;
+    place-items: center;
+  }
+
+  &__placeholder {
+    font-size: 2.2rem;
+    color: color-mix(in srgb, var(--app-color-green) 70%, #fff);
+  }
+
+  &__photo {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__species {
+    position: absolute;
+    top: var(--app-spacing-8);
+    left: var(--app-spacing-8);
+    background: rgba(255, 255, 255, 0.92);
+    color: #3c4a44;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 8px;
+  }
+
+  &__body {
+    padding: var(--app-spacing-12) var(--app-spacing-12) var(--app-spacing-14);
+  }
+
+  &__name {
+    font-family: var(--font-title);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #23322c;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__breed {
+    margin: 2px 0 0;
+    font-size: 0.82rem;
+    color: #8a9893;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--app-spacing-6);
+    margin-top: var(--app-spacing-8);
+    font-size: 0.78rem;
+    color: #6f7f79;
+  }
+
+  &__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #c2cec8;
+  }
+}
+
+/* ---------- Empty ---------- */
+.pg-empty {
+  max-width: 420px;
+  margin: var(--app-spacing-32) auto;
+  padding: 0 var(--app-spacing-24);
+  text-align: center;
+
+  h2 {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    color: #23322c;
+    margin: 0 0 var(--app-spacing-6);
+  }
+
+  p {
+    color: #6f7f79;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0 0 var(--app-spacing-20);
+  }
+}
+
+.pg-empty-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 24px;
+  margin: 0 auto var(--app-spacing-16);
+  background: color-mix(in srgb, var(--app-color-primary) 10%, #fff);
+  display: grid;
+  place-items: center;
+
+  ion-icon {
+    font-size: 2rem;
+    color: var(--app-color-primary);
+  }
+}
+
+.pg-cta {
+  --background: var(--app-color-primary);
+  --background-activated: color-mix(in srgb, var(--app-color-primary) 82%, black);
+  --border-radius: 14px;
+  --color: #fff;
+  --box-shadow: none;
+  font-weight: 700;
+}
+
+/* ---------- FAB ---------- */
+.pg-fab {
+  --background: var(--app-color-primary);
+  --background-activated: color-mix(in srgb, var(--app-color-primary) 82%, black);
+  --color: #fff;
+  --box-shadow: 0 8px 20px color-mix(in srgb, var(--app-color-primary) 34%, transparent);
+}

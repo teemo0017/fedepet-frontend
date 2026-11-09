@@ -1,0 +1,160 @@
+<ion-content class="doctor-dash">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @if (!loading) {
+    <!-- Encabezado -->
+    <header class="dd-hero">
+      <div class="dd-hero-top">
+        <div class="dd-user">
+          <div class="dd-avatar">
+            @if (infoUser.doctorPhoto) {
+              <img [src]="infoUser.doctorPhoto" alt="" />
+            } @else {
+              <span>{{ doctorInitials }}</span>
+            }
+          </div>
+          <div class="dd-greeting">
+            <span class="dd-hello">Panel del doctor</span>
+            <span class="dd-name">{{ infoUser.name || 'Doctor' }}</span>
+          </div>
+        </div>
+        <button class="dd-logout" (click)="logout()" aria-label="Cerrar sesión">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div class="dd-summary">
+        <div class="dd-summary-item">
+          <span class="dd-summary-num">{{ datesIncoming.length }}</span>
+          <span class="dd-summary-lbl">Por atender</span>
+        </div>
+        <span class="dd-summary-sep"></span>
+        <div class="dd-summary-item">
+          <span class="dd-summary-num">{{ datesDone.length }}</span>
+          <span class="dd-summary-lbl">Atendidas</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="dd-body">
+      <!-- Próximas citas -->
+      <section class="dd-section">
+        <div class="dd-section-head">
+          <h2 class="dd-section-title">
+            <ion-icon name="calendar-outline"></ion-icon>
+            Próximas citas
+          </h2>
+          @if (datesIncoming.length > 0) {
+            <button class="dd-link" (click)="viewAll()">
+              Ver agenda
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+          }
+        </div>
+
+        @if (datesIncoming.length === 0) {
+          <div class="dd-empty">
+            <ion-icon name="calendar-clear-outline"></ion-icon>
+            <span>No tienes citas por atender.</span>
+          </div>
+        } @else {
+          @for (cita of datesIncoming | slice:0:3; track trackByDate($index, cita)) {
+            <article class="dd-appt">
+              <img [src]="cita.petImg" class="dd-appt-img" alt="" />
+              <div class="dd-appt-body">
+                <div class="dd-appt-line">
+                  <h3 class="dd-appt-pet">{{ cita.pet }}</h3>
+                  <span class="dd-chip" [ngClass]="statusClass(cita.state)">{{ cita.state }}</span>
+                </div>
+                <p class="dd-appt-meta">
+                  <ion-icon name="person-outline"></ion-icon>
+                  {{ cita.client }}
+                </p>
+                <p class="dd-appt-meta">
+                  <ion-icon name="medical-outline"></ion-icon>
+                  {{ cita.motive }}
+                </p>
+              </div>
+              <div class="dd-appt-time">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>{{ cita.dateTime | date:'shortTime' }}</span>
+              </div>
+            </article>
+          }
+        }
+      </section>
+
+      <!-- Acciones rápidas -->
+      <section class="dd-section">
+        <h2 class="dd-section-title dd-section-title--sub">Acciones rápidas</h2>
+        <div class="dd-quick">
+          <button class="dd-quick-btn" (click)="viewAll()">
+            <span class="dd-quick-icon dd-quick-icon--primary">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </span>
+            <span class="dd-quick-label">Agenda</span>
+          </button>
+          <button class="dd-quick-btn" (click)="viewHistory()">
+            <span class="dd-quick-icon dd-quick-icon--blue">
+              <ion-icon name="time-outline"></ion-icon>
+            </span>
+            <span class="dd-quick-label">Historial</span>
+          </button>
+          <button class="dd-quick-btn" disabled>
+            <span class="dd-quick-icon dd-quick-icon--muted">
+              <ion-icon name="pulse-outline"></ion-icon>
+            </span>
+            <span class="dd-quick-label">Disponibilidad</span>
+          </button>
+          <button class="dd-quick-btn" disabled>
+            <span class="dd-quick-icon dd-quick-icon--muted">
+              <ion-icon name="analytics-outline"></ion-icon>
+            </span>
+            <span class="dd-quick-label">Reportes</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Historial reciente -->
+      <section class="dd-section">
+        <div class="dd-section-head">
+          <h2 class="dd-section-title">
+            <ion-icon name="time-outline"></ion-icon>
+            Historial reciente
+          </h2>
+          @if (datesDone.length > 0) {
+            <button class="dd-link" (click)="viewHistory()">
+              Ver todo
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+          }
+        </div>
+
+        @if (datesDone.length === 0) {
+          <div class="dd-empty">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>Aún no hay citas atendidas.</span>
+          </div>
+        } @else {
+          @for (cita of datesDone | slice:0:3; track trackByDate($index, cita)) {
+            <article class="dd-hist">
+              <img [src]="cita.petImg" class="dd-hist-img" alt="" />
+              <div class="dd-hist-body">
+                <h3 class="dd-hist-title">{{ cita.pet }}</h3>
+                <p class="dd-hist-meta">{{ cita.client }} · {{ cita.type }}</p>
+              </div>
+              <div class="dd-hist-side">
+                <span class="dd-chip" [ngClass]="statusClass(cita.state)">{{ cita.state }}</span>
+                <span class="dd-hist-date">{{ cita.dateTime | date:'shortDate' }}</span>
+              </div>
+            </article>
+          }
+        }
+      </section>
+    </main>
+  } @else {
+    <component-skeleton></component-skeleton>
+  }
+</ion-content>

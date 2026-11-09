@@ -1,10 +1,13 @@
 swiper-slide {
-  height: 165px;
+  height: 175px;
   border-radius: var(--app-spacing-14);
 }
 
 img {
-  width: 135px;
-  height: 135px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
 }

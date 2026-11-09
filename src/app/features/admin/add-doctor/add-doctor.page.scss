@@ -1,0 +1,192 @@
+.af-content {
+  --background: var(--app-color-background);
+}
+
+/* ---------- Encabezado ---------- */
+.af-toolbar {
+  --background: #fff;
+  --border-width: 0;
+  --min-height: calc(56px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 1px solid #e6ede9;
+}
+
+.af-title {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2b3b36;
+}
+
+.af-back {
+  --color: #4a5852;
+}
+
+/* ---------- Cuerpo ---------- */
+.af-body {
+  padding: var(--app-spacing-20) var(--app-spacing-16) var(--app-spacing-32);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.af-intro {
+  margin: 0 0 var(--app-spacing-20);
+  font-size: 0.88rem;
+  color: #6b7b76;
+  line-height: 1.45;
+}
+
+/* ---------- Foto ---------- */
+.af-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--app-spacing-12);
+  margin-bottom: var(--app-spacing-24);
+}
+
+.af-photo-preview {
+  width: 104px;
+  height: 104px;
+  border-radius: 26px;
+  background: #fff;
+  border: 1px solid #e6ede9;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ion-icon {
+    font-size: 3rem;
+    color: #c1cdc7;
+  }
+}
+
+.af-photo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--app-color-primary) 40%, #fff);
+  color: var(--app-color-primary);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-family: var(--ion-font-family);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+
+  ion-icon {
+    font-size: 1.05rem;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ---------- Formulario ---------- */
+.af-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-spacing-16);
+}
+
+.af-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.af-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #4a5852;
+  margin: 0 0 var(--app-spacing-6) var(--app-spacing-2);
+}
+
+.af-item {
+  --background: #fff;
+  --border-radius: 14px;
+  --padding-start: var(--app-spacing-12);
+  --inner-padding-end: var(--app-spacing-10);
+  --min-height: 54px;
+  border-radius: 14px;
+  border: 1.5px solid #e6ede9;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  ion-icon[slot="start"] {
+    color: var(--app-color-primary);
+    font-size: 1.2rem;
+    margin-inline-end: var(--app-spacing-10);
+    align-self: center;
+  }
+
+  &.item-has-focus {
+    border-color: var(--app-color-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--app-color-primary) 12%, transparent);
+  }
+
+  &--area {
+    --min-height: 88px;
+    align-items: flex-start;
+
+    ion-icon[slot="start"] {
+      margin-top: var(--app-spacing-14);
+      align-self: flex-start;
+    }
+  }
+}
+
+.af-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: var(--app-spacing-6) 0 0 var(--app-spacing-2);
+  color: #c02a2f;
+  font-size: 0.76rem;
+  font-weight: 600;
+
+  ion-icon {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- Acción primaria ---------- */
+.af-submit {
+  margin-top: var(--app-spacing-8);
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--app-color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-family: var(--ion-font-family);
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--app-color-primary) 34%, transparent);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+
+  ion-spinner {
+    --color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.99);
+    background: color-mix(in srgb, var(--app-color-primary) 84%, black);
+  }
+
+  &[disabled] {
+    opacity: 0.7;
+  }
+}

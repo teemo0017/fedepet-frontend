@@ -1,0 +1,70 @@
+<ion-content class="doctors-content" fullscreen>
+  <header class="dr-head">
+    <h1 class="dr-title">Nuestros doctores</h1>
+    <p class="dr-subtitle">El equipo que cuida de tus mascotas.</p>
+  </header>
+
+  <div class="dr-tools">
+    <ion-searchbar
+      class="dr-search"
+      placeholder="Buscar por nombre o especialidad"
+      mode="ios"
+      [debounce]="300"
+      (ionInput)="onSearch($event)">
+    </ion-searchbar>
+  </div>
+
+  @if (loading) {
+    <div class="dr-list">
+      @for (s of [1,2,3,4]; track s) {
+        <div class="doctor-card doctor-card--skeleton">
+          <span class="dr-avatar sk-box"></span>
+          <div class="dr-lines">
+            <span class="sk-box sk-line"></span>
+            <span class="sk-box sk-line sk-line--sm"></span>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (doctorsFiltered.length === 0) {
+    <div class="dr-empty">
+      <div class="dr-empty-icon">
+        <ion-icon name="medkit-outline"></ion-icon>
+      </div>
+      <h2>Sin resultados</h2>
+      <p>No encontramos doctores que coincidan con tu búsqueda.</p>
+    </div>
+  } @else {
+    <div class="dr-list">
+      @for (doctor of doctorsFiltered; track doctor) {
+        <article class="doctor-card">
+          <div class="dr-top">
+            @if (doctor.photoUrl) {
+              <img [src]="doctor.photoUrl" class="dr-avatar" alt="" />
+            } @else {
+              <span class="dr-avatar dr-avatar--initials">{{ initials(doctor.name) }}</span>
+            }
+            <div class="dr-info">
+              <h3 class="dr-name">{{ doctor.name }}</h3>
+              <span class="dr-specialty">
+                <ion-icon name="medkit-outline"></ion-icon>
+                {{ doctor.specialty }}
+              </span>
+            </div>
+          </div>
+
+          <div class="dr-contact">
+            <a class="dr-contact-item" [href]="'mailto:' + doctor.email">
+              <ion-icon name="mail-outline"></ion-icon>
+              <span>{{ doctor.email }}</span>
+            </a>
+            <a class="dr-contact-item" [href]="'tel:' + doctor.phone">
+              <ion-icon name="call-outline"></ion-icon>
+              <span>{{ doctor.phone }}</span>
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</ion-content>

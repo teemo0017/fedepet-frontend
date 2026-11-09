@@ -1,0 +1,110 @@
+<ion-content class="dashboard">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @if (!loading()) {
+    <!-- Hero -->
+    <header class="db-hero">
+      <div class="db-hero-top">
+        <div class="db-user">
+          <div class="db-avatar">{{ initials }}</div>
+          <div class="db-greeting">
+            <span class="db-hello">{{ greeting }},</span>
+            <span class="db-name">{{ infoUser.name || 'Bienvenido' }}</span>
+          </div>
+        </div>
+        <button class="db-logout" (click)="goExit()" aria-label="Salir">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div class="db-hero-card">
+        <div class="db-hero-card-text">
+          <h2>Reserva tu próxima cita</h2>
+          <p>Agenda y lleva el control de salud de tus mascotas.</p>
+        </div>
+        <ion-button class="db-hero-cta" (click)="goCreateDate()">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          Agendar cita
+        </ion-button>
+      </div>
+    </header>
+
+    <main class="db-body">
+      <!-- Pets -->
+      @if (infoPets.length === 0) {
+        <section class="db-empty">
+          <div class="db-empty-icon">
+            <ion-icon name="paw-outline"></ion-icon>
+          </div>
+          <h2>Aún no tienes mascotas</h2>
+          <p>Registra tu primera mascota para empezar a gestionar sus controles y vacunas.</p>
+          <ion-button class="db-empty-cta" shape="round" (click)="goToCreate()">
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+            Agregar mascota
+          </ion-button>
+        </section>
+      } @else {
+        <section class="db-section">
+          <div class="db-section-head">
+            <h2 class="db-section-title">
+              <ion-icon name="paw-outline"></ion-icon>
+              Mis mascotas
+            </h2>
+            <button class="db-link" (click)="goManagerPets()">
+              Ver todas
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+          </div>
+          <round-slide [roundSlideInfo]="infoPets"></round-slide>
+        </section>
+
+        <!-- Accesos rápidos -->
+        <section class="db-quick">
+          <h2 class="db-quick-title">Accesos rápidos</h2>
+          <div class="db-quick-grid">
+            <button class="db-quick-btn" (click)="goDates()">
+              <span class="db-quick-icon db-quick-icon--blue">
+                <ion-icon name="calendar-outline"></ion-icon>
+              </span>
+              <span class="db-quick-label">Mis citas</span>
+            </button>
+            <button class="db-quick-btn" (click)="goCreateDate()">
+              <span class="db-quick-icon db-quick-icon--green">
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </span>
+              <span class="db-quick-label">Agendar</span>
+            </button>
+            <button class="db-quick-btn" (click)="goManagerPets()">
+              <span class="db-quick-icon db-quick-icon--primary">
+                <ion-icon name="paw-outline"></ion-icon>
+              </span>
+              <span class="db-quick-label">Mascotas</span>
+            </button>
+          </div>
+        </section>
+      }
+
+      <!-- Doctores -->
+      <section class="db-section">
+        <div class="db-section-head">
+          <h2 class="db-section-title">
+            <ion-icon name="medkit-outline"></ion-icon>
+            Doctores disponibles
+          </h2>
+        </div>
+        @if (infoDoctors.length > 0) {
+          <square-slide [squareSlideInfo]="infoDoctors"></square-slide>
+        } @else {
+          <div class="db-doctors-empty">
+            <ion-icon name="medkit-outline"></ion-icon>
+            <span>Pronto verás aquí a los doctores de tu clínica.</span>
+          </div>
+        }
+      </section>
+    </main>
+  } @else {
+    <component-skeleton></component-skeleton>
+  }
+</ion-content>

@@ -1,179 +1,145 @@
-ion-content {
+/* ---------- Sub-page header ---------- */
+.sub-header {
+  background: var(--app-color-background);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--app-spacing-8) var(--app-spacing-12);
+    padding-top: calc(var(--app-spacing-8) + env(safe-area-inset-top));
+    min-height: 52px;
+  }
+}
+
+.sub-back {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid #e2e9e5;
+  background: #fff;
+  color: #3c4a44;
+  display: grid;
+  place-items: center;
+  transition: transform 0.15s ease;
+
+  ion-icon { font-size: 1.3rem; }
+  &:active { transform: scale(0.92); }
+}
+
+.sub-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #23322c;
+}
+
+.sub-spacer { width: 40px; }
+
+/* ---------- Content ---------- */
+.shop-content {
   --background: var(--app-color-background);
 }
 
-/* HEADER */
-
-.store-header {
-  --background: var(--app-color-blue);
-  color: #fff;
+.sh-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--app-spacing-8) var(--app-spacing-16) var(--app-spacing-32);
 }
 
-.store-header__title {
+.sh-head {
+  padding: 0 var(--app-spacing-4) var(--app-spacing-16);
+}
+
+.sh-title {
   font-family: var(--font-title);
-  font-size: var(--app-spacing-20);
+  font-size: 1.4rem;
   font-weight: 700;
-  text-align: center;
-  color: #fff;
-}
-
-/* CONTENEDOR GENERAL */
-
-.store-wrapper {
-  min-height: 100%;
-}
-
-/* BANNER SUPERIOR */
-
-.store-banner {
-  background: linear-gradient(
-    135deg,
-    var(--app-color-blue),
-    var(--app-color-green)
-  );
-  border-radius: 18px;
-  padding: var(--app-spacing-16);
-  color: #fff;
-}
-
-.store-banner__title {
-  font-family: var(--font-title);
-  font-size: var(--app-spacing-20);
-  margin: 0 0 var(--app-spacing-6) 0;
-}
-
-.store-banner__subtitle {
+  color: #23322c;
   margin: 0;
-  font-size: var(--app-spacing-14);
-  opacity: 0.95;
 }
 
-/* GRID */
-
-.store-grid {
-  width: 100%;
+.sh-subtitle {
+  margin: var(--app-spacing-4) 0 0;
+  color: #6f7f79;
+  font-size: 0.92rem;
 }
 
-.store-col {
-  padding-left: var(--app-spacing-8);
-  padding-right: var(--app-spacing-8);
-  margin-bottom: var(--app-spacing-16);
+/* ---------- Grid ---------- */
+.sh-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--app-spacing-14);
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-/* CARD PRODUCTO */
-
-.store-card {
+/* ---------- Card ---------- */
+.sh-card {
   background: #fff;
+  border: 1px solid #eaf0ec;
   border-radius: 18px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  height: 100%;
-}
 
-/* Imagen con proporción fija (no se corta raro) */
+  &__media {
+    aspect-ratio: 1 / 1;
+    background: var(--app-color-clay-green);
 
-.store-card__image-wrapper {
-  width: 100%;
-  aspect-ratio: 4 / 3; // mantiene proporción
-  overflow: hidden;
-}
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
 
-.store-card__image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+  &__body {
+    padding: var(--app-spacing-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--app-spacing-10);
+    flex: 1;
+  }
 
-/* CUERPO DEL PRODUCTO */
+  &__name {
+    font-family: var(--font-title);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #23322c;
+    line-height: 1.3;
+    margin: 0;
+  }
 
-.store-card__body {
-  padding: var(--app-spacing-10) var(--app-spacing-12) 0
-    var(--app-spacing-12);
-  flex: 1;
-}
+  &__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
 
-.store-card__name {
-  font-family: var(--font-title);
-  font-size: var(--app-spacing-14);
-  margin: 0 0 var(--app-spacing-6) 0;
-  color: #333;
-}
+  &__price {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #23322c;
+  }
 
-.store-card__description {
-  margin: 0;
-  font-size: var(--app-spacing-12);
-  color: #666;
-}
+  &__btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    border: none;
+    background: var(--app-color-primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    transition: transform 0.15s ease;
 
-/* FOOTER (precio + botón) */
-
-.store-card__footer {
-  padding: var(--app-spacing-10) var(--app-spacing-12)
-    var(--app-spacing-12) var(--app-spacing-12);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--app-spacing-10);
-}
-
-.store-card__price {
-  font-weight: 700;
-  font-size: var(--app-spacing-14);
-  color: var(--app-color-orange);
-}
-
-/* Botón custom usando tu paleta */
-
-.store-card__btn {
-  border: none;
-  outline: none;
-  padding: var(--app-spacing-6) var(--app-spacing-10);
-  border-radius: 999px;
-  background: var(--app-color-green);
-  color: #fff;
-  font-size: var(--app-spacing-12);
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--app-spacing-4);
-}
-
-.store-card__btn ion-icon {
-  font-size: 1.1rem;
-}
-
-.main-header {
-  background: var(--app-color-blue);
-  --background: var(--app-color-blue);
-
-  /* Respeta notch de iPhone */
-  padding-top: env(safe-area-inset-top);
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.toolbar {
-  --background: var(--app-color-blue);
-  background: var(--app-color-blue);
-  padding-top: var(--app-spacing-40);
-  height: var(--app-spacing-80);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.back-btn {
-  --color: white;
-  margin-left: 4px;
-}
-
-.title {
-  font-family: var(--font-title);
-  font-size: var(--app-spacing-20);
-  font-weight: 700;
-  color: white;
-  text-align: center;
+    ion-icon { font-size: 1.2rem; }
+    &:active { transform: scale(0.9); }
+  }
 }

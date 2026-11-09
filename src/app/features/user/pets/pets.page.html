@@ -1,0 +1,67 @@
+<ion-content class="pets-content" fullscreen>
+  <header class="pg-head">
+    <h1 class="pg-title">Mis mascotas</h1>
+    <p class="pg-subtitle">Administra a tus compañeros y sus controles.</p>
+  </header>
+
+  <div class="pg-tools">
+    <ion-searchbar
+      class="pg-search"
+      placeholder="Buscar por nombre o raza"
+      mode="ios"
+      [debounce]="300"
+      (ionInput)="onSearch($event)">
+    </ion-searchbar>
+
+    <div class="pg-filters">
+      <button class="pg-chip" [class.pg-chip--on]="activeFilter==='todas'" (click)="setFilter('todas')">Todas</button>
+      <button class="pg-chip" [class.pg-chip--on]="activeFilter==='perro'" (click)="setFilter('perro')">Perros</button>
+      <button class="pg-chip" [class.pg-chip--on]="activeFilter==='gato'" (click)="setFilter('gato')">Gatos</button>
+      <button class="pg-chip" [class.pg-chip--on]="activeFilter==='otros'" (click)="setFilter('otros')">Otros</button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="pg-skeleton">
+      <component-skeleton [count]="4" [type]="'grid'"></component-skeleton>
+    </div>
+  } @else if (petsFiltered.length === 0) {
+    <div class="pg-empty">
+      <div class="pg-empty-icon">
+        <ion-icon name="paw-outline"></ion-icon>
+      </div>
+      <h2>No hay mascotas</h2>
+      <p>Registra a tu primera mascota para llevar el control de sus vacunas y citas.</p>
+      <ion-button class="pg-cta" (click)="openCreate()">Agregar mascota</ion-button>
+    </div>
+  } @else {
+    <div class="pg-grid">
+      @for (pet of petsFiltered; track pet) {
+        <article class="pet-card" (click)="openDetails(pet)">
+          <div class="pet-card__media">
+            <ion-icon name="paw-outline" class="pet-card__placeholder"></ion-icon>
+            <div class="pet-card__photo" [style.background-image]="pet.photo ? 'url(' + pet.photo + ')' : 'none'"></div>
+            <span class="pet-card__species">{{ pet.species }}</span>
+          </div>
+          <div class="pet-card__body">
+            <h3 class="pet-card__name">{{ pet.name }}</h3>
+            <p class="pet-card__breed">{{ pet.breed || 'Sin raza registrada' }}</p>
+            <div class="pet-card__meta">
+              <span>{{ pet.dateBirth | date:'dd/MM/yyyy':'America/Panama' }}</span>
+              @if (pet.weight) {
+                <span class="pet-card__dot"></span>
+                <span>{{ pet.weight }} kg</span>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  }
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="pg-fab" (click)="openCreate()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

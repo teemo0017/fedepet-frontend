@@ -1,0 +1,80 @@
+<ion-content class="appointment-page">
+  @if (!initLoading) {
+    <div class="ap-shell">
+      <header class="ap-head">
+        <h1 class="ap-title">Agenda tu cita</h1>
+        <p class="ap-subtitle">Elige mascota, doctor y la fecha disponible.</p>
+      </header>
+
+      <div class="ap-field">
+        <span class="ap-label">Mascota</span>
+        <ion-select class="ap-input" interface="popover" [(ngModel)]="selectedPet" placeholder="Selecciona tu mascota" mode="md">
+          @for (pet of petList; track pet) {
+            <ion-select-option [value]="pet.id">{{ pet.name }}</ion-select-option>
+          }
+        </ion-select>
+      </div>
+
+      <div class="ap-field">
+        <span class="ap-label">Doctor</span>
+        <ion-select class="ap-input" interface="popover" [(ngModel)]="selectedDoctor" placeholder="Selecciona un doctor" mode="md">
+          @for (doctor of doctorList; track doctor) {
+            <ion-select-option [value]="doctor.id">{{ doctor.name }}</ion-select-option>
+          }
+        </ion-select>
+      </div>
+
+      <div class="ap-field">
+        <span class="ap-label">Tipo de cita</span>
+        <ion-select class="ap-input" interface="popover" [(ngModel)]="selectAppointmentType" placeholder="Selecciona el tipo" mode="md">
+          @for (type of appointmentTypes; track type) {
+            <ion-select-option [value]="type">{{ type }}</ion-select-option>
+          }
+        </ion-select>
+      </div>
+
+      <div class="ap-field">
+        <span class="ap-label">Fecha y hora</span>
+        <div class="ap-date">
+          <ion-datetime
+            [(ngModel)]="selectedTime"
+            [isDateEnabled]="isWeekday"
+            [min]="minDate"
+            [max]="maxDate"
+            locale="es-PA"
+            hourCycle="h12">
+            <span slot="time-label">Hora de la cita</span>
+          </ion-datetime>
+        </div>
+      </div>
+
+      <div class="ap-field">
+        <span class="ap-label">Motivo</span>
+        <ion-textarea
+          class="ap-input ap-textarea"
+          [autoGrow]="true"
+          [rows]="3"
+          placeholder="Describe brevemente el motivo de la consulta"
+          [(ngModel)]="reason"
+          mode="md">
+        </ion-textarea>
+      </div>
+
+      <ion-button
+        expand="block"
+        class="ap-submit"
+        [disabled]="!selectedDoctor || !selectedPet || selectedTime === initDate || !reason || !selectAppointmentType"
+        (click)="submit()">
+        @if (!saveDateLoading) {
+          <span>Agendar cita</span>
+        } @else {
+          <ion-spinner name="dots"></ion-spinner>
+        }
+      </ion-button>
+    </div>
+  } @else {
+    <div class="ap-skeleton">
+      <component-skeleton [count]="5" [type]="'grid'"></component-skeleton>
+    </div>
+  }
+</ion-content>

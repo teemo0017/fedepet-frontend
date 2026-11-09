@@ -1,0 +1,66 @@
+<ion-header class="dt-header">
+  <ion-toolbar class="dt-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" class="dt-back" (click)="back()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="dt-title">Citas agendadas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dt-content">
+  @if (!loading) {
+    <div class="dt-body">
+      @if (!dateList || dateList.length === 0) {
+        <div class="dt-empty">
+          <ion-icon name="calendar-clear-outline"></ion-icon>
+          <h2>Sin citas</h2>
+          <p>No hay citas para mostrar en esta vista.</p>
+        </div>
+      } @else {
+        @for (item of dateList; track trackByDate($index, item)) {
+          <article class="dt-card" [ngClass]="getStatusClass(item.state)">
+            <!-- Cabecera: mascota + estado -->
+            <header class="dt-card-head">
+              <div class="dt-pet">
+                <img [src]="item.petImg" class="dt-pet-img" alt="" />
+                <div class="dt-pet-info">
+                  <h2 class="dt-pet-name">{{ item.pet }}</h2>
+                  <span class="dt-client">{{ item.client }}</span>
+                </div>
+              </div>
+              <span class="dt-chip" [ngClass]="getStatusClass(item.state)">{{ item.state }}</span>
+            </header>
+
+            <!-- Detalle -->
+            <div class="dt-meta">
+              <div class="dt-meta-row">
+                <ion-icon name="medical-outline"></ion-icon>
+                <span>{{ item.motive }}</span>
+              </div>
+              <div class="dt-meta-row">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span>{{ item.type }}</span>
+              </div>
+              <div class="dt-meta-row">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <span>{{ item.dateTime | date:'dd/MM/yyyy · HH:mm' }}</span>
+              </div>
+            </div>
+
+            <!-- Acción -->
+            @if (!verifyStatusDate(item)) {
+              <button class="dt-action" (click)="openStatusModal(item)">
+                <ion-icon name="create-outline"></ion-icon>
+                Cambiar estado
+              </button>
+            }
+          </article>
+        }
+      }
+    </div>
+  } @else {
+    <component-skeleton></component-skeleton>
+  }
+</ion-content>

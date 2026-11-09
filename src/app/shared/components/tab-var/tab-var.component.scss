@@ -1,7 +1,23 @@
-ion-tab-bar{
-  --background: white;
-  --color: black;
+.tab-bar {
+  --background: #ffffff;
   --border: none;
-  height: var(--app-spacing-64);
-  box-shadow: 0px -5px 9px -4px rgba(0,0,0,0.10);
+  height: calc(var(--app-spacing-58) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1px solid #e7ede9;
+}
+
+ion-tab-button {
+  --color: #90a09a;
+  --color-selected: var(--app-color-primary);
+  font-weight: 600;
+
+  ion-icon {
+    font-size: 1.4rem;
+    margin-bottom: 2px;
+  }
+
+  &::part(native) {
+    font-size: 0.7rem;
+    letter-spacing: 0.2px;
+  }
 }
