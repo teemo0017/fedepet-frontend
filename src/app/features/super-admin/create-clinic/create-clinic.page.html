@@ -1,0 +1,140 @@
+<ion-header class="cc-header">
+  <ion-toolbar class="cc-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/super-admin/clinics" text="" icon="chevron-back-outline" class="cc-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="cc-title">Nueva clínica</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cc-content">
+  <div class="cc-body">
+    <p class="cc-intro">Da de alta la clínica y su cuenta de administrador. El código quedará listo para compartir.</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="cc-form">
+      <h2 class="cc-section">Datos de la clínica</h2>
+
+      <div class="cc-field">
+        <label class="cc-label">Nombre de la clínica</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="storefront-outline" slot="start"></ion-icon>
+          <ion-input formControlName="clinicName" placeholder="Ej. Clínica Veterinaria San Francisco"></ion-input>
+        </ion-item>
+        @if (f.clinicName.touched && f.clinicName.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa el nombre de la clínica.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Código de acceso (slug)</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="link-outline" slot="start"></ion-icon>
+          <ion-input formControlName="clinicSlug" placeholder="clinica-san-francisco"></ion-input>
+        </ion-item>
+        <small class="cc-hint">La clínica ingresará por /{{ f.clinicSlug.value || 'tu-codigo' }}/login</small>
+        @if (f.clinicSlug.touched && f.clinicSlug.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa un código de acceso.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Dirección</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="location-outline" slot="start"></ion-icon>
+          <ion-input formControlName="clinicAddress" placeholder="Dirección de la clínica"></ion-input>
+        </ion-item>
+        @if (f.clinicAddress.touched && f.clinicAddress.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa la dirección.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Teléfono</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-input type="tel" formControlName="clinicPhone" placeholder="Teléfono de contacto"></ion-input>
+        </ion-item>
+        @if (f.clinicPhone.touched && f.clinicPhone.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa el teléfono.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Correo de la clínica</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" formControlName="clinicEmail" placeholder="contacto@clinica.com"></ion-input>
+        </ion-item>
+        @if (f.clinicEmail.touched && f.clinicEmail.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa un correo válido.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Color de marca</label>
+        <div class="cc-color-row">
+          <input type="color" class="cc-color-input" formControlName="primaryColor" />
+          <ion-item class="cc-item cc-item--grow" lines="none">
+            <ion-icon name="color-palette-outline" slot="start"></ion-icon>
+            <ion-input formControlName="primaryColor" placeholder="#ffa420"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+
+      <h2 class="cc-section">Cuenta de administrador</h2>
+      <p class="cc-section-sub">La persona dueña de la clínica entrará con estos datos.</p>
+
+      <div class="cc-field">
+        <label class="cc-label">Nombre del administrador</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input formControlName="adminName" placeholder="Nombre completo"></ion-input>
+        </ion-item>
+        @if (f.adminName.touched && f.adminName.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa el nombre.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Correo del administrador</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" formControlName="adminEmail" placeholder="admin@clinica.com"></ion-input>
+        </ion-item>
+        @if (f.adminEmail.touched && f.adminEmail.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa un correo válido.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Teléfono del administrador</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-input type="tel" formControlName="adminPhone" placeholder="Número de contacto"></ion-input>
+        </ion-item>
+        @if (f.adminPhone.touched && f.adminPhone.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Ingresa el teléfono.</small>
+        }
+      </div>
+
+      <div class="cc-field">
+        <label class="cc-label">Contraseña inicial</label>
+        <ion-item class="cc-item" lines="none">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input type="password" formControlName="adminPassword" placeholder="Mínimo 6 caracteres"></ion-input>
+        </ion-item>
+        @if (f.adminPassword.touched && f.adminPassword.invalid) {
+          <small class="cc-error"><ion-icon name="alert-circle-outline"></ion-icon> Debe tener al menos 6 caracteres.</small>
+        }
+      </div>
+
+      <button type="submit" class="cc-submit" [disabled]="loadingService">
+        @if (!loadingService) {
+          <span>Crear clínica</span>
+        } @else {
+          <ion-spinner name="dots"></ion-spinner>
+        }
+      </button>
+    </form>
+  </div>
+</ion-content>

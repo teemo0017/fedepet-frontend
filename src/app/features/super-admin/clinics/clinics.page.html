@@ -1,0 +1,67 @@
+<ion-header class="scl-header">
+  <ion-toolbar class="scl-toolbar">
+    <ion-title class="scl-title">Clínicas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="logout()" aria-label="Salir">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="scl-content">
+  <div class="scl-body">
+    <p class="scl-intro">Clínicas dadas de alta en la plataforma.</p>
+
+    <button type="button" class="scl-add" (click)="goToCreateClinic()">
+      <ion-icon name="add-outline"></ion-icon>
+      Nueva clínica
+    </button>
+
+    @if (loading) {
+      <component-skeleton [count]="3" type="list"></component-skeleton>
+    } @else if (clinics.length === 0) {
+      <div class="scl-empty">
+        <div class="scl-empty-icon">
+          <ion-icon name="storefront-outline"></ion-icon>
+        </div>
+        <h2>Todavía no hay clínicas</h2>
+        <p>Da de alta la primera clínica para empezar a onboardear clientes.</p>
+      </div>
+    } @else {
+      @for (clinic of clinics; track trackByClinic($index, clinic)) {
+        <article class="scl-card">
+          <div class="scl-card-main">
+            <div class="scl-badge" [style.background]="clinic.primaryColor || 'var(--app-color-primary)'">
+              {{ clinic.name.charAt(0) }}
+            </div>
+            <div class="scl-info">
+              <div class="scl-info-top">
+                <h3 class="scl-name">{{ clinic.name }}</h3>
+                <span class="scl-chip" [class.scl-chip--inactive]="!clinic.active">
+                  <span class="scl-dot"></span>
+                  {{ clinic.active ? 'Activa' : 'Inactiva' }}
+                </span>
+              </div>
+              <span class="scl-slug">/{{ clinic.slug }}</span>
+              @if (clinic.email) {
+                <span class="scl-meta">
+                  <ion-icon name="mail-outline"></ion-icon>
+                  {{ clinic.email }}
+                </span>
+              }
+            </div>
+          </div>
+
+          <div class="scl-card-footer">
+            <span class="scl-link">{{ loginUrl(clinic) }}</span>
+            <button type="button" class="scl-copy" (click)="copyLink(clinic)">
+              <ion-icon name="copy-outline"></ion-icon>
+              Copiar enlace
+            </button>
+          </div>
+        </article>
+      }
+    }
+  </div>
+</ion-content>

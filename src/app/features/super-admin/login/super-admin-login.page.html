@@ -1,0 +1,44 @@
+<ion-content class="sal-content">
+  <div class="sal-shell">
+    <div class="sal-brand">
+      <div class="sal-logo">
+        <img src="assets/icon/paw.svg" alt="FedePet" />
+      </div>
+      <h1 class="sal-title">FedePet</h1>
+      <p class="sal-sub">Panel del propietario</p>
+    </div>
+
+    <div class="sal-card">
+      @if (form.touched && form.errors?.['invalidRequest']) {
+        <div class="sal-alert">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <span>Verifica tu usuario o tu contraseña</span>
+        </div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="sal-form">
+        <ion-item class="sal-item" lines="none">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input label="Usuario" label-placement="floating" formControlName="username"></ion-input>
+        </ion-item>
+
+        <ion-item class="sal-item mt-12" lines="none">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input label="Contraseña" label-placement="floating" [type]="hide ? 'password' : 'text'"
+            formControlName="password"></ion-input>
+          <ion-button fill="clear" slot="end" size="small" type="button" (click)="togglePassword()">
+            <ion-icon [name]="hide ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <button type="submit" class="sal-submit mt-20" [disabled]="form.invalid || loadingService">
+          @if (!loadingService) {
+            <span>Ingresar</span>
+          } @else {
+            <ion-spinner name="dots"></ion-spinner>
+          }
+        </button>
+      </form>
+    </div>
+  </div>
+</ion-content>
