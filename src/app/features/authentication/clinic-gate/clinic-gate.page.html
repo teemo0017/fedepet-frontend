@@ -1,0 +1,49 @@
+<ion-content class="clinic-gate">
+  <div class="cg-shell">
+    @if (checking) {
+      <div class="cg-checking">
+        <div class="cg-logo cg-logo--pulse">
+          <img src="assets/icon/paw.svg" alt="FedePet" />
+        </div>
+        <ion-spinner name="crescent"></ion-spinner>
+        <p class="cg-checking-text">Buscando tu clínica…</p>
+      </div>
+    } @else {
+      <div class="cg-card-wrap">
+        <div class="cg-brand">
+          <div class="cg-logo">
+            <img src="assets/icon/paw.svg" alt="FedePet" />
+          </div>
+          <h1 class="cg-wordmark">Fede<span>Pet</span></h1>
+          <p class="cg-tagline">El cuidado de tus mascotas, en una sola app</p>
+        </div>
+
+        <div class="cg-card">
+          <h2 class="cg-card-title">Ingresa a tu clínica</h2>
+          <p class="cg-card-sub">Escribe el código que te compartió tu clínica veterinaria.</p>
+
+          <ion-item class="cg-item" lines="none">
+            <ion-icon name="storefront-outline" slot="start"></ion-icon>
+            <ion-input
+              label="Código de la clínica"
+              label-placement="floating"
+              [(ngModel)]="slugInput"
+              placeholder="ej. clinica-san-francisco"
+              (keyup.enter)="goToClinic()">
+            </ion-input>
+          </ion-item>
+
+          <ion-button expand="block" class="cg-cta" (click)="goToClinic()" [disabled]="!slugInput.trim()">
+            <span>Continuar</span>
+            <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="cg-trust">
+          <ion-icon name="shield-checkmark-outline"></ion-icon>
+          <span>Plataforma segura para clínicas veterinarias</span>
+        </div>
+      </div>
+    }
+  </div>
+</ion-content>

@@ -23,7 +23,9 @@
   --app-color-#{$color-name}: #{$color-value};
 }
 
-
+  // Color de marca de la clínica activa. ThemeService lo sobreescribe en runtime
+  // con el color de la clínica (junto con --app-color-orange, por compatibilidad).
+  --app-color-primary: var(--app-color-orange);
 }
 
 @for $i from 0 through 32 {

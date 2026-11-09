@@ -68,3 +68,13 @@ export interface DateResponseDoctor {
   datesIncoming: DatesResponse[],
   datesDone: DatesResponse[]
 }
+
+export interface saveDoctorRequest {
+  name: string;
+  password: string;
+  specialty: string;
+  description: string;
+  email: string;
+  phone: string;
+  photo: string;
+}

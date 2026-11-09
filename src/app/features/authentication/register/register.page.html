@@ -1,0 +1,79 @@
+<ion-header class="reg-header">
+  <div class="reg-header-inner">
+    <button class="reg-back" (click)="goToBack()" aria-label="Volver">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <div class="reg-header-title">
+      <span>Registro</span>
+      <img src="assets/icon/paw.svg" alt="" class="reg-paw" />
+    </div>
+    <span class="reg-header-spacer"></span>
+  </div>
+</ion-header>
+
+<ion-content class="register-page">
+  <div class="reg-shell">
+    <div class="reg-intro">
+      <div class="reg-logo">
+        <img src="assets/icon/paw.svg" alt="FedePet" />
+      </div>
+      <h1 class="reg-title">Crea tu cuenta</h1>
+      <p class="reg-subtitle">Regístrate para gestionar el cuidado de tus mascotas</p>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="reg-form">
+      <!-- Nombre -->
+      <ion-item class="reg-item" lines="none" [class.reg-item--error]="f['name'].touched && f['name'].invalid">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input label="Nombre completo" label-placement="floating" type="text" formControlName="name"></ion-input>
+      </ion-item>
+      @if (f['name'].touched && f['name'].errors?.['required']) {
+        <div class="reg-error"><ion-icon name="alert-circle-outline"></ion-icon><small>El nombre es obligatorio</small></div>
+      } @else if (f['name'].touched && f['name'].errors?.['minlength']) {
+        <div class="reg-error"><ion-icon name="alert-circle-outline"></ion-icon><small>Mínimo 3 caracteres</small></div>
+      }
+
+      <!-- Correo -->
+      <ion-item class="reg-item mt-12" lines="none" [class.reg-item--error]="f['email'].touched && f['email'].invalid">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input label="Correo electrónico" label-placement="floating" type="email" formControlName="email"></ion-input>
+      </ion-item>
+      @if (f['email'].touched && f['email'].errors?.['required']) {
+        <div class="reg-error"><ion-icon name="alert-circle-outline"></ion-icon><small>El correo es obligatorio</small></div>
+      } @else if (f['email'].touched && f['email'].errors?.['email']) {
+        <div class="reg-error"><ion-icon name="alert-circle-outline"></ion-icon><small>Ingresa un correo válido</small></div>
+      }
+
+      <!-- Teléfono -->
+      <ion-item class="reg-item mt-12" lines="none">
+        <ion-icon name="call-outline" slot="start"></ion-icon>
+        <ion-input label="Teléfono" label-placement="floating" type="tel" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <!-- Contraseña -->
+      <ion-item class="reg-item mt-12" lines="none" [class.reg-item--error]="f['password'].touched && f['password'].invalid">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input label="Contraseña" label-placement="floating" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      @if (f['password'].touched && f['password'].errors?.['required']) {
+        <div class="reg-error"><ion-icon name="alert-circle-outline"></ion-icon><small>La contraseña es obligatoria</small></div>
+      } @else if (f['password'].touched && f['password'].errors?.['minlength']) {
+        <div class="reg-error"><ion-icon name="alert-circle-outline"></ion-icon><small>Mínimo 6 caracteres</small></div>
+      }
+
+      <ion-button expand="block" class="reg-cta mt-24" type="submit" [disabled]="userForm.invalid || loadingService">
+        @if (!loadingService) {
+          <span>Crear cuenta</span>
+        }
+        @if (loadingService) {
+          <ion-spinner name="dots"></ion-spinner>
+        }
+      </ion-button>
+    </form>
+
+    <div class="reg-footer" (click)="goToBack()">
+      <span>¿Ya tienes cuenta?</span>
+      <strong>Inicia sesión</strong>
+    </div>
+  </div>
+</ion-content>

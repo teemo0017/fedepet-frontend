@@ -1,0 +1,237 @@
+.login-page {
+  --background: var(--app-color-background);
+}
+
+.lp-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ---------- Hero ---------- */
+.lp-hero {
+  position: relative;
+  padding: calc(var(--app-spacing-40) + env(safe-area-inset-top)) var(--app-spacing-24) var(--app-spacing-48);
+  text-align: center;
+  overflow: hidden;
+
+  .lp-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 80% at 50% -10%,
+        color-mix(in srgb, var(--app-color-primary) 24%, transparent),
+        transparent 62%);
+    z-index: 0;
+  }
+}
+
+.lp-brand {
+  position: relative;
+  z-index: 1;
+}
+
+.lp-logo {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto var(--app-spacing-14);
+  border-radius: 28px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lp-logo-fallback {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+}
+
+.lp-logo-skeleton {
+  width: 96px;
+  height: 96px;
+  border-radius: 28px;
+  margin: 0 auto var(--app-spacing-14);
+}
+
+.lp-welcome-skeleton {
+  width: 62%;
+  height: 22px;
+  border-radius: 8px;
+  margin: 0 auto var(--app-spacing-8);
+}
+
+.lp-sub-skeleton {
+  width: 40%;
+  height: 14px;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.lp-welcome {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--app-color-blue);
+
+  span {
+    color: var(--app-color-primary);
+  }
+}
+
+.lp-sub {
+  margin: var(--app-spacing-4) 0 0;
+  color: #7a8983;
+  font-size: 0.95rem;
+}
+
+/* ---------- Card ---------- */
+.lp-card {
+  position: relative;
+  flex: 1;
+  background: #fff;
+  border-radius: 28px 28px 0 0;
+  margin-top: calc(-1 * var(--app-spacing-24));
+  padding: var(--app-spacing-28) var(--app-spacing-24) var(--app-spacing-32);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.lp-card-title {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 var(--app-spacing-18);
+  color: #2b3b36;
+  text-align: center;
+}
+
+.lp-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-8);
+  background: color-mix(in srgb, var(--app-color-orange) 12%, #fff);
+  color: color-mix(in srgb, var(--app-color-orange) 70%, black);
+  border-radius: 12px;
+  padding: var(--app-spacing-10) var(--app-spacing-12);
+  margin-bottom: var(--app-spacing-14);
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  ion-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+}
+
+.lp-item {
+  --background: var(--app-color-background);
+  --border-radius: 16px;
+  --padding-start: var(--app-spacing-14);
+  --inner-padding-end: var(--app-spacing-6);
+  --min-height: 58px;
+  border-radius: 16px;
+  border: 1.5px solid #e6ede9;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  ion-icon[slot="start"] {
+    color: var(--app-color-primary);
+    font-size: 1.25rem;
+    margin-inline-end: var(--app-spacing-10);
+  }
+
+  &.item-has-focus {
+    border-color: var(--app-color-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--app-color-primary) 14%, transparent);
+  }
+
+  &.lp-item--error {
+    border-color: color-mix(in srgb, var(--app-color-orange) 60%, #fff);
+  }
+}
+
+.lp-eye {
+  --color: #9aa8a3;
+  margin: 0;
+}
+
+.lp-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: color-mix(in srgb, var(--app-color-orange) 75%, black);
+  margin: var(--app-spacing-6) 0 0 var(--app-spacing-4);
+
+  ion-icon {
+    font-size: 0.95rem;
+  }
+
+  small {
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+}
+
+.lp-cta {
+  --background: var(--app-color-primary);
+  --background-activated: color-mix(in srgb, var(--app-color-primary) 82%, black);
+  --border-radius: 16px;
+  --box-shadow: 0 12px 24px color-mix(in srgb, var(--app-color-primary) 38%, transparent);
+  --color: #fff;
+  height: 54px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.lp-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-10);
+  margin: var(--app-spacing-20) 0 var(--app-spacing-14);
+
+  span {
+    flex: 1;
+    height: 1px;
+    background: #e2e9e5;
+  }
+
+  small {
+    color: #9aa8a3;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+}
+
+.lp-google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+}
+
+.lp-register {
+  text-align: center;
+  margin-top: var(--app-spacing-22);
+  font-size: 0.92rem;
+  color: #6b7b76;
+  cursor: pointer;
+
+  span {
+    margin-right: 6px;
+  }
+
+  strong {
+    color: var(--app-color-primary);
+    font-weight: 700;
+  }
+}

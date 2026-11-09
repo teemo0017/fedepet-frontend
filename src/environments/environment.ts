@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl:'http://localhost:4000'
+  apiBaseUrl: 'http://localhost:4000',
+  useMocks: false,  // Cambiar a false para usar el backend real
+  googleClientId: '853612658006-7bf67j1oro7nfd1q9qoc44qmaf063e74.apps.googleusercontent.com'
 };
 
 /*

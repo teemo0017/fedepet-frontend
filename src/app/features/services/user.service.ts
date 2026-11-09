@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { from, Observable, switchMap, tap } from 'rxjs';
+import { from, Observable, map, switchMap, tap } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
-import { DateResponseDoctor, DatesResponse, Doctor, GenericResponseSave, petsResponseByUser, requestId, saveDateRequest, savePetRequest, updateDateState } from './models/users';
+import { DateResponseDoctor, DatesResponse, Doctor, GenericResponseSave, petsResponseByUser, requestId, saveDateRequest, saveDoctorRequest, savePetRequest, updateDateState } from './models/users';
+import { ApiResponse } from 'src/app/core/models/api-response';
 import { AuthService } from 'src/app/core/auth.service';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -15,121 +16,52 @@ export class UserService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getPets(data: requestId): Observable<petsResponseByUser[]> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}` // 👈 lo envías así
-        });
-        return this.http.post<petsResponseByUser[]>(
-          `${this.apiUrl}/api/pets/findbyuser`,
-          data,
-          { headers }
-        );
-      })
-    );
+    return this.http.post<ApiResponse<petsResponseByUser[]>>(
+      `${this.apiUrl}/api/pets/findbyuser`,
+      data
+    ).pipe(map(resp => resp.body));
   }
 
 
   getDocts(): Observable<Doctor[]> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}` // 👈 lo envías así
-        });
-        return this.http.post<Doctor[]>(
-          `${this.apiUrl}/api/doctors/findall`, null,
-          { headers }
-        );
-      })
-    );
+    return this.http.post<ApiResponse<Doctor[]>>(
+      `${this.apiUrl}/api/doctors/findall`, null
+    ).pipe(map(resp => resp.body));
+  }
+
+  createDoctor(request: saveDoctorRequest): Observable<void> {
+    return this.http.post<ApiResponse<void>>(
+      `${this.apiUrl}/api/doctors/create`, request
+    ).pipe(map(resp => resp.body));
   }
 
   savePet(request: savePetRequest): Observable<void> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}` // 👈 lo envías así
-        });
-        return this.http.post<void>(
-          `${this.apiUrl}/api/pets/create`, request,
-          { headers }
-        );
-      })
-    );
+    return this.http.post<ApiResponse<void>>(
+      `${this.apiUrl}/api/pets/create`, request
+    ).pipe(map(resp => resp.body));
   }
 
   saveDate(request: saveDateRequest): Observable<GenericResponseSave> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}` // 👈 lo envías así
-        });
-        return this.http.post<GenericResponseSave>(
-          `${this.apiUrl}/api/dates/create`, request,
-          { headers }
-        );
-      })
-    );
+    return this.http.post<ApiResponse<GenericResponseSave>>(
+      `${this.apiUrl}/api/dates/create`, request,
+    ).pipe(map(resp => resp.body));
   }
 
   getDatesByUser(request: requestId): Observable<DatesResponse[]> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}` // 👈 lo envías así
-        });
-        return this.http.post<DatesResponse[]>(
-          `${this.apiUrl}/api/dates/findbyclient`, request,
-          { headers }
-        );
-      })
-    );
+    return this.http.post<ApiResponse<DatesResponse[]>>(
+      `${this.apiUrl}/api/dates/findbyclient`, request
+    ).pipe(map(resp => resp.body));
   }
 
   getDatesByDoctor(request: requestId): Observable<DateResponseDoctor> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}` // 👈 lo envías así
-        });
-        return this.http.post<DateResponseDoctor>(
-          `${this.apiUrl}/api/dates/findbydoctor`, request,
-          { headers }
-        );
-      })
-    );
+    return this.http.post<ApiResponse<DateResponseDoctor>>(
+      `${this.apiUrl}/api/dates/findbydoctor`, request
+    ).pipe(map(resp => resp.body));
   }
 
   updateDate(request: updateDateState): Observable<GenericResponseSave> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}` // 👈 lo envías así
-        });
-        return this.http.post<GenericResponseSave>(
-          `${this.apiUrl}/api/dates/update`, request,
-          { headers }
-        );
-      })
-    );
+    return this.http.post<ApiResponse<GenericResponseSave>>(
+      `${this.apiUrl}/api/dates/update`, request
+    ).pipe(map(resp => resp.body));
   }
-  /*
-    getDoctors(data: Login): Observable<ResponseAuth> {
-      return this.http.post<ResponseAuth>(`${this.apiUrl}/login`, data).pipe(
-        tap(
-          async (resp) => {
-            await Preferences.set({
-              key: 'token',
-              value: resp.token
-            });
-          }
-        )
-      );
-
-    }
-
-    async getToken(): Promise<string> {
-      const { value } = await Preferences.get({ key: 'token' });
-      return value ?? '';
-    } */
 }
