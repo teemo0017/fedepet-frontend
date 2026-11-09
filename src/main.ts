@@ -1,29 +1,44 @@
-import { provideZoneChangeDetection, importProvidersFrom } from "@angular/core";
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+import { bootstrapApplication } from "@angular/platform-browser";
+import { provideRouter, withComponentInputBinding, RouteReuseStrategy } from '@angular/router';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from "@angular/common/http";
 
-
+// Ionic Standalone Providers
+import { provideIonicAngular, IonicRouteStrategy } from "@ionic/angular/standalone";
 import { provideLottieOptions } from "ngx-lottie";
-import { RouteReuseStrategy } from "@angular/router";
-import { IonicRouteStrategy, IonicModule } from "@ionic/angular";
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
-import { BrowserModule, bootstrapApplication } from "@angular/platform-browser";
-import { AppRoutingModule } from "./app/app-routing.module";
-import { AppComponent } from "./app/app.component";
 import { register } from 'swiper/element/bundle';
+
+import { AppComponent } from "./app/app.component";
+import { MAIN_ROUTES } from './app/app.routes';
+import { AppInterceptor } from './app/core/app.interceptor';
+import { mockInterceptor } from './app/core/mocks/mock.interceptor';
 
 register();
 
 bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(BrowserModule, // Requerido para Angular
-        IonicModule.forRoot(), // Inicializa Ionic
-        AppRoutingModule),
+        // 1. You DON'T need BrowserModule here. bootstrapApplication handles it.
+        // 2. Use provideIonicAngular() instead of IonicModule.forRoot()
+        provideIonicAngular({ mode: 'ios' }),
+
+        provideRouter(MAIN_ROUTES, withComponentInputBinding()),
+
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+
+        // Nuevo sistema de interceptores funcionales + sistema antiguo
+        provideHttpClient(
+            withInterceptors([mockInterceptor]), // Mock interceptor (nuevo sistema)
+            withInterceptorsFromDi() // Para mantener compatibilidad con AppInterceptor
+        ),
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppInterceptor,
+            multi: true
+        },
+
         provideLottieOptions({
-            // carga dinámica de lottie-web
             player: () => import('lottie-web'),
         }),
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        provideHttpClient(withInterceptorsFromDi())
     ]
 })
-  .catch(err => console.log(err));
+    .catch(err => console.error(err));
