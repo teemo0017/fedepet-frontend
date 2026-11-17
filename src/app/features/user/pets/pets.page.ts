@@ -74,8 +74,8 @@ export class PetsPage implements OnInit {
     this.navCtrl.navigateForward('/user/add-pet');
   }
 
-  async openDetails(pet: petsResponseByUser) {
-    await this.toastService.info('El detalle de mascota estará disponible pronto');
+  openDetails(pet: petsResponseByUser) {
+    this.navCtrl.navigateForward(`/user/pet-detail/${pet.id}`, { state: { pet } });
   }
 
   async ionViewWillEnter() {

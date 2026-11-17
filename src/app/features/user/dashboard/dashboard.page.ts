@@ -17,7 +17,6 @@ import { SkeletonComponent } from '../../../shared/components/skeleton/skeleton.
   imports: [IonicModule, RoundSlideComponent, SquareSlideComponent, SkeletonComponent]
 })
 export class DashboardPage implements OnInit {
-  public firstCall = true;
   public infoUser: DecodedUser = {} as DecodedUser
   public loading = signal(false);
   public infoDoctors: SquareSlideInfo[] = [
@@ -69,6 +68,9 @@ export class DashboardPage implements OnInit {
     this.navCtrl.navigateForward('/user/dates',)
 
   }
+  async goToDoctors() {
+    this.navCtrl.navigateForward('/user/doctors');
+  }
   async goToCreate() {
     this.navCtrl.navigateForward('/user/add-pet',)
   }
@@ -104,12 +106,6 @@ export class DashboardPage implements OnInit {
       this.infoPets = [];
     } finally {
       this.loading.set(false);
-    }
-  }
-  async ionViewDidEnter() {
-    if (this.firstCall) {
-      this.callServiceDocts();
-      this.firstCall = false;
     }
   }
   public async callServiceDocts(): Promise<void> {

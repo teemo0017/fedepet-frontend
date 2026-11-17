@@ -93,6 +93,10 @@
             <ion-icon name="medkit-outline"></ion-icon>
             Doctores disponibles
           </h2>
+          <button class="db-link" (click)="goToDoctors()">
+            Ver todos
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </button>
         </div>
         @if (infoDoctors.length > 0) {
           <square-slide [squareSlideInfo]="infoDoctors"></square-slide>

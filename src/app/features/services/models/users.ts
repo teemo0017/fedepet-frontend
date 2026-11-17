@@ -33,6 +33,15 @@ export interface savePetRequest {
   photo: string
 }
 
+export interface updatePetRequest {
+  name: string;
+  species: string;
+  breed: string;
+  dateBirth: string;
+  weight: number;
+  photo: string
+}
+
 export interface GenericResponseSave {
   status: string;
 }

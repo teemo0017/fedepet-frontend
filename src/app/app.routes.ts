@@ -55,6 +55,10 @@ export const MAIN_ROUTES: Routes = [
                 loadComponent: () => import('./features/user/add-pet/add-pet.page').then(m => m.AddPetPage)
             },
             {
+                path: 'pet-detail/:id',
+                loadComponent: () => import('./features/user/pet-detail/pet-detail.page').then(m => m.PetDetailPage)
+            },
+            {
                 path: 'dates',
                 loadComponent: () => import('./features/user/dates/dates.page').then(m => m.DatesPage)
             },

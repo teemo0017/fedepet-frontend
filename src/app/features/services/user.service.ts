@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { from, Observable, map, switchMap, tap } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
-import { DateResponseDoctor, DatesResponse, Doctor, GenericResponseSave, petsResponseByUser, requestId, saveDateRequest, saveDoctorRequest, savePetRequest, updateDateState } from './models/users';
+import { DateResponseDoctor, DatesResponse, Doctor, GenericResponseSave, petsResponseByUser, requestId, saveDateRequest, saveDoctorRequest, savePetRequest, updateDateState, updatePetRequest } from './models/users';
 import { ApiResponse } from 'src/app/core/models/api-response';
 import { AuthService } from 'src/app/core/auth.service';
 import { environment } from 'src/environments/environment';
@@ -38,6 +38,12 @@ export class UserService {
   savePet(request: savePetRequest): Observable<void> {
     return this.http.post<ApiResponse<void>>(
       `${this.apiUrl}/api/pets/create`, request
+    ).pipe(map(resp => resp.body));
+  }
+
+  updatePet(id: number, request: updatePetRequest): Observable<petsResponseByUser> {
+    return this.http.put<ApiResponse<petsResponseByUser>>(
+      `${this.apiUrl}/api/pets/${id}`, request
     ).pipe(map(resp => resp.body));
   }
 

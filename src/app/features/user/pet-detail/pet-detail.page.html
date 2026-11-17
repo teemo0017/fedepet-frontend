@@ -1,0 +1,74 @@
+<ion-header class="sub-header">
+  <div class="sub-header__inner">
+    <button class="sub-back" (click)="goBack()" aria-label="Volver">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <span class="sub-title">Editar mascota</span>
+    <span class="sub-spacer"></span>
+  </div>
+</ion-header>
+
+<ion-content class="pet-detail-content">
+  @if (!pageLoading()) {
+    <div class="pd-shell">
+      <p class="pd-lead">Actualiza los datos de tu mascota para mantener su historial al día.</p>
+
+      <button type="button" class="pd-photo" [class.pd-photo--set]="previewImage" (click)="selectImage()">
+        @if (previewImage) {
+          <img [src]="previewImage" class="pd-photo__img" alt="Foto de la mascota" />
+          <span class="pd-photo__edit"><ion-icon name="camera-outline"></ion-icon></span>
+        } @else {
+          <ion-icon name="camera-outline" class="pd-photo__icon"></ion-icon>
+          <span class="pd-photo__hint">Añadir foto</span>
+        }
+      </button>
+
+      <form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="pd-form">
+        <label class="pd-field">
+          <span class="pd-label">Nombre</span>
+          <ion-input class="pd-input" formControlName="name" placeholder="Ej. Luna" mode="md"></ion-input>
+        </label>
+
+        <label class="pd-field">
+          <span class="pd-label">Especie</span>
+          <ion-select class="pd-input" formControlName="species" interface="popover" placeholder="Seleccionar" mode="md">
+            @for (specie of speciesList; track specie) {
+              <ion-select-option [value]="specie">{{ specie }}</ion-select-option>
+            }
+          </ion-select>
+        </label>
+
+        <label class="pd-field">
+          <span class="pd-label">Raza</span>
+          <ion-select class="pd-input" formControlName="breed" interface="popover" placeholder="Seleccionar" mode="md">
+            @for (breed of filteredBreeds; track breed) {
+              <ion-select-option [value]="breed">{{ breed }}</ion-select-option>
+            }
+          </ion-select>
+        </label>
+
+        <label class="pd-field">
+          <span class="pd-label">Peso (kg)</span>
+          <ion-input class="pd-input" type="number" inputmode="decimal" formControlName="weight" placeholder="0.0" mode="md"></ion-input>
+        </label>
+
+        <div class="pd-field">
+          <span class="pd-label">Fecha de nacimiento</span>
+          <div class="pd-date">
+            <ion-datetime formControlName="dateBirth" presentation="date" [preferWheel]="true" locale="es-PA"></ion-datetime>
+          </div>
+        </div>
+
+        <ion-button expand="block" type="submit" class="pd-submit" [disabled]="petForm.invalid || loading">
+          @if (!loading) {
+            <span>Guardar cambios</span>
+          } @else {
+            <ion-spinner name="dots"></ion-spinner>
+          }
+        </ion-button>
+      </form>
+    </div>
+  } @else {
+    <component-skeleton></component-skeleton>
+  }
+</ion-content>
