@@ -45,10 +45,13 @@
       }
 
       <!-- Teléfono -->
-      <ion-item class="reg-item mt-12" lines="none">
+      <ion-item class="reg-item mt-12" lines="none" [class.reg-item--error]="f['phone'].touched && f['phone'].invalid">
         <ion-icon name="call-outline" slot="start"></ion-icon>
         <ion-input label="Teléfono" label-placement="floating" type="tel" formControlName="phone"></ion-input>
       </ion-item>
+      @if (f['phone'].touched && f['phone'].errors?.['required']) {
+        <div class="reg-error"><ion-icon name="alert-circle-outline"></ion-icon><small>El teléfono es obligatorio</small></div>
+      }
 
       <!-- Contraseña -->
       <ion-item class="reg-item mt-12" lines="none" [class.reg-item--error]="f['password'].touched && f['password'].invalid">

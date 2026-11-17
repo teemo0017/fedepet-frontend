@@ -33,9 +33,28 @@ export class DoctorDatesPage implements OnInit {
 
   async ngOnInit() {
     const state = this.router.currentNavigation()?.extras.state;
-    console.log(state);
-    this.dateList = state?.['dates'];
-    console.log(this.dateList);
+    if (state?.['dates']) {
+      this.dateList = state['dates'];
+    } else {
+      // Refresco o navegación directa: no hay state del router, traemos del backend.
+      await this.loadDates();
+    }
+  }
+
+  private async loadDates(): Promise<void> {
+    this.loading = true;
+    try {
+      this.infoUser = await this.authService.getUserInfo();
+      const resp = await firstValueFrom(
+        this.userService.getDatesByDoctor({ id: this.infoUser.id })
+      );
+      this.dateList = [...resp.datesIncoming, ...resp.datesDone];
+    } catch (err) {
+      console.error('Error al obtener las citas del doctor:', err);
+      this.dateList = [];
+    } finally {
+      this.loading = false;
+    }
   }
   async ionViewWillEnter() {
     this.loading = true;

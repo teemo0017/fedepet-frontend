@@ -31,11 +31,40 @@
   margin: 2px 0 0;
 }
 
+.ad-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-12);
+}
+
 .ad-count {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   line-height: 1.1;
+}
+
+.ad-logout {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+
+  ion-icon {
+    font-size: 1.25rem;
+  }
+
+  &:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.24);
+  }
 }
 
 .ad-count-num {

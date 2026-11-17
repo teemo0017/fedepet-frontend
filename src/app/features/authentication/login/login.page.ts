@@ -50,9 +50,11 @@ export class LoginPage implements OnInit, AfterViewInit {
         this.loadingClinic = false;
         this.themeService.applyClinicTheme(info);
       },
-      error: () => {
+      error: async () => {
         this.clinicName = '';
         this.loadingClinic = false;
+        await this.toastService.error('No encontramos esa clínica — revisa el enlace que te compartieron');
+        this.navCtrl.navigateRoot('/');
       }
     });
   }

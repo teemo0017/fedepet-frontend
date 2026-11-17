@@ -6,9 +6,14 @@
         <span class="ad-hello">Administración</span>
         <h1 class="ad-title">Doctores</h1>
       </div>
-      <div class="ad-count">
-        <span class="ad-count-num">{{ doctors.length }}</span>
-        <span class="ad-count-lbl">en total</span>
+      <div class="ad-hero-actions">
+        <div class="ad-count">
+          <span class="ad-count-num">{{ doctors.length }}</span>
+          <span class="ad-count-lbl">en total</span>
+        </div>
+        <button class="ad-logout" (click)="logout()" aria-label="Cerrar sesión">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </button>
       </div>
     </div>
     <p class="ad-sub">Administra los perfiles del equipo médico de tu clínica.</p>
@@ -20,7 +25,11 @@
       Agregar doctor
     </button>
 
-    @if (!loading && doctors.length === 0) {
+    @if (loading) {
+      <component-skeleton [count]="4" [type]="'list'" [showFooter]="true"></component-skeleton>
+    } @else {
+
+    @if (doctors.length === 0) {
       <div class="ad-empty">
         <div class="ad-empty-icon">
           <ion-icon name="people-outline"></ion-icon>
@@ -59,7 +68,7 @@
 
         <div class="ad-card-footer">
           <label class="ad-toggle">
-            <ion-toggle [checked]="doc.available" (ionChange)="toggleAvailability(doc)"></ion-toggle>
+            <ion-toggle [checked]="doc.available" (ionChange)="toggleAvailability(doc, $event)"></ion-toggle>
             <span>Disponible</span>
           </label>
           <button class="ad-edit" (click)="goToEditDoctor(doc)">
@@ -68,6 +77,8 @@
           </button>
         </div>
       </article>
+    }
+
     }
   </main>
 </ion-content>

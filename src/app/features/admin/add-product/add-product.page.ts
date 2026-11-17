@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { IonicModule } from '@ionic/angular';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-add-product',
@@ -20,7 +21,7 @@ export class AddProductPage {
 
   previewImage: string | null = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private toastService: ToastService) {}
 
   async selectImage() {
     const image = await Camera.getPhoto({
@@ -34,10 +35,15 @@ export class AddProductPage {
     this.productForm.patchValue({ photo: this.previewImage });
   }
 
-  onSubmit() {
-    if (this.productForm.valid) {
-      console.log('🛒 Producto:', this.productForm.value);
-      // TODO: enviar al backend
+  async onSubmit() {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      return;
     }
+
+    // La tienda es solo mock: no existe ProductController en el backend.
+    await this.toastService.info('La tienda todavía no está conectada al backend — tus datos no se guardaron');
+    this.productForm.reset();
+    this.previewImage = null;
   }
 }
