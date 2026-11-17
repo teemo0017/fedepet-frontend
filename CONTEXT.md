@@ -35,10 +35,14 @@ Un SaaS de gestión veterinaria multi-tenant: cada clínica tiene su propia URL 
 
 ## Huecos de producto conocidos en este frontend (honestos: hoy muestran un toast en vez de fallar)
 
-- `pets.page.ts`: detalle/edición/borrado de mascota — el backend tiene `PUT`/`DELETE /api/pets/{id}`, el frontend no los usa todavía.
-- `admin-dashboard.page.ts`: editar doctor / cambiar disponibilidad — no hay endpoint en el backend.
-- `shop` / `admin/add-product`: 100% mock, no existe `ProductController` en el backend.
+- `pet-detail.page.ts`: ver/editar mascota ya está construido (`PUT /api/pets/{id}`). Falta borrado (ADMIN-only, sin listado de mascotas para ADMIN donde colgarlo todavía).
+- `admin-dashboard.page.ts`: editar doctor / cambiar disponibilidad — no hay endpoint en el backend (el toggle ya no da falsa sensación de guardado, se revierte visualmente).
+- `shop` / `admin/add-product`: 100% mock, no existe `ProductController` en el backend. El tab "Tienda" está oculto del nav del CLIENTE por esto mismo (ver auditoría de 2026-11-17 más abajo).
 - `super-admin/clinics`: no hay edición de clínica después de creada, solo alta y listado (el backend no expone update).
+
+### Auditoría funcional de 2026-11-17
+
+Se corrió una auditoría completa (agente de análisis + 2 agentes de implementación) cruzando cada ruta del frontend contra cada endpoint del backend. Encontró y corrigió varios bugs reales (no solo features faltantes): el toggle de disponibilidad de doctor no persistía pero parecía guardar; ADMIN no tenía botón de logout; guardar mascota/cita podía fallar en silencio; la pantalla de citas del doctor se rompía al refrescar (solo leía datos de la navegación); el JWT expirado fallaba en silencio en vez de redirigir a login; el campo teléfono del registro tenía un bug de validación (`false` como valor inicial en vez de `''`, por lo que `Validators.required` nunca disparaba); y `/user/doctors` estaba huérfana (sin ningún link que llevara ahí). Todo esto quedó corregido. Además se encontró y corrigió un bug de backend más serio durante la implementación: `PetService.update()` reasignaba el `user` (dueño) de la mascota con un valor que el endpoint nunca podía recibir correctamente (el frontend mandaba `owner: number`, la entidad espera `user: UserInfo`), lo que hubiera **puesto en null el dueño de la mascota en cada edición**. Se corrigió en el backend (ver `backend-fedepet/CONTEXT.md`).
 
 ## Qué falta para poder vender (no técnico)
 

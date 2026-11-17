@@ -15,7 +15,7 @@ core/
   auth.service.ts          # Login/registro/logout, slug de clínica, JWT en Preferences
   clinic.service.ts        # CRUD de clínicas (crear, listar) — uso exclusivo de SUPER_ADMIN
   theme.service.ts         # Aplica el color de marca + logo de la clínica activa (runtime CSS vars)
-  app.interceptor.ts       # Interceptor HTTP (adjunta JWT a requests)
+  app.interceptor.ts       # Interceptor HTTP (adjunta JWT a requests; en 401 limpia sesión, avisa y redirige a /{slug}/login)
   mocks/                   # Mock interceptor + datos de prueba para desarrollo sin backend
   models/
     auth.ts                # Login, Register, DecodedUser, ClinicPublicInfo
@@ -35,9 +35,10 @@ features/
     dashboard/             # Dashboard del CLIENTE (dueño de mascota)
     pets/                  # Lista de mascotas
     add-pet/               # Formulario agregar mascota
+    pet-detail/            # Ver/editar mascota, ruta user/pet-detail/:id (PUT /api/pets/{id}; sin borrado desde aquí)
     appointment/           # Crear cita
     dates/                 # Ver citas del usuario
-    doctors/               # Ver doctores de la clínica
+    doctors/               # Ver doctores de la clínica — accesible desde "Ver todos" en el dashboard
   doctor/
     doctor-dashboard/      # Dashboard del DOCTOR (ruta doctor/dashboard)
     doctor-dates/          # Citas asignadas al doctor (ruta doctor/dates)
@@ -45,7 +46,8 @@ features/
   admin/
     add-doctor/            # Agregar doctor (conectado a POST /api/doctors/create)
     add-product/           # Agregar producto — solo mock, el backend no tiene ProductController todavía
-  shop/                    # Tienda de productos — solo mock, sin backend real
+  shop/                    # Tienda de productos — solo mock, sin backend real. Ruta y página viven, pero
+                           # el tab "Tienda" está oculto en tab-var hasta que exista ProductController
 
 shared/
   interfaces/interfaces.ts # Interfaces TypeScript compartidas (SquareSlideInfo)
@@ -113,8 +115,10 @@ npx tsc --noEmit                 # Type-check rápido
 ```
 
 ## Gaps conocidos (no implementados a propósito)
-- No hay `ProductController` en el backend — `shop` y `admin/add-product` son solo UI mock.
-- No hay endpoint para editar doctor ni cambiar disponibilidad — esos botones en `admin-dashboard` muestran un toast informativo en vez de fallar.
-- `pets.page.ts`: ver detalle de mascota es un toast "disponible pronto" — no hay pantalla de detalle. El backend sí tiene `PUT`/`DELETE /api/pets/{id}` pero el frontend no los consume todavía (no hay UI de editar/eliminar mascota).
-- No hay refresh token — el JWT dura 1 hora (ver backend) y el usuario debe volver a loguearse; puede pasar en medio de una sesión de trabajo real.
-- No hay edición de clínica (nombre, color, logo) después de creada — solo alta. El backend no expone un endpoint de update.
+- No hay `ProductController` en el backend — `shop` y `admin/add-product` son solo UI mock. El tab "Tienda" está oculto en `tab-var.component.html` para no mostrarle a un cliente real un catálogo que no puede comprar; el `add-product.page.ts` avisa con un toast que no se guarda nada.
+- No hay endpoint para editar doctor ni cambiar disponibilidad — esos botones en `admin-dashboard` muestran un toast informativo en vez de fallar (el toggle de disponibilidad ya NO muta el modelo local, se revierte visualmente para no dar falsa sensación de guardado).
+- No hay endpoint `DELETE /api/pets/{id}` consumido desde el frontend (sí existe `PUT`, usado por `pet-detail.page.ts`) — no hay UI de eliminar mascota porque es ADMIN-only y no existe un listado de mascotas para ADMIN todavía (`GET /api/pets/findall` tampoco tiene consumidor).
+- Editar una mascota con una foto nueva guarda el base64 directo en la columna `photo` de la DB — a diferencia de la creación (`PetService.save`), que sube la foto a S3 y guarda la URL. Inconsistente pero no roto; si se quiere parejo, el update debería subir a S3 igual que el create.
+- No hay refresh token — el JWT dura 1 hora. Si expira a mitad de sesión, el interceptor (`core/app.interceptor.ts`) ya lo detecta y redirige a `/{slug}/login` con un toast — ya no falla en silencio, pero el usuario sigue teniendo que volver a loguearse.
+- No hay edición de clínica (nombre, color, logo, activar/desactivar) después de creada — solo alta y listado. El backend no expone un endpoint de update.
+- `GET /api/clinic/me` existe en el backend y no tiene consumidor en el frontend (podría usarse para mostrar nombre/logo de la clínica en los headers de staff).
